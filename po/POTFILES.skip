@@ -1,0 +1,4 @@
+src/account_datedetailed.c
+src/account_datedetailed.glade
+src/inputdialog.glade
+src/transfer.glade

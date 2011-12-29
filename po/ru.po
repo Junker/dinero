@@ -1,0 +1,619 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-22 19:29+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Source-Language: C\n"
+
+#: ../src/mainform.c:398 ../src/mainform.c:485 ../src/mainform.c:610
+#: ../src/mainform.c:663 ../src/mainform.c:720 ../src/mainform.c:808
+#: ../src/mainform.c:900 ../src/debtcredit_payment.c:121 ../src/exchange.c:96
+#: ../src/report.c:960 ../src/transfer.c:100 ../src/reminddebt.c:99
+#: ../src/editdebt.glade.h:3 ../src/editexchange.glade.h:2
+#: ../src/editexpin.glade.h:7 ../src/editplan.glade.h:8
+#: ../src/edittransfer.glade.h:3 ../src/plan.glade.h:5
+msgid "Date"
+msgstr "Дата"
+
+#: ../src/mainform.c:399 ../src/mainform.c:486 ../src/mainform.c:539
+#: ../src/mainform.c:611 ../src/mainform.c:664 ../src/mainform.c:721
+#: ../src/mainform.c:809 ../src/mainform.c:901 ../src/exchange.c:97
+#: ../src/report.c:276 ../src/report.c:395 ../src/report.c:514
+#: ../src/report.c:639 ../src/report.c:758 ../src/report.c:869
+#: ../src/report.c:961 ../src/reminddebt.c:100 ../src/mainform.glade.h:1
+#: ../src/editaccount.glade.h:1 ../src/editdebt.glade.h:1
+#: ../src/editexchange.glade.h:1 ../src/editexpin.glade.h:1
+#: ../src/editplan.glade.h:1 ../src/plan.glade.h:1
+msgid "Account"
+msgstr "Счет"
+
+#: ../src/mainform.c:400 ../src/mainform.c:487 ../src/mainform.c:810
+#: ../src/mainform.c:902 ../src/category.c:103 ../src/category.c:132
+#: ../src/report.c:277 ../src/report.c:396 ../src/report.c:515
+#: ../src/report.c:640 ../src/report.c:759 ../src/report.c:870
+#: ../src/mainform.glade.h:5 ../src/category.glade.h:1
+#: ../src/editexpin.glade.h:6 ../src/editplan.glade.h:6 ../src/plan.glade.h:3
+msgid "Category"
+msgstr "Категория"
+
+#: ../src/mainform.c:401 ../src/mainform.c:488 ../src/mainform.c:811
+#: ../src/mainform.c:903 ../src/category.c:118 ../src/category.c:146
+#: ../src/report.c:278 ../src/report.c:397 ../src/report.c:516
+#: ../src/report.c:641 ../src/report.c:760 ../src/report.c:871
+#: ../src/mainform.glade.h:25 ../src/editexpin.glade.h:11
+#: ../src/editplan.glade.h:20 ../src/plan.glade.h:9
+msgid "Subcategory"
+msgstr "Подкатегория"
+
+#: ../src/mainform.c:402 ../src/mainform.c:489 ../src/mainform.c:812
+#: ../src/mainform.c:904 ../src/report.c:279 ../src/report.c:398
+#: ../src/report.c:517 ../src/report.c:642 ../src/report.c:761
+#: ../src/report.c:872
+msgid "Qty."
+msgstr "Кол."
+
+#: ../src/mainform.c:403 ../src/mainform.c:490 ../src/mainform.c:813
+#: ../src/mainform.c:905 ../src/category.c:159 ../src/report.c:280
+#: ../src/report.c:399 ../src/report.c:518 ../src/report.c:643
+#: ../src/report.c:762 ../src/report.c:873 ../src/plan.glade.h:10
+msgid "Unit"
+msgstr "Ед. изм."
+
+#: ../src/mainform.c:404 ../src/mainform.c:491 ../src/mainform.c:670
+#: ../src/mainform.c:727 ../src/mainform.c:814 ../src/mainform.c:906
+#: ../src/debtcredit_payment.c:122 ../src/editaccount.c:136
+#: ../src/exchange.c:98 ../src/exchange.c:100 ../src/report.c:281
+#: ../src/report.c:400 ../src/report.c:519 ../src/report.c:644
+#: ../src/report.c:763 ../src/report.c:874 ../src/report.c:962
+#: ../src/transfer.c:103 ../src/reminddebt.c:106 ../src/editdebt.glade.h:2
+#: ../src/editexpin.glade.h:5 ../src/editplan.glade.h:5
+#: ../src/edittransfer.glade.h:1 ../src/plan.glade.h:2
+msgid "Amount"
+msgstr "Сумма"
+
+#: ../src/mainform.c:405 ../src/mainform.c:492 ../src/mainform.c:544
+#: ../src/mainform.c:615 ../src/mainform.c:672 ../src/mainform.c:729
+#: ../src/mainform.c:815 ../src/mainform.c:907 ../src/debtcredit_payment.c:123
+#: ../src/report.c:282 ../src/report.c:401 ../src/report.c:520
+#: ../src/report.c:645 ../src/report.c:764 ../src/report.c:875
+#: ../src/report.c:963 ../src/transfer.c:104 ../src/reminddebt.c:108
+#: ../src/mainform.glade.h:8 ../src/currency.glade.h:2
+#: ../src/edittransfer.glade.h:2 ../src/report.glade.h:5 ../src/plan.glade.h:4
+msgid "Currency"
+msgstr "Валюта"
+
+#: ../src/mainform.c:406 ../src/mainform.c:493 ../src/mainform.c:545
+#: ../src/mainform.c:673 ../src/mainform.c:730 ../src/mainform.c:817
+#: ../src/mainform.c:909 ../src/debtcredit_payment.c:124 ../src/exchange.c:102
+#: ../src/transfer.c:105 ../src/reminddebt.c:109 ../src/editdebt.glade.h:5
+#: ../src/editexchange.glade.h:3 ../src/editexpin.glade.h:8
+#: ../src/editplan.glade.h:9 ../src/edittransfer.glade.h:4
+msgid "Description"
+msgstr "Примечание"
+
+#: ../src/mainform.c:540
+msgid "Initial balance"
+msgstr "Начальный баланс"
+
+#: ../src/mainform.c:541 ../src/mainform.c:612 ../src/mainform.glade.h:15
+#: ../src/report.glade.h:8
+msgid "Expenses"
+msgstr "Расход"
+
+#: ../src/mainform.c:542 ../src/mainform.c:613 ../src/mainform.glade.h:19
+#: ../src/report.glade.h:14
+msgid "Income"
+msgstr "Доход"
+
+#: ../src/mainform.c:543
+msgid "Balance"
+msgstr "Баланс"
+
+#: ../src/mainform.c:614
+msgid "Turnover"
+msgstr "Остаток"
+
+#: ../src/mainform.c:665 ../src/mainform.c:722 ../src/category.c:173
+#: ../src/reminddebt.c:101
+msgid "Debtor"
+msgstr "Должник"
+
+#: ../src/mainform.c:666 ../src/mainform.c:723 ../src/reminddebt.c:102
+#: ../src/editdebt.glade.h:8
+msgid "Percent"
+msgstr "Процент"
+
+#: ../src/mainform.c:667 ../src/mainform.c:724 ../src/reminddebt.c:103
+msgid "Period"
+msgstr "Период"
+
+#: ../src/mainform.c:668 ../src/mainform.c:725 ../src/reminddebt.c:104
+#: ../src/editdebt.glade.h:7
+msgid "Pay off"
+msgstr "Погашен"
+
+#: ../src/mainform.c:669 ../src/mainform.c:726 ../src/reminddebt.c:105
+msgid "Date pay off"
+msgstr "Дата погашения"
+
+#: ../src/mainform.c:671 ../src/mainform.c:728 ../src/reminddebt.c:107
+msgid "Paid"
+msgstr "Выплачено"
+
+#: ../src/mainform.c:816 ../src/mainform.c:908 ../src/editplan.glade.h:15
+#: ../src/plan.glade.h:6
+msgid "Periodicity"
+msgstr "Периодичность"
+
+#: ../src/mainform.c:961 ../src/plan.c:164 ../src/editplan.glade.h:14
+msgid "Once"
+msgstr "Однажды"
+
+#: ../src/mainform.c:962 ../src/plan.c:167 ../src/editplan.glade.h:7
+msgid "Daily"
+msgstr "Ежедневно"
+
+#: ../src/mainform.c:963 ../src/plan.c:170 ../src/editplan.glade.h:12
+msgid "Monthly"
+msgstr "Ежемесячно"
+
+#: ../src/mainform.c:964 ../src/plan.c:173 ../src/editplan.glade.h:18
+msgid "Quarterly"
+msgstr "Ежеквартально"
+
+#: ../src/mainform.c:965 ../src/plan.c:176 ../src/editplan.glade.h:25
+msgid "Yearly"
+msgstr "Ежегодно"
+
+#: ../src/mainform.c:1085
+msgid ""
+"If you remove the account, all operations associated with this account will "
+"be removed. Are you sure you want to delete?"
+msgstr ""
+"Если вы удалите счет, то все опреции связанные с этим счетом будут удалены. "
+"Вы уверены что хотите удалить?"
+
+#: ../src/mainform.c:1117 ../src/mainform.c:1155
+#: ../src/debtcredit_payment.c:241 ../src/exchange.c:124 ../src/transfer.c:125
+msgid "Are you sure you want to delete?"
+msgstr "Вы уверены, что хотите удалить?"
+
+#: ../src/category.c:187
+msgid "Creditor"
+msgstr "Кредитор"
+
+#: ../src/category.c:204 ../src/category.c:242 ../src/category.c:282
+#: ../src/category.c:326 ../src/editexpin.c:249 ../src/editplan.c:258
+msgid "Enter category name:"
+msgstr "Введите название категории:"
+
+#: ../src/category.c:222 ../src/category.c:259 ../src/category.c:305
+#: ../src/category.c:349 ../src/editexpin.c:277 ../src/editplan.c:295
+msgid "Enter subcategory name:"
+msgstr "Введите название подкатегории:"
+
+#: ../src/category.c:366 ../src/category.c:383 ../src/category.c:400
+#: ../src/category.c:417
+#, fuzzy
+msgid ""
+"If you delete a category, field 'category' will be cleared in all the "
+"operations associated with this category. Are you sure you want to delete?"
+msgstr ""
+"Если вы удалите категорию, то поле 'категория' будет обнулено во всех "
+"опрециях, связанных с этой категорией. Вы уверены что хотите удалить?"
+
+#: ../src/category.c:435 ../src/category.c:455 ../src/editexpin.c:299
+#: ../src/editplan.c:314
+msgid "Enter unit name:"
+msgstr "Введите название ед. изм.:"
+
+#: ../src/category.c:483 ../src/category.c:502
+msgid "Enter debtor name:"
+msgstr "Введите название должника:"
+
+#: ../src/category.c:530
+msgid "Enter creditor name:"
+msgstr "Введите название кредитора:"
+
+#: ../src/currency.c:76 ../src/editaccount.c:135 ../src/editdebt.glade.h:6
+msgid "Name"
+msgstr "Название"
+
+#: ../src/currency.c:77
+msgid "Short name"
+msgstr "Кор. название"
+
+#: ../src/currency.c:78
+msgid "Main"
+msgstr "Основной"
+
+#: ../src/currency.c:165
+msgid ""
+"If you remove the currency, all operations associated with this currency "
+"will be removed. Are you sure you want to delete?"
+msgstr ""
+"Если вы удалите валюту, то все опреции связанные с этой валютой будут "
+"удалены. Вы уверены что хотите удалить?"
+
+#: ../src/db.c:37
+msgid "DB connect failed"
+msgstr "Ошибка подключения к БД"
+
+#: ../src/db.c:74 ../src/db.c:93 ../src/db.c:111 ../src/db.c:129
+#: ../src/db.c:145 ../src/db.c:163 ../src/db.c:166 ../src/db.c:171
+msgid "Query failed"
+msgstr "Ошибка запроса"
+
+#: ../src/editaccount.c:137
+msgid "Active"
+msgstr "Активный"
+
+#: ../src/editdebt.c:153 ../src/editexchange.c:94 ../src/editexchange.c:100
+#: ../src/editexpin.c:328 ../src/editplan.c:344 ../src/edittransfer.c:94
+msgid "Warning!"
+msgstr "Внимание!"
+
+#: ../src/editdebt.c:153 ../src/editexchange.c:94 ../src/editexpin.c:328
+#: ../src/editplan.c:344 ../src/edittransfer.c:94
+msgid "Some fields were not filled"
+msgstr "Некоторые поля не заполнены"
+
+#: ../src/editexchange.c:100
+msgid "Please, choose different currency"
+msgstr "Пожалуйста, выберите разную валюту"
+
+#: ../src/exchange.c:99
+msgid "From currency"
+msgstr "Из валюты"
+
+#: ../src/exchange.c:101
+msgid "To Currency"
+msgstr "В валюту"
+
+#: ../src/transfer.c:101
+msgid "From"
+msgstr "От"
+
+#: ../src/transfer.c:102
+msgid "To"
+msgstr "До"
+
+#: ../src/account_datedetailed.glade.h:1
+msgid "label"
+msgstr ""
+
+#: ../src/mainform.glade.h:2 ../src/report.glade.h:2
+msgid "Accounts"
+msgstr "Счета"
+
+#: ../src/mainform.glade.h:3
+msgid "Brief"
+msgstr "Кратко"
+
+#: ../src/mainform.glade.h:4 ../src/report.glade.h:4
+msgid "Categories"
+msgstr "Категории"
+
+#: ../src/mainform.glade.h:6 ../src/category.glade.h:2
+msgid "Creditors"
+msgstr "Кредиторы"
+
+#: ../src/mainform.glade.h:7
+msgid "Currencies"
+msgstr "Валюта"
+
+#: ../src/mainform.glade.h:9
+msgid "Debt"
+msgstr "Долг"
+
+#: ../src/mainform.glade.h:10
+msgid "Debtors"
+msgstr "Должники"
+
+#: ../src/mainform.glade.h:11
+msgid "Detailed..."
+msgstr "Детально"
+
+#: ../src/mainform.glade.h:12 ../src/editexchange.glade.h:4
+msgid "Exchange"
+msgstr "Обмен"
+
+#: ../src/mainform.glade.h:13
+msgid "Exchange History"
+msgstr "История обмена"
+
+#: ../src/mainform.glade.h:14
+msgid "Expense planning"
+msgstr "Планирование расходов"
+
+#: ../src/mainform.glade.h:16
+msgid "Filter"
+msgstr "Фильтр"
+
+#: ../src/mainform.glade.h:17
+msgid "Home Finances"
+msgstr ""
+
+#: ../src/mainform.glade.h:18
+msgid "In detail"
+msgstr "Детально"
+
+#: ../src/mainform.glade.h:20
+msgid "Income planning"
+msgstr "Планирование доходов"
+
+#: ../src/mainform.glade.h:21 ../src/editdebtcredit_payment.glade.h:4
+msgid "Payments"
+msgstr "Платежи"
+
+#: ../src/mainform.glade.h:22 ../src/report.glade.h:15
+msgid "Planning"
+msgstr "Планирование"
+
+#: ../src/mainform.glade.h:23
+#, fuzzy
+msgid "Print"
+msgstr "Печать"
+
+#: ../src/mainform.glade.h:24 ../src/report.glade.h:17
+msgid "Reports"
+msgstr "Отчеты"
+
+#: ../src/mainform.glade.h:26 ../src/edittransfer.glade.h:5
+msgid "Transfer"
+msgstr "Перевод"
+
+#: ../src/mainform.glade.h:27
+msgid "Transfer history"
+msgstr "История переводов"
+
+#: ../src/mainform.glade.h:28
+msgid "_File"
+msgstr "Файл"
+
+#: ../src/mainform.glade.h:29
+msgid "_Help"
+msgstr "Помощь"
+
+#: ../src/mainform.glade.h:30
+msgid "from"
+msgstr "от"
+
+#: ../src/mainform.glade.h:31
+msgid "till"
+msgstr "до"
+
+#: ../src/category.glade.h:3
+msgid "Debtors / Creditors"
+msgstr "Должники / Кредиторы"
+
+#: ../src/category.glade.h:4
+msgid "Expense categories"
+msgstr "Категории расходов"
+
+#: ../src/category.glade.h:5
+msgid "Income categories"
+msgstr "Категории доходов"
+
+#: ../src/category.glade.h:6
+msgid "Units"
+msgstr "Ед. изм."
+
+#: ../src/currency.glade.h:1
+#, fuzzy
+msgid "Currencies in use list"
+msgstr "Валюта"
+
+#: ../src/editaccount.glade.h:2
+msgid "Account name:"
+msgstr "Название счета:"
+
+#: ../src/editaccount.glade.h:3
+msgid "Currencies:"
+msgstr "Валюта:"
+
+#: ../src/editaccount.glade.h:4 ../src/editdebtcredit_payment.glade.h:3
+msgid "Description:"
+msgstr "Примечание:"
+
+#: ../src/editdebt.glade.h:4
+msgid "Debt/Credit"
+msgstr "Долги/Кредиты"
+
+#: ../src/editdebt.glade.h:9
+msgid "Period (month)"
+msgstr "Период (мес.)"
+
+#: ../src/editdebt.glade.h:10
+msgid "Remind date"
+msgstr "Дата напоминания"
+
+#: ../src/editdebt.glade.h:11
+msgid "Remind me"
+msgstr "Напомнить"
+
+#: ../src/editexchange.glade.h:5
+#, fuzzy
+msgid "Get"
+msgstr "Взято"
+
+#: ../src/editexchange.glade.h:6
+msgid "Give"
+msgstr ""
+
+#: ../src/editexpin.glade.h:2 ../src/editplan.glade.h:2
+msgid "Add new category"
+msgstr "Добавить категорию"
+
+#: ../src/editexpin.glade.h:3 ../src/editplan.glade.h:3
+msgid "Add new subcategory"
+msgstr "Добавить подкатегорию"
+
+#: ../src/editexpin.glade.h:4 ../src/editplan.glade.h:4
+msgid "Add new unit type"
+msgstr "Добавить новую ед. изм."
+
+#: ../src/editexpin.glade.h:9 ../src/editplan.glade.h:13
+msgid "Multiply"
+msgstr "Умножить"
+
+#: ../src/editexpin.glade.h:10 ../src/editplan.glade.h:17
+#: ../src/report.glade.h:16 ../src/plan.glade.h:8
+msgid "Quantity"
+msgstr "Кол-во"
+
+#: ../src/editplan.glade.h:10
+msgid "Friday"
+msgstr "Пятница"
+
+#: ../src/editplan.glade.h:11
+msgid "Monday"
+msgstr "Понедельник"
+
+#: ../src/editplan.glade.h:16 ../src/plan.glade.h:7
+msgid "Plan"
+msgstr "План"
+
+#: ../src/editplan.glade.h:19
+msgid "Saturday"
+msgstr "Суббота"
+
+#: ../src/editplan.glade.h:21
+msgid "Sunday"
+msgstr "Воскресение"
+
+#: ../src/editplan.glade.h:22
+msgid "Thursday"
+msgstr "Четверг"
+
+#: ../src/editplan.glade.h:23
+msgid "Tuesday"
+msgstr "Вторник"
+
+#: ../src/editplan.glade.h:24
+msgid "Wednesday "
+msgstr "Среда"
+
+#: ../src/edittransfer.glade.h:6
+msgid "Transfer to"
+msgstr "Перенести в"
+
+#: ../src/edittransfer.glade.h:7
+msgid "Withdraw from"
+msgstr "Снять с"
+
+#: ../src/editdebtcredit_payment.glade.h:1
+msgid "Amount:"
+msgstr "Сумма:"
+
+#: ../src/editdebtcredit_payment.glade.h:2
+msgid "Date:"
+msgstr "Дата:"
+
+#: ../src/report.glade.h:1
+#, fuzzy
+msgid "Account balance"
+msgstr "Баланс счета"
+
+#: ../src/report.glade.h:3
+#, fuzzy
+msgid "Accounts balance"
+msgstr "Введите название счета:"
+
+#: ../src/report.glade.h:6
+#, fuzzy
+msgid "Date interval"
+msgstr "Интервал дат"
+
+#: ../src/report.glade.h:7
+msgid "Exchange rate dynamics"
+msgstr ""
+
+#: ../src/report.glade.h:9
+msgid "Expenses / Income"
+msgstr "Расход / Доход"
+
+#: ../src/report.glade.h:10
+msgid "Group by date"
+msgstr "Группировать по дате"
+
+#: ../src/report.glade.h:11
+msgid "Group by:"
+msgstr "Групировать по:"
+
+#: ../src/report.glade.h:12
+msgid "Include credits"
+msgstr "Включить кредиты"
+
+#: ../src/report.glade.h:13
+msgid "Include in report"
+msgstr "Включить в отчет"
+
+#: ../src/report.glade.h:18
+msgid "Subcategories"
+msgstr "Подкатегории"
+
+#: ../src/report.glade.h:19
+msgid "Total"
+msgstr "Итого"
+
+#: ../src/report.glade.h:20
+msgid "day"
+msgstr "день"
+
+#: ../src/report.glade.h:21
+msgid "month"
+msgstr "месяц"
+
+#: ../src/report.glade.h:22
+msgid "year"
+msgstr "год"
+
+#: ../src/plan.glade.h:11
+msgid "expenditure / income planning"
+msgstr "Планирование расходов и доходов"
+
+#~ msgid "daily"
+#~ msgstr "Ежедневно"
+
+#~ msgid "monthly"
+#~ msgstr "ежемесячно"
+
+#~ msgid "quarterly"
+#~ msgstr "Ежеквартально"
+
+#~ msgid "yearly"
+#~ msgstr "Ежегодно"
+
+#~ msgid "Planing"
+#~ msgstr "Планирование"
+
+#~ msgid "Enter Account name:"
+#~ msgstr "Введите название счета:"
+
+#~ msgid "Enter currency name:"
+#~ msgstr "Введите название валюты:"
+
+#~ msgid "Currency exchange"
+#~ msgstr "Обмен валюты"
+
+#~ msgid "exchange currency.."
+#~ msgstr "Обмен валюты"
+
+#~ msgid "Initial balance:"
+#~ msgstr "Начальный баланс"
