@@ -24,8 +24,11 @@
 #  include <config.h>
 #endif
 
+#ifdef MY_DEBUG
+#define GLADE_PATH "ui/"
+#else
 #define GLADE_PATH PACKAGE_DATA_DIR"/"GETTEXT_PACKAGE"/glade/"
-
+#endif
 
 GValue* ex_value_new_string(const gchar *string)
 {
@@ -215,12 +218,11 @@ gint ex_combo_get_row_by_id(GdauiCombo *combo, const gint id)
 void ex_builder_load_file(GtkBuilder *builder, const gchar *filename)
 {
 	gchar *filepath = g_strconcat(GLADE_PATH, filename, NULL);
-	
-	if (g_file_test(filename, G_FILE_TEST_EXISTS))
-		gtk_builder_add_from_file (builder, filename, NULL);
-	else if (g_file_test(filepath, G_FILE_TEST_EXISTS))
-		gtk_builder_add_from_file (builder, filepath, NULL);
 
+	if (g_file_test(filepath, G_FILE_TEST_EXISTS))
+	{
+		gtk_builder_add_from_file (builder, filepath, NULL);
+	}
 	g_free(filepath);
 }
 

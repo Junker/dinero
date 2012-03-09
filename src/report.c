@@ -943,7 +943,7 @@ void fill_grid_rep3()
 
 	if (!gdaui_combo_is_null_selected(combo_rep3_account))
 	{
-		g_string_append(sql," AND a.account_id>=##account::gint");
+		g_string_append(sql," AND a.account_id=##account::gint");
 		account = ex_combo_get_current_row_value(combo_rep3_account, 0);
 	}
 

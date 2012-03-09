@@ -79,7 +79,7 @@ int main (int argc, char *argv[])
 	{
 		g_mkdir_with_parents(home, 0755);
 
-		gchar *source_path = g_build_filename(PACKAGE_DATA_DIR, "homefinances", "homefinances.db", NULL);
+		gchar *source_path = g_build_filename(PACKAGE_DATA_DIR, "dinero", "homefinances.db", NULL);
 		gchar *dest_path   = dbfilename;
 		GFile *source = g_file_new_for_path (source_path);
 		GFile *dest   = g_file_new_for_path (dest_path);
@@ -104,7 +104,6 @@ int main (int argc, char *argv[])
 
 	check_debtcredit_remain();
 
-//	check_
 	show_plan_payment_window ();
 
 	
@@ -121,8 +120,6 @@ void check_debtcredit_remain()
 {
 	GValue *date = ex_value_new_int (get_current_date());
 
-	g_debug("TIME: %i", time);
-	
 	GdaDataModel *model = db_exec_select_sql ("SELECT id FROM debtcredit b \
 	                                             WHERE b.remind=1 AND b.remind_date<##date::gint",
 	                                          "date", date,

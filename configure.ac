@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl Created by Anjuta application wizard.
 
-AC_INIT(homefinances, 0.7)
+AC_INIT(dinero, 0.7, , , http://github.com/Junker/dinero)
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AC_CONFIG_HEADERS([config.h])
@@ -18,7 +18,7 @@ AC_HEADER_STDC
 dnl ***************************************************************************
 dnl Internatinalization
 dnl ***************************************************************************
-GETTEXT_PACKAGE=homefinances
+GETTEXT_PACKAGE=dinero
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [GETTEXT package name])
 AM_GLIB_GNU_GETTEXT
@@ -30,7 +30,7 @@ AM_PROG_LIBTOOL
 
 
 
-PKG_CHECK_MODULES(HOMEFINANCE, [gtk+-2.0 >= 2.16 libgda-4.0 >= 4.2 libgda-sqlite-4.0 libgda-ui-4.0 gmodule-export-2.0])
+PKG_CHECK_MODULES(DINERO, [gtk+-2.0 >= 2.16 libgda-4.0 >= 4.2 libgda-sqlite-4.0 libgda-ui-4.0 gmodule-export-2.0])
 
 
 

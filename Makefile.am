@@ -3,8 +3,8 @@
 
 SUBDIRS = src po
 
-homefinancedocdir = ${prefix}/doc/homefinance
-homefinancedoc_DATA = \
+dinerodocdir = ${prefix}/doc/dinero
+dinerodoc_DATA = \
 	README\
 	COPYING\
 	AUTHORS\
@@ -17,7 +17,7 @@ INTLTOOL_FILES = intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in
 
-EXTRA_DIST = $(homefinancedoc_DATA) \
+EXTRA_DIST = $(dineroedoc_DATA) \
 	$(INTLTOOL_FILES)
 
 DISTCLEANFILES = intltool-extract \
@@ -28,4 +28,4 @@ DISTCLEANFILES = intltool-extract \
 
 # Remove doc directory on uninstall
 uninstall-local:
-	-rm -r $(homefinancedocdir)
+	-rm -r $(dinerodocdir)
