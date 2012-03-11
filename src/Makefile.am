@@ -3,11 +3,11 @@
 
 ## Created by Anjuta
 
-sharedir = $(datadir)/homefinances
+sharedir = $(datadir)/dinero
 share_DATA = \
         homefinances.db
 
-gladedir = $(datadir)/homefinances/glade
+gladedir = $(datadir)/dinero/glade
 glade_DATA = \
 	ui/account_datedetailed.glade\
 	ui/category.glade \
@@ -48,15 +48,15 @@ AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
 	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
 	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
-	$(HOMEFINANCE_CFLAGS)
+	$(DINERO_CFLAGS)
 
 AM_CFLAGS =\
 	 -Wall\
 	 -g
 
-bin_PROGRAMS = homefinances
+bin_PROGRAMS = dinero
 
-homefinances_SOURCES = \
+dinero_SOURCES = \
 	main.c \
 	db.c \
 	db.h \
@@ -104,10 +104,10 @@ homefinances_SOURCES = \
 	gtkdateentry.c \
 	gtkdateentry.h
 
-homefinances_LDFLAGS = \
+dinero_LDFLAGS = \
 	-Wl,--export-dynamic
 
-homefinances_LDADD = $(HOMEFINANCE_LIBS)
+dinero_LDADD = $(DINERO_LIBS)
 
 EXTRA_DIST = $(glade_DATA) \
 	$(pixmaps_DATA) \
@@ -116,5 +116,5 @@ EXTRA_DIST = $(glade_DATA) \
 # Remove glade directory on uninstall
 uninstall-local:
 	-rm -r $(gladedir)
-##	-rm -r $(datadir)/homefinances
+##	-rm -r $(datadir)/dinero
 
