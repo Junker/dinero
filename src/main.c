@@ -35,6 +35,9 @@
 #include "db.h"
 
 
+
+#define DB_FILE_NAME "dinero.sqlite"
+
 static void create_lookup_models();
 static void check_debtcredit_remain();
 
@@ -56,30 +59,30 @@ int main (int argc, char *argv[])
 	textdomain (GETTEXT_PACKAGE);
 #endif
 
-	/*gnome_program_init (PACKAGE, VERSION, LIBGNOMEUI_MODULE,
-                      argc, argv,
-                      GNOME_PARAM_APP_DATADIR, PACKAGE_DATA_DIR,
-                      NULL);
-	*/
-
 	gtk_init(&argc, &argv);
 
-	setlocale(LC_NUMERIC,"POSIX");
+	setlocale(LC_NUMERIC, "POSIX");
 
-	home = g_build_filename(g_get_home_dir(), ".config", GETTEXT_PACKAGE, NULL);
+	home = g_build_filename(g_get_home_dir(), ".config", PACKAGE_NAME, NULL);
 
 	gchar dsn[1000];
 	//Connect
-	gchar *dbfilename = g_build_filename(home, "homefinances.db", NULL);
-	if (g_file_test("homefinances.db", G_FILE_TEST_EXISTS))
-		strcpy(dsn, "DB_DIR=.;DB_NAME=homefinances.db");
-	else if (g_file_test(dbfilename, G_FILE_TEST_EXISTS))
-		g_sprintf(dsn, "DB_DIR=%s;DB_NAME=homefinances.db", home);
+	gchar *dbfilename = g_build_filename(home, DB_FILE_NAME, NULL);
+
+	if (g_file_test(dbfilename, G_FILE_TEST_EXISTS))
+		g_sprintf(dsn, "DB_DIR=%s;DB_NAME=%s", home, DB_FILE_NAME);
 	else
 	{
 		g_mkdir_with_parents(home, 0755);
+	
+		gchar *source_path = g_build_filename(PACKAGE_DATA_DIR, PACKAGE_NAME, DB_FILE_NAME, NULL);
 
-		gchar *source_path = g_build_filename(PACKAGE_DATA_DIR, "dinero", "homefinances.db", NULL);
+		if (!g_file_test(source_path, G_FILE_TEST_EXISTS))
+		{
+			g_print("%s File not found", source_path);
+			exit(-1);
+		}
+		    
 		gchar *dest_path   = dbfilename;
 		GFile *source = g_file_new_for_path (source_path);
 		GFile *dest   = g_file_new_for_path (dest_path);
@@ -87,7 +90,7 @@ int main (int argc, char *argv[])
 		GError *error = NULL;
 		g_file_copy (source, dest, G_FILE_COPY_NONE, NULL, NULL, NULL, &error);
 
-		g_sprintf(dsn, "DB_DIR=%s;DB_NAME=homefinances.db", home);
+		g_sprintf(dsn, "DB_DIR=%s;DB_NAME=%s", home, DB_FILE_NAME);
 
 		g_free(source_path);
 	}
@@ -210,7 +213,7 @@ void init_periodicity_model()
 	GValue *quarter = ex_value_new_string (_("Quarterly"));
 	GValue *year = ex_value_new_string (_("Yearly"));
 	
-	db_exec_sql("CREATE TEMPORARY TABLE tmp_periodicity(id INTEGER, name TEXT)");
+	db_exec_sql("CREATE TEMPORARY TABLE tmp_periodicity(id INTEGER, name TEXT)", NULL);
 
 	db_exec_sql ("INSERT INTO tmp_periodicity(id,name) VALUES(0, ##name::string)", "name", once, NULL);
 	db_exec_sql ("INSERT INTO tmp_periodicity(id,name) VALUES(1, ##name::string)", "name", day, NULL);

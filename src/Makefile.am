@@ -5,7 +5,7 @@
 
 sharedir = $(datadir)/dinero
 share_DATA = \
-        homefinances.db
+        ../db/dinero.sqlite
 
 gladedir = $(datadir)/dinero/glade
 glade_DATA = \
