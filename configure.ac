@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl Created by Anjuta application wizard.
 
-AC_INIT(dinero, 0.7, , , http://github.com/Junker/dinero)
+AC_INIT(dinero, 0.8, , , http://github.com/Junker/dinero)
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AC_CONFIG_HEADERS([config.h])
@@ -30,7 +30,10 @@ AM_PROG_LIBTOOL
 
 
 
-PKG_CHECK_MODULES(DINERO, [gtk+-2.0 >= 2.16 libgda-4.0 >= 4.2 libgda-sqlite-4.0 libgda-ui-4.0 gmodule-export-2.0])
+PKG_CHECK_MODULES(DINERO, gtk+-3.0
+libgda-5.0
+libgda-sqlite-5.0
+libgda-ui-5.0)
 
 
 

@@ -46,7 +46,8 @@ glade_DATA = \
 
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
-	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
+	-DPACKAGE_SRC_DIR=\""$(srcdir). \
+	$(libgda-sqlite-5.0_CFLAGS)"\" \
 	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
 	$(DINERO_CFLAGS)
 
@@ -107,7 +108,8 @@ dinero_SOURCES = \
 dinero_LDFLAGS = \
 	-Wl,--export-dynamic
 
-dinero_LDADD = $(DINERO_LIBS)
+dinero_LDADD = $(DINERO_LIBS) \
+	$(libgda-sqlite-5.0_LIBS)
 
 EXTRA_DIST = $(glade_DATA) \
 	$(pixmaps_DATA) \

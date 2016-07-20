@@ -86,9 +86,9 @@ gint show_editaccount_window (OperType oper)
 	}
 	else 
 	{
-		gtk_widget_hide_all(GTK_WIDGET(scrolledwindow_grid));
-		gtk_widget_hide_all(GTK_WIDGET(button_edit_currency));
-		gtk_widget_hide_all(GTK_WIDGET(label_grid));
+		gtk_widget_hide(GTK_WIDGET(scrolledwindow_grid));
+		gtk_widget_hide(GTK_WIDGET(button_edit_currency));
+		gtk_widget_hide(GTK_WIDGET(label_grid));
 	}
 	
 	gint response = gtk_dialog_run(GTK_DIALOG(dialog));
