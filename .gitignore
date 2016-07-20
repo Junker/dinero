@@ -1,3 +1,5 @@
+/src/dinero
+
 # Autotools
 /autom4te.cache
 /autoscan.log
@@ -8,23 +10,29 @@
 /config.log
 /config.sub
 /config.guess
+/config.status
 /ltmain.sh
-/Makefile
+**/Makefile
 /configure
 /configure.scan
 /depcomp
 /install-sh
 /missing
+/libtool
 /stamp-h1
 /intltool*
-Makefile.in
-Makefile.in.in
+**/Makefile.in
+**/Makefile.in.in
+config.h
+
+**/.deps
 
 # Gettext
 po/POTFILES
 po/POTFILES-py
 po/POTFILES-webdoc
 po/stamp-po
+po/stamp-it
 po/*.gmo
 po/*.mo
 po/*.sed
