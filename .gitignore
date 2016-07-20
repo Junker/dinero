@@ -1,17 +1,43 @@
+# Autotools
 /autom4te.cache
 /autoscan.log
 /autoscan-*.log
 /aclocal.m4
 /compile
 /config.h.in
+/config.log
+/config.sub
+/config.guess
+/ltmain.sh
+/Makefile
 /configure
 /configure.scan
 /depcomp
 /install-sh
 /missing
 /stamp-h1
+/intltool*
+Makefile.in
+Makefile.in.in
 
+# Gettext
+po/POTFILES
+po/POTFILES-py
+po/POTFILES-webdoc
+po/stamp-po
+po/*.gmo
+po/*.mo
+po/*.sed
+
+#Anjita IDE
 /.anjuta_sym_db.db
+/.anjuta
+/Debug
+
+
+#Temp files
+*.c~
+*.h~
 
 # Prerequisites
 *.d
