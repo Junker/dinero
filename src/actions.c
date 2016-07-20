@@ -90,7 +90,7 @@ gint show_warning_dialog(gchar *message, GtkWindow *parrent)
 
 GtkDateEntry* create_dateentry(GtkContainer *container) 
 {
-	GtkDateEntry *dateentry = gtk_dateentry_new();
+	GtkDateEntry *dateentry = gtk_date_entry_new();
 	gtk_container_add(GTK_CONTAINER(container), GTK_WIDGET(dateentry));
 	gtk_widget_show(GTK_WIDGET(dateentry));
 	
@@ -100,9 +100,10 @@ GtkDateEntry* create_dateentry(GtkContainer *container)
 ExGrid* create_grid(GtkContainer *container) 
 {
 	//dirty hack, need rewrite or send bugreport to glade command
-	if (G_OBJECT_TYPE(container) == GTK_TYPE_SCROLLED_WINDOW)
+/*	if (G_OBJECT_TYPE(container) == GTK_TYPE_SCROLLED_WINDOW)
 		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (container), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-
+*/
+	
 	ExGrid *grid = ex_grid_new(NULL);
 	gtk_container_add(GTK_CONTAINER(container), GTK_WIDGET(grid));
 	gtk_widget_show(GTK_WIDGET(grid));

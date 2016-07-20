@@ -158,7 +158,7 @@ void on_button_addedit_clicked (GtkButton *button, OperType oper)
 		gchar *description = g_value_get_string(ex_grid_get_selected_row_value (grid, DESCR_COL));
 
 		gtk_spin_button_set_value(spinbutton_amount, amount);
-		gtk_dateentry_set_date(dateedit, date);
+		gtk_date_entry_set_date(dateedit, date);
 		ex_textview_set_text(textview_description, description);
 		
 	}
@@ -173,7 +173,7 @@ void on_button_addedit_clicked (GtkButton *button, OperType oper)
 		GValue *account    = ex_grid_get_selected_row_value (source_grid, DEB_ACCOUNT_ID_COL);
 		GValue *currency   = ex_grid_get_selected_row_value (source_grid, DEB_CURRENCY_ID_COL);
 		
-		GValue *date        = ex_value_new_int(gtk_dateentry_get_date(dateedit));
+		GValue *date        = ex_value_new_int(gtk_date_entry_get_date(dateedit));
 //		GValue *amount      = ex_value_new_double(gtk_spin_button_get_value(spinbutton_amount));
 		GValue *description = ex_value_new_string(ex_textview_get_text(textview_description));
 

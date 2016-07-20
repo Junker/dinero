@@ -296,10 +296,10 @@ GtkWidget* create_main_window (void)
 	g_signal_connect_swapped(G_OBJECT(grid_plan_income), "row-activated", G_CALLBACK(on_plan_income_button_edit_clicked), NULL);
 	
 
-	gtk_dateentry_set_date(dateedit_filter_account_from, get_current_date() - 30);
-	gtk_dateentry_set_date(dateedit_filter_expend_from, get_current_date() - 30);
-	gtk_dateentry_set_date(dateedit_filter_income_from, get_current_date() - 30);	
-	gtk_dateentry_set_date(dateedit_filter_plan_income_from, get_current_date() - 30);	
+	gtk_date_entry_set_date(dateedit_filter_account_from, get_current_date() - 30);
+	gtk_date_entry_set_date(dateedit_filter_expend_from, get_current_date() - 30);
+	gtk_date_entry_set_date(dateedit_filter_income_from, get_current_date() - 30);	
+	gtk_date_entry_set_date(dateedit_filter_plan_income_from, get_current_date() - 30);	
 	
 	//Set Combo models 
 	gint viewcols[1] = {1};
@@ -357,8 +357,8 @@ void fill_grid_expenditure(void)
 		g_string_append(sql," AND a.date>=##datefrom::gint");
 		g_string_append(sql," AND a.date<=##dateto::gint");
 
-		datefrom = ex_value_new_int(gtk_dateentry_get_date(dateedit_filter_expend_from));
-		dateto   = ex_value_new_int(gtk_dateentry_get_date(dateedit_filter_expend_to));
+		datefrom = ex_value_new_int(gtk_date_entry_get_date(dateedit_filter_expend_from));
+		dateto   = ex_value_new_int(gtk_date_entry_get_date(dateedit_filter_expend_to));
 		account     = ex_combo_get_current_row_value(combo_filter_expend_account, 0);
 		category    = ex_combo_get_current_row_value(combo_filter_expend_category, 0);
 		subcategory = ex_combo_get_current_row_value(combo_filter_expend_subcategory, 0);
@@ -444,8 +444,8 @@ void fill_grid_income(void)
 		g_string_append(sql," AND a.date>=##datefrom::gint");
 		g_string_append(sql," AND a.date<=##dateto::gint");
 
-		datefrom = ex_value_new_int(gtk_dateentry_get_date(dateedit_filter_income_from));
-		dateto   = ex_value_new_int(gtk_dateentry_get_date(dateedit_filter_income_to));
+		datefrom = ex_value_new_int(gtk_date_entry_get_date(dateedit_filter_income_from));
+		dateto   = ex_value_new_int(gtk_date_entry_get_date(dateedit_filter_income_to));
 		account     = ex_combo_get_current_row_value(combo_filter_income_account,0);
 		category    = ex_combo_get_current_row_value(combo_filter_income_category,0);
 		subcategory = ex_combo_get_current_row_value(combo_filter_income_subcategory,0);
@@ -579,8 +579,8 @@ void fill_grid_account_full(void)
 			account  = ex_combo_get_current_row_value(combo_filter_account_account, 0);
 		}
 
-		datefrom = ex_value_new_int (gtk_dateentry_get_date(dateedit_filter_account_from));
-		dateto   = ex_value_new_int (gtk_dateentry_get_date(dateedit_filter_account_to));
+		datefrom = ex_value_new_int (gtk_date_entry_get_date(dateedit_filter_account_from));
+		dateto   = ex_value_new_int (gtk_date_entry_get_date(dateedit_filter_account_to));
 	
 		g_string_append(sql," AND c.date>=##datefrom::gint");
 		g_string_append(sql," AND c.date<=##dateto::gint");
@@ -763,8 +763,8 @@ void fill_grid_plan_expenditure(void)
 		g_string_append(sql," AND date>=##datefrom::gint");
 		g_string_append(sql," AND date<=##dateto::gint");
 
-		datefrom = ex_value_new_int(gtk_dateentry_get_date(dateedit_filter_income_from));
-		dateto   = ex_value_new_int(gtk_dateentry_get_date(dateedit_filter_income_to));
+		datefrom = ex_value_new_int(gtk_date_entry_get_date(dateedit_filter_income_from));
+		dateto   = ex_value_new_int(gtk_date_entry_get_date(dateedit_filter_income_to));
 		account     = ex_combo_get_current_row_value(combo_filter_income_account,0);
 		category    = ex_combo_get_current_row_value(combo_filter_income_category,0);
 		subcategory = ex_combo_get_current_row_value(combo_filter_income_subcategory,0);
@@ -853,8 +853,8 @@ void fill_grid_plan_income(void)
 		g_string_append(sql," AND date>=##datefrom::gint");
 		g_string_append(sql," AND date<=##dateto::gint");
 
-		datefrom = ex_value_new_int(gtk_dateentry_get_date(dateedit_filter_income_from));
-		dateto   = ex_value_new_int(gtk_dateentry_get_date(dateedit_filter_income_to));
+		datefrom = ex_value_new_int(gtk_date_entry_get_date(dateedit_filter_income_from));
+		dateto   = ex_value_new_int(gtk_date_entry_get_date(dateedit_filter_income_to));
 		account     = ex_combo_get_current_row_value(combo_filter_income_account,0);
 		category    = ex_combo_get_current_row_value(combo_filter_income_category,0);
 		subcategory = ex_combo_get_current_row_value(combo_filter_income_subcategory,0);
@@ -1358,15 +1358,15 @@ void on_grid_plan_income_selection_changed(GdauiRawGrid *dbrawgrid, gboolean arg
 
 void on_button_filter_account_clear_clicked (GtkButton *button, gpointer user_data)
 {
-	gtk_dateentry_set_date(dateedit_filter_account_from, get_current_date() - 30);
-	gtk_dateentry_set_date(dateedit_filter_account_to, NULL);
+	gtk_date_entry_set_date(dateedit_filter_account_from, get_current_date() - 30);
+	gtk_date_entry_set_date(dateedit_filter_account_to, NULL);
 	gtk_combo_box_set_active(combo_filter_account_account, -1);
 }
 
 void on_button_filter_expend_clear_clicked (GtkButton *button, gpointer user_data)
 {
-	gtk_dateentry_set_date(dateedit_filter_expend_from, get_current_date() - 30);
-	gtk_dateentry_set_date(dateedit_filter_expend_to, get_current_date());
+	gtk_date_entry_set_date(dateedit_filter_expend_from, get_current_date() - 30);
+	gtk_date_entry_set_date(dateedit_filter_expend_to, get_current_date());
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_filter_expend_account), -1);
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_filter_expend_subcategory), -1);
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_filter_expend_category), -1);
@@ -1375,8 +1375,8 @@ void on_button_filter_expend_clear_clicked (GtkButton *button, gpointer user_dat
 
 void on_button_filter_income_clear_clicked (GtkButton *button, gpointer user_data)
 {
-	gtk_dateentry_set_date(dateedit_filter_income_from, get_current_date () - 30);
-	gtk_dateentry_set_date(dateedit_filter_income_to, get_current_date ());
+	gtk_date_entry_set_date(dateedit_filter_income_from, get_current_date () - 30);
+	gtk_date_entry_set_date(dateedit_filter_income_to, get_current_date ());
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_filter_income_account), -1);
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_filter_income_subcategory), -1);
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_filter_income_category), -1);

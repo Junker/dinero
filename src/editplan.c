@@ -211,7 +211,7 @@ void set_fields_values(OperType oper)
 	periodicity = g_value_get_int(ex_grid_get_selected_row_value (grid, PLAN_PERIODICITY_COL));
 	periodicity_days = g_value_get_int(ex_grid_get_selected_row_value (grid, PLAN_PERIODICITY_DAYS_COL));
 		
-	gtk_dateentry_set_date(dateedit, date);
+	gtk_date_entry_set_date(dateedit, date);
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_category), ex_combo_get_row_by_id(combo_category, category));
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_subcategory), ex_combo_get_row_by_id(combo_subcategory, subcategory));
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_account), ex_combo_get_row_by_id(combo_account, account));
@@ -350,7 +350,7 @@ void on_editplan_button_ok_clicked(GtkButton *button, OperType oper)
 	GValue *account     = ex_combo_get_current_row_value(combo_account, 0);
 	GValue *currency    = ex_combo_get_current_row_value(combo_currency, 0);
 	GValue *unit        = ex_combo_get_current_row_value(combo_unit, 0);
-	GValue *date        = ex_value_new_int(gtk_dateentry_get_date(dateedit));
+	GValue *date        = ex_value_new_int(gtk_date_entry_get_date(dateedit));
 	GValue *quantity    = ex_value_new_int(gtk_spin_button_get_value_as_int(spinbutton_quantity));
 	GValue *periodicity = ex_value_new_int(gtk_combo_box_get_active(combobox_periodicity));
 	gboolean multi      = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_multi));

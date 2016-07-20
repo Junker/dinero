@@ -134,7 +134,7 @@ void set_fields_values(gint oper)
 	guint date_remind  = g_value_get_int(ex_grid_get_selected_row_value (grid,DEB_REMIND_DATE_COL));
 	gchar *description = g_value_get_string(ex_grid_get_selected_row_value (grid,DEB_DESCR_COL));
 	
-	gtk_dateentry_set_date(dateedit, date);
+	gtk_date_entry_set_date(dateedit, date);
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_person), ex_combo_get_row_by_id(combo_person, person));
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_account), ex_combo_get_row_by_id(combo_account,account));
 	gtk_spin_button_set_value(spinbutton_amount, amount);	
@@ -143,7 +143,7 @@ void set_fields_values(gint oper)
 	gtk_spin_button_set_value(spinbutton_period,period);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_is_closed), is_closed);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton_remind), remind);
-	gtk_dateentry_set_date(dateedit_remind, date_remind);
+	gtk_date_entry_set_date(dateedit_remind, date_remind);
 	ex_textview_set_text(textview_description, description);
 }
 
@@ -161,7 +161,7 @@ void on_button_ok_clicked(GtkButton *button,gint oper)
 	}
 
 
-	GValue *date        = ex_value_new_int(gtk_dateentry_get_date(dateedit));
+	GValue *date        = ex_value_new_int(gtk_date_entry_get_date(dateedit));
 	GValue *person      = ex_combo_get_current_row_value(combo_person, 0);
 	GValue *account     = ex_combo_get_current_row_value(combo_account, 0);
 	GValue *currency    = ex_combo_get_current_row_value(combo_currency,0);
@@ -169,7 +169,7 @@ void on_button_ok_clicked(GtkButton *button,gint oper)
 	GValue *period      = ex_value_new_int(gtk_spin_button_get_value_as_int(spinbutton_period));
 	GValue *is_closed   = ex_value_new_boolean(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_is_closed)));
 	GValue *remind      = ex_value_new_boolean(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkbutton_remind)));
-	GValue *date_remind = ex_value_new_int(gtk_dateentry_get_date(dateedit_remind));
+	GValue *date_remind = ex_value_new_int(gtk_date_entry_get_date(dateedit_remind));
 	GValue *description = ex_value_new_string(ex_textview_get_text(textview_description));
 	GValue *amount;
 	

@@ -212,7 +212,7 @@ void fill_grid()
 					gtk_list_store_set_value (store, &iter, STORE_CURRENCY_COL, currency);
 					gtk_list_store_set_value (store, &iter, STORE_PERIODICITY_COL, periodicity_val);
 					gtk_list_store_set_value (store, &iter, STORE_PLAN_ID_COL, plan);
-					gtk_list_store_set_value (store, &iter, STORE_TIME_T_COL, ex_value_new_int (gtk_dateentry_get_date(plan_gdate)));
+					gtk_list_store_set_value (store, &iter, STORE_TIME_T_COL, ex_value_new_int (gtk_date_entry_get_date(plan_gdate)));
 
 
 					
@@ -250,7 +250,7 @@ void fill_grid()
 				gtk_list_store_set_value (store, &iter, STORE_CURRENCY_COL, currency);
 				gtk_list_store_set_value (store, &iter, STORE_PERIODICITY_COL, periodicity_val);
 				gtk_list_store_set_value (store, &iter, STORE_PLAN_ID_COL, plan);
-				gtk_list_store_set_value (store, &iter, STORE_TIME_T_COL, ex_value_new_int (gtk_dateentry_get_date(plan_gdate)));
+				gtk_list_store_set_value (store, &iter, STORE_TIME_T_COL, ex_value_new_int (gtk_date_entry_get_date(plan_gdate)));
 
 				g_date_add_months(plan_gdate, 1);
 			}
@@ -283,7 +283,7 @@ void fill_grid()
 				gtk_list_store_set_value (store, &iter, STORE_CURRENCY_COL, currency);
 				gtk_list_store_set_value (store, &iter, STORE_PERIODICITY_COL, periodicity_val);
 				gtk_list_store_set_value (store, &iter, STORE_PLAN_ID_COL, plan);
-				gtk_list_store_set_value (store, &iter, STORE_TIME_T_COL, ex_value_new_int (gtk_dateentry_get_date(plan_gdate)));
+				gtk_list_store_set_value (store, &iter, STORE_TIME_T_COL, ex_value_new_int (gtk_date_entry_get_date(plan_gdate)));
 
 				g_date_add_months(plan_gdate, 4);
 			}
@@ -316,7 +316,7 @@ void fill_grid()
 				gtk_list_store_set_value (store, &iter, STORE_CURRENCY_COL, currency);
 				gtk_list_store_set_value (store, &iter, STORE_PERIODICITY_COL, periodicity_val);
 				gtk_list_store_set_value (store, &iter, STORE_PLAN_ID_COL, plan);
-				gtk_list_store_set_value (store, &iter, STORE_TIME_T_COL, ex_value_new_int (gtk_dateentry_get_date(plan_gdate)));
+				gtk_list_store_set_value (store, &iter, STORE_TIME_T_COL, ex_value_new_int (gtk_date_entry_get_date(plan_gdate)));
 				
 				g_date_add_years(plan_gdate, 1);
 			}

@@ -138,9 +138,9 @@ void show_report_window (void)
 	combo_rep2_currency = create_combo(eventbox_rep2_currency);
 	combo_rep3_account = create_combo(eventbox_rep3_account);
 	
-	gtk_dateentry_set_date(dateedit_rep1_from, get_current_date() - 30);
-	gtk_dateentry_set_date(dateedit_rep2_from, get_current_date() - 30);
-	gtk_dateentry_set_date(dateedit_rep3_from, get_current_date() - 30);
+	gtk_date_entry_set_date(dateedit_rep1_from, get_current_date() - 30);
+	gtk_date_entry_set_date(dateedit_rep2_from, get_current_date() - 30);
+	gtk_date_entry_set_date(dateedit_rep3_from, get_current_date() - 30);
 
 	gint viewcols[1] = {1};
 	gdaui_combo_set_model(combo_rep1_currency, currency_model, 1, viewcols);
@@ -251,8 +251,8 @@ void fill_grid_rep1_expenditure()
 	
 	gda_sql_builder_set_where(builder, id_cond);
 
-	GValue *datefrom = ex_value_new_int(gtk_dateentry_get_date(dateedit_rep1_from));
-	GValue *dateto   = ex_value_new_int(gtk_dateentry_get_date(dateedit_rep1_to));
+	GValue *datefrom = ex_value_new_int(gtk_date_entry_get_date(dateedit_rep1_from));
+	GValue *dateto   = ex_value_new_int(gtk_date_entry_get_date(dateedit_rep1_to));
 	GValue *currency = ex_combo_get_current_row_value(combo_rep1_currency, 0);
 	
 	GdaDataModel *db_model = db_exec_select_sql(gda_statement_to_sql(gda_sql_builder_get_statement(builder, NULL), NULL, NULL),
@@ -370,8 +370,8 @@ void fill_grid_rep1_income()
 	
 	gda_sql_builder_set_where(builder, id_cond);
 
-	GValue *datefrom = ex_value_new_int(gtk_dateentry_get_date(dateedit_rep1_from));
-	GValue *dateto   = ex_value_new_int(gtk_dateentry_get_date(dateedit_rep1_to));
+	GValue *datefrom = ex_value_new_int(gtk_date_entry_get_date(dateedit_rep1_from));
+	GValue *dateto   = ex_value_new_int(gtk_date_entry_get_date(dateedit_rep1_to));
 	GValue *currency = ex_combo_get_current_row_value(combo_rep1_currency, 0);
 	
 	GdaDataModel *db_model = db_exec_select_sql(gda_statement_to_sql(gda_sql_builder_get_statement(builder, NULL), NULL, NULL),
@@ -486,8 +486,8 @@ void fill_grid_rep1_total()
 	
 	gda_sql_builder_set_where(builder, id_cond);
 
-	GValue *datefrom = ex_value_new_int(gtk_dateentry_get_date(dateedit_rep1_from));
-	GValue *dateto   = ex_value_new_int(gtk_dateentry_get_date(dateedit_rep1_to));
+	GValue *datefrom = ex_value_new_int(gtk_date_entry_get_date(dateedit_rep1_from));
+	GValue *dateto   = ex_value_new_int(gtk_date_entry_get_date(dateedit_rep1_to));
 	GValue *currency = ex_combo_get_current_row_value(combo_rep1_currency, 0);
 	
 	GdaDataModel *db_model = db_exec_select_sql(gda_statement_to_sql(gda_sql_builder_get_statement(builder, NULL), NULL, NULL),
@@ -611,8 +611,8 @@ void fill_grid_rep2_expenditure()
 	
 	gda_sql_builder_set_where(builder, id_cond);
 
-	GValue *datefrom = ex_value_new_int(gtk_dateentry_get_date(dateedit_rep2_from));
-	GValue *dateto   = ex_value_new_int(gtk_dateentry_get_date(dateedit_rep2_to));
+	GValue *datefrom = ex_value_new_int(gtk_date_entry_get_date(dateedit_rep2_from));
+	GValue *dateto   = ex_value_new_int(gtk_date_entry_get_date(dateedit_rep2_to));
 	GValue *currency = ex_combo_get_current_row_value(combo_rep2_currency, 0);
 	
 	GdaDataModel *db_model = db_exec_select_sql(gda_statement_to_sql(gda_sql_builder_get_statement(builder, NULL), NULL, NULL),
@@ -730,8 +730,8 @@ void fill_grid_rep2_income()
 	
 	gda_sql_builder_set_where(builder, id_cond);
 
-	GValue *datefrom = ex_value_new_int(gtk_dateentry_get_date(dateedit_rep2_from));
-	GValue *dateto   = ex_value_new_int(gtk_dateentry_get_date(dateedit_rep2_to));
+	GValue *datefrom = ex_value_new_int(gtk_date_entry_get_date(dateedit_rep2_from));
+	GValue *dateto   = ex_value_new_int(gtk_date_entry_get_date(dateedit_rep2_to));
 	GValue *currency = ex_combo_get_current_row_value(combo_rep2_currency, 0);
 	
 	GdaDataModel *db_model = db_exec_select_sql(gda_statement_to_sql(gda_sql_builder_get_statement(builder, NULL), NULL, NULL),
@@ -841,8 +841,8 @@ void fill_grid_rep2_total()
 	
 	gda_sql_builder_set_where(builder, id_cond);
 
-	GValue *datefrom = ex_value_new_int(gtk_dateentry_get_date(dateedit_rep2_from));
-	GValue *dateto   = ex_value_new_int(gtk_dateentry_get_date(dateedit_rep2_to));
+	GValue *datefrom = ex_value_new_int(gtk_date_entry_get_date(dateedit_rep2_from));
+	GValue *dateto   = ex_value_new_int(gtk_date_entry_get_date(dateedit_rep2_to));
 	GValue *currency = ex_combo_get_current_row_value(combo_rep2_currency, 0);
 	
 	GdaDataModel *db_model = db_exec_select_sql(gda_statement_to_sql(gda_sql_builder_get_statement(builder, NULL), NULL, NULL),
@@ -950,8 +950,8 @@ void fill_grid_rep3()
 	g_string_append(sql, " GROUP BY strftime(##datef2::string,date(date+1721425)), account_id, currency_id");
 
 	
-	GValue *datefrom = ex_value_new_int(gtk_dateentry_get_date(dateedit_rep3_from));
-	GValue *dateto   = ex_value_new_int(gtk_dateentry_get_date(dateedit_rep3_to));
+	GValue *datefrom = ex_value_new_int(gtk_date_entry_get_date(dateedit_rep3_from));
+	GValue *dateto   = ex_value_new_int(gtk_date_entry_get_date(dateedit_rep3_to));
 	
 	GdaDataModel *db_model = db_exec_select_sql(sql->str,
 	                                           "datefrom", datefrom,

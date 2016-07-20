@@ -108,7 +108,7 @@ void on_button_ok_clicked(GtkButton *button,gpointer user_data)
 	GValue *in_account  = ex_combo_get_current_row_value(combo_in_account, 0);
 	GValue *currency    = ex_combo_get_current_row_value(combo_currency, 0);
 	gdouble amount      = gtk_spin_button_get_value(spinbutton_amount);
-	GValue *date        = ex_value_new_int(gtk_dateentry_get_date(dateedit));
+	GValue *date        = ex_value_new_int(gtk_date_entry_get_date(dateedit));
 	GValue *description = ex_value_new_string(ex_textview_get_text(textview_description));	
 
 
