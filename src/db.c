@@ -56,7 +56,6 @@ gboolean db_connect (gchar * dsn)
 	}   
 	
 	db_exec_select_sql ("PRAGMA foreign_keys = ON", NULL);
-	
 
 	return TRUE;
 }
@@ -73,20 +72,27 @@ GdaSet* db_exec_sql (const gchar *sql, ...)
 	if (error) show_error_dialog (_("Query failed"), error->message , NULL);
 	gda_statement_get_parameters (stmt, &params, NULL);
 
-	va_list ap;
-	va_start(ap, sql);
-	for (;;)
+	if (params) 
 	{
-		gchar *var_name = va_arg(ap, gchar*);
-		GValue *var_value = va_arg(ap, GValue*);
+		va_list ap;
+		va_start(ap, sql);
+		for (;;)
+		{
+			gchar *var_name = va_arg(ap, gchar*);
+			GValue *var_value = va_arg(ap, GValue*);
 
-		if (!var_name) break;
+			if (!var_name) break;
 
+			GdaHolder *holder = gda_set_get_holder(params, var_name);
 
-		//g_debug("VARNAME:%s VARVALUE:%s", var_name, gda_value_stringify(var_value));
-		gda_holder_set_value (gda_set_get_holder(params, var_name), var_value, NULL);
-		va_end (ap);	
+			if (!holder) break;
+			
+			//g_debug("VARNAME:%s VARVALUE:%s", var_name, gda_value_stringify(var_value));
+			gda_holder_set_value (holder, var_value, NULL);
+		}
+		va_end (ap);
 	}
+	
 	//g_debug(gda_statement_to_sql(stmt, params, NULL));
 	gda_connection_statement_execute_non_select (connection, stmt, params, &inserted_row, &error);
 	if (error) show_error_dialog (_("Query failed"), error->message, NULL);
@@ -111,18 +117,25 @@ GdaDataModel* db_exec_select_sql (const gchar *sql, ...)
 
 	gda_statement_get_parameters (stmt, &params, NULL);
 
-	va_list ap;
-	va_start(ap, sql);
-	for (;;)
+	if (params)
 	{
-		const gchar *var_name = va_arg(ap, gchar*);
-		const GValue *var_value = va_arg(ap, GValue*);
+		va_list ap;
+		va_start(ap, sql);
+		for (;;)
+		{
+			const gchar *var_name = va_arg(ap, gchar*);
+			const GValue *var_value = va_arg(ap, GValue*);
 
-		if (!var_name) break;
+			if (!var_name) break;
 
-		//g_debug("VARNAME:%s VARVALUE:%s", var_name, gda_value_stringify(var_value));
-		gda_holder_set_value (gda_set_get_holder(params, var_name), var_value, NULL);
-		va_end (ap);
+			GdaHolder *holder = gda_set_get_holder(params, var_name);
+
+			if (!holder) break;
+
+			//g_debug("VARNAME:%s VARVALUE:%s", var_name, gda_value_stringify(var_value));
+			gda_holder_set_value (holder, var_value, NULL);
+		}
+		va_end (ap);	
 	}
 	
 	//g_debug(gda_statement_to_sql(stmt, params, NULL));
@@ -158,8 +171,8 @@ const GValue* db_get_value (const gchar *sql, ...)
 		
 		//g_debug("VARNAME:%s VARVALUE:%s", var_name, gda_value_stringify(var_value));
 		gda_holder_set_value (gda_set_get_holder(params, var_name), var_value, NULL);
-		va_end (ap);
 	}
+	va_end (ap);
 	
 	if (error) show_error_dialog (_("Query failed"), error->message , NULL);
 
