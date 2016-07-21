@@ -21,7 +21,7 @@
 
 
 
-gchar *home;
+gchar *home_path;
 
 enum
 {

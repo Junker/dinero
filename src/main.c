@@ -63,17 +63,17 @@ int main (int argc, char *argv[])
 
 	setlocale(LC_NUMERIC, "POSIX");
 
-	home = g_build_filename(g_get_home_dir(), ".config", PACKAGE_NAME, NULL);
+	home_path = g_build_filename(g_get_home_dir(), ".config", PACKAGE_NAME, NULL);
 
 	gchar dsn[1000];
 	//Connect
-	gchar *dbfilename = g_build_filename(home, DB_FILE_NAME, NULL);
+	gchar *dbfilename = g_build_filename(home_path, DB_FILE_NAME, NULL);
 
 	if (g_file_test(dbfilename, G_FILE_TEST_EXISTS))
-		g_sprintf(dsn, "DB_DIR=%s;DB_NAME=%s", home, DB_FILE_NAME);
+		g_sprintf(dsn, "DB_DIR=%s;DB_NAME=%s", home_path, DB_FILE_NAME);
 	else
 	{
-		g_mkdir_with_parents(home, 0755);
+		g_mkdir_with_parents(home_path, 0755);
 	
 		gchar *source_path = g_build_filename(PACKAGE_DATA_DIR, PACKAGE_NAME, DB_FILE_NAME, NULL);
 
@@ -90,7 +90,7 @@ int main (int argc, char *argv[])
 		GError *error = NULL;
 		g_file_copy (source, dest, G_FILE_COPY_NONE, NULL, NULL, NULL, &error);
 
-		g_sprintf(dsn, "DB_DIR=%s;DB_NAME=%s", home, DB_FILE_NAME);
+		g_sprintf(dsn, "DB_DIR=%s;DB_NAME=%s", home_path, DB_FILE_NAME);
 
 		g_free(source_path);
 	}
