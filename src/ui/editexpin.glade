@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.20.0 -->
 <interface>
-  <requires lib="gtk+" version="2.16"/>
+  <requires lib="gtk+" version="3.8"/>
   <object class="GtkAdjustment" id="adjustment_amount">
     <property name="lower">0.01</property>
     <property name="upper">10000000</property>
@@ -24,13 +25,15 @@
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
     <child>
-      <object class="GtkVBox" id="vbox1">
+      <object class="GtkBox" id="vbox1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkVBox" id="vbox3">
+          <object class="GtkBox" id="vbox3">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
             <child>
               <object class="GtkTable" id="table3">
                 <property name="visible">True</property>
@@ -41,11 +44,26 @@
                 <property name="column_spacing">4</property>
                 <property name="row_spacing">6</property>
                 <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
                   <object class="GtkLabel" id="label16">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Amount</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="top_attach">6</property>
@@ -56,8 +74,8 @@
                   <object class="GtkLabel" id="label18">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Account</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="top_attach">3</property>
@@ -68,8 +86,8 @@
                   <object class="GtkLabel" id="label19">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Subcategory</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="top_attach">2</property>
@@ -80,8 +98,8 @@
                   <object class="GtkLabel" id="label20">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Category</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="top_attach">1</property>
@@ -89,7 +107,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkHBox" id="hbox5">
+                  <object class="GtkBox" id="hbox5">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -136,7 +154,6 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
-                    <property name="use_action_appearance">False</property>
                     <property name="draw_indicator">True</property>
                   </object>
                   <packing>
@@ -147,7 +164,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkHBox" id="hbox6">
+                  <object class="GtkBox" id="hbox6">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -190,16 +207,16 @@
                   <object class="GtkLabel" id="label21">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Date</property>
+                    <property name="xalign">1</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkLabel" id="label15">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Description</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="top_attach">7</property>
@@ -265,7 +282,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkHBox" id="hbox1">
+                  <object class="GtkBox" id="hbox1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -275,13 +292,12 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="tooltip_text" translatable="yes">Add new category</property>
-                        <property name="use_action_appearance">False</property>
                         <child>
                           <object class="GtkImage" id="image1">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="stock">gtk-add</property>
-                            <property name="icon-size">1</property>
+                            <property name="icon_size">1</property>
                           </object>
                         </child>
                       </object>
@@ -303,7 +319,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkHBox" id="hbox2">
+                  <object class="GtkBox" id="hbox2">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -314,13 +330,12 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="tooltip_text" translatable="yes">Add new subcategory</property>
-                        <property name="use_action_appearance">False</property>
                         <child>
                           <object class="GtkImage" id="image2">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="stock">gtk-add</property>
-                            <property name="icon-size">1</property>
+                            <property name="icon_size">1</property>
                           </object>
                         </child>
                       </object>
@@ -342,7 +357,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkHBox" id="hbox3">
+                  <object class="GtkBox" id="hbox3">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -354,14 +369,13 @@
                         <property name="has_tooltip">True</property>
                         <property name="tooltip_markup" translatable="yes">Add new unit type</property>
                         <property name="tooltip_text" translatable="yes">Add new unit type</property>
-                        <property name="use_action_appearance">False</property>
                         <signal name="clicked" handler="on_button_unit_add_clicked" swapped="no"/>
                         <child>
                           <object class="GtkImage" id="image3">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="stock">gtk-add</property>
-                            <property name="icon-size">1</property>
+                            <property name="icon_size">1</property>
                           </object>
                         </child>
                       </object>
@@ -383,11 +397,14 @@
                   </packing>
                 </child>
                 <child>
+                  <placeholder/>
+                </child>
+                <child>
                   <object class="GtkLabel" id="label1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Quantity</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="top_attach">4</property>
@@ -417,24 +434,6 @@
                     <property name="bottom_attach">8</property>
                   </packing>
                 </child>
-                <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -443,7 +442,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkHSeparator" id="separator1">
+              <object class="GtkSeparator" id="separator1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
               </object>
@@ -462,7 +461,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkHButtonBox" id="hbuttonbox1">
+          <object class="GtkButtonBox" id="hbuttonbox1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="spacing">5</property>
@@ -474,7 +473,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -490,7 +488,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="gtk_widget_destroy" object="window" swapped="yes"/>
               </object>
