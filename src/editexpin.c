@@ -17,7 +17,7 @@
  */
 
 #include "config.h"
- 
+
 #include <string.h>
 #include <glib/gprintf.h>
 #include <glib/gi18n-lib.h>
@@ -228,7 +228,7 @@ void set_fields_values(OperType oper)
 	}
 	else
 	{
-		GValue *currency = db_get_value ("SELECT id FROM currency WHERE is_main=1",NULL);
+		GValue *currency = db_get_value ("SELECT id FROM currency WHERE is_main=1");
 		gtk_combo_box_set_active(GTK_COMBO_BOX(combo_currency), 
 		                         ex_combo_get_row_by_id(combo_currency,g_value_get_int(currency))
 		                        );	

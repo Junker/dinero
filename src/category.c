@@ -144,7 +144,7 @@ void show_category_window (void)
 void fill_grid_out_category(void)
 {
 	
-	GdaDataModel *db_model = db_exec_select_sql ("SELECT id, name FROM category WHERE type=1 ORDER BY name", NULL);
+	GdaDataModel *db_model = db_exec_select_sql ("SELECT id, name FROM category WHERE type=1 ORDER BY name");
 
 	if (!db_model) return;
 
@@ -180,7 +180,7 @@ void fill_grid_out_subcategory(GValue *id)
 void fill_grid_in_category(void)
 {
 	
-	GdaDataModel *db_model = db_exec_select_sql ("SELECT id,name FROM category WHERE type=2 ORDER BY name",NULL);
+	GdaDataModel *db_model = db_exec_select_sql ("SELECT id,name FROM category WHERE type=2 ORDER BY name");
 	if (!db_model) return;
 	
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid_in_category),db_model);
@@ -213,7 +213,7 @@ void fill_grid_in_subcategory(GValue *id)
 
 void fill_grid_unit(void)
 {
-	GdaDataModel *db_model = db_exec_select_sql ("SELECT id,name FROM unit ORDER BY name",NULL);
+	GdaDataModel *db_model = db_exec_select_sql ("SELECT id,name FROM unit ORDER BY name");
 	if (!db_model) return;
 
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid_unit),db_model);
@@ -230,7 +230,7 @@ void fill_grid_unit(void)
 void fill_grid_debtor(void)
 {
 	
-	GdaDataModel *db_model = db_exec_select_sql ("SELECT id,name FROM person ORDER BY name",NULL);
+	GdaDataModel *db_model = db_exec_select_sql ("SELECT id,name FROM person ORDER BY name");
 	if (!db_model) return;
 	
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid_debtor), db_model);
@@ -247,7 +247,7 @@ void fill_grid_debtor(void)
 void fill_grid_creditor(void)
 {
 	
-	GdaDataModel *db_model = db_exec_select_sql ("SELECT id,name FROM person ORDER BY name",NULL);
+	GdaDataModel *db_model = db_exec_select_sql ("SELECT id,name FROM person ORDER BY name");
 	if (!db_model) return;
 	
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid_creditor), db_model);

@@ -41,7 +41,7 @@ gboolean db_connect (gchar * dsn)
 
 	parser = gda_connection_create_parser(connection);
 	
-	const gchar *sqlite_ver = g_value_get_string(db_get_value ("SELECT sqlite_version()", NULL));
+	const gchar *sqlite_ver = g_value_get_string(db_get_value("SELECT sqlite_version()"));
 	gint sqlite_major_ver,
 	     sqlite_minor_ver,
 	     sqlite_patch_ver;
@@ -56,7 +56,7 @@ gboolean db_connect (gchar * dsn)
 		g_error("Sqlite version >= 3.6.19 needed");
 	}   
 	
-	db_exec_select_sql ("PRAGMA foreign_keys = ON", NULL);
+	db_exec_select_sql ("PRAGMA foreign_keys = ON");
 
 	g_debug("Connected to DSN: %s", dsn);
 	
@@ -100,8 +100,6 @@ GdaDataModel* db_exec_select_sql(const gchar *sql, ...)
 	GdaSet *params;
 	GdaDataModel *model;
 	GError *error = NULL;
-
-	//g_debug("SELECT SQL: %s", sql);
 	
 	stmt = gda_sql_parser_parse_string (parser, sql, NULL, &error);
 	if (error) 
@@ -174,7 +172,6 @@ static void sql_dump(GdaStatement *stmt, GdaSet *params)
 {
 	GString *result;
 	gchar *sql;
-	GdaHolder *holder;
 	int i;
 
 	if (g_getenv("G_MESSAGES_DEBUG") == NULL)
@@ -189,7 +186,7 @@ static void sql_dump(GdaStatement *stmt, GdaSet *params)
 	
 	for (i = 0; i<1000; i++)
 	{
-		holder = gda_set_get_nth_holder(params, i);
+		GdaHolder *holder = gda_set_get_nth_holder(params, i);
 
 		if (!holder) break;
 

@@ -25,47 +25,47 @@
 void refresh_account_model()
 {
 	if (G_IS_OBJECT(account_model)) g_object_unref(account_model);
-	account_model = db_exec_select_sql ("SELECT id,name FROM account", NULL);
+	account_model = db_exec_select_sql ("SELECT id,name FROM account");
 }
 
 void refresh_currency_model()
 {
 	if (G_IS_OBJECT(currency_model)) g_object_unref(currency_model);
-	currency_model = db_exec_select_sql ("SELECT id,name FROM currency", NULL);
+	currency_model = db_exec_select_sql ("SELECT id,name FROM currency");
 }
 
 void refresh_category_model()
 {
 	if (G_IS_OBJECT(in_category_model)) g_object_unref(category_model);
-	category_model = db_exec_select_sql ("SELECT id,name FROM category", NULL);
+	category_model = db_exec_select_sql ("SELECT id,name FROM category");
 }
 
 void refresh_in_category_model()
 {
 	if (G_IS_OBJECT(in_category_model)) g_object_unref(in_category_model);
-	in_category_model = db_exec_select_sql ("SELECT id,name FROM category WHERE type=2", NULL);
+	in_category_model = db_exec_select_sql ("SELECT id,name FROM category WHERE type=2");
 }
 
 void refresh_out_category_model()
 {
 	if (G_IS_OBJECT(out_category_model)) g_object_unref(out_category_model);
-	out_category_model = db_exec_select_sql ("SELECT id,name FROM category WHERE type=1", NULL);
+	out_category_model = db_exec_select_sql ("SELECT id,name FROM category WHERE type=1");
 }
 
 void refresh_subcategory_model()
 {
 	if (G_IS_OBJECT(subcategory_model)) g_object_unref(subcategory_model);
-	subcategory_model = db_exec_select_sql ("SELECT id,name FROM subcategory", NULL);
+	subcategory_model = db_exec_select_sql ("SELECT id,name FROM subcategory");
 }
 
 void refresh_unit_model()
 {
 	if (G_IS_OBJECT(unit_model)) g_object_unref(unit_model);
-	unit_model = db_exec_select_sql ("SELECT id,name FROM unit", NULL);
+	unit_model = db_exec_select_sql ("SELECT id,name FROM unit");
 }
 
 void refresh_person_model()
 {
 	if (G_IS_OBJECT(person_model)) g_object_unref(person_model);
-	person_model = db_exec_select_sql ("SELECT id,name FROM person", NULL);
+	person_model = db_exec_select_sql ("SELECT id,name FROM person");
 }

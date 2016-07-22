@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301,  USA
  */
 #include "config.h"
- 
+
 #include <string.h>
 #include <glib/gprintf.h>
 #include <glib/gi18n-lib.h>
@@ -105,8 +105,8 @@ void fill_combo_person(gint oper)
 {
 	GdaDataModel *db_model;
 
-	if (oper == EDITDEBT_DEBT || oper == INSERTDEBT_DEBT) db_model = db_exec_select_sql ("SELECT id,name FROM person ORDER BY name",NULL);
-	else db_model = db_exec_select_sql ("SELECT id,name FROM person ORDER BY name",NULL);
+	if (oper == EDITDEBT_DEBT || oper == INSERTDEBT_DEBT) db_model = db_exec_select_sql ("SELECT id,name FROM person ORDER BY name");
+	else db_model = db_exec_select_sql ("SELECT id,name FROM person ORDER BY name");
 
 	if (!db_model) return;
 

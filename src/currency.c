@@ -17,7 +17,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "config.h"
- 
+
 #include <libgda-ui/libgda-ui.h>
 #include <string.h> 
 #include <glib/gprintf.h> 
@@ -65,7 +65,7 @@ void show_currency_window (void)
 
 void fill_grid(void)
 {
-	GdaDataModel *db_model = db_exec_select_sql ("SELECT id, name, short_name, is_main FROM currency ORDER BY name",NULL);
+	GdaDataModel *db_model = db_exec_select_sql ("SELECT id, name, short_name, is_main FROM currency ORDER BY name");
 	if (!db_model) return;
 
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid), db_model);

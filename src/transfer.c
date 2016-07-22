@@ -85,7 +85,7 @@ void fill_grid(void)
 
 	GdaDataModel *db_model = db_exec_select_sql ("SELECT a.id, b.date, strftime('%d.%m.%Y',date(b.date+1721425)), b.account_id, c. account_id, b.amount, b.currency_id,b.description \
 	                                               FROM transfer a, operation b, operation c WHERE a.expenditure_id=b.id AND a.income_id=c.id \
-	                                               ORDER BY b.date DESC",NULL);
+	                                               ORDER BY b.date DESC");
 
 	if (!db_model) return;
 

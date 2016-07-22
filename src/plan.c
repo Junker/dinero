@@ -18,7 +18,7 @@
  */
 
 #include "config.h"
- 
+
 #include <libgda-ui/libgda-ui.h>
 #include <glib/gprintf.h>
 #include <glib/gi18n-lib.h>
@@ -332,7 +332,7 @@ void fill_grid()
 
 void on_plan_button_ok_clicked (GtkButton *button, gpointer user_data)
 {
-	GdaDataModel *db_model = db_exec_select_sql ("SELECT id, account_id, category_id, subcategory_id, quantity, unit_id, amount, currency_id FROM plan", NULL);
+	GdaDataModel *db_model = db_exec_select_sql ("SELECT id, account_id, category_id, subcategory_id, quantity, unit_id, amount, currency_id FROM plan");
 
 	gtk_tree_model_foreach (GTK_TREE_MODEL(store), proccess_list_store, db_model);
 
