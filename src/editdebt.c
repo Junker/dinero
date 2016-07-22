@@ -15,8 +15,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301,  USA
  */
-
-#include <config.h> 
+#include "config.h"
+ 
 #include <string.h>
 #include <glib/gprintf.h>
 #include <glib/gi18n-lib.h>

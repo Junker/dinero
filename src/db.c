@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Dmitry Kosenkov 2009 <junker@front.ru>
+ * Copyright (C) Dmitry Kosenkov <junker@front.ru>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,13 +15,12 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301,  USA
  */
- 
-#include <glib/gi18n.h>
+
+
 #include <stdarg.h>
 #include <sql-parser/gda-sql-parser.h>
 
 #include "db.h"
-#include "actions.h"
 #include "sutil.h"
 
 
@@ -146,7 +145,7 @@ const GValue* db_get_value (const gchar *sql, ...)
 	_get_vargs_params(stmt, params, vargs);
 	va_end (vargs);
 	
-	g_debug("SQL: %s", gda_statement_to_sql(stmt, params, NULL));
+	sql_dump(stmt, params);
 
 	model = gda_connection_statement_execute_select (connection, stmt, params, &error);
 	if (error) 

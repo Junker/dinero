@@ -22,8 +22,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301,  USA
  */
 
-
-#include <config.h> 
+#include "config.h"
+ 
 #include <glib/gprintf.h>
 #include <libgda-ui/libgda-ui.h>
 #include <string.h>

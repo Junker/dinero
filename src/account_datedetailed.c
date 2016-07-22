@@ -16,7 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301,  USA
  */
 
-#include <config.h> 
+#include "config.h"
+
 #include <gtk/gtk.h>
 #include <string.h>
 #include <glib/gprintf.h>
@@ -26,6 +27,7 @@
 #include "db.h"
 #include "account_datedetailed.h"
 #include "mainform.h"
+#include "sutil.h"
 
 enum
 {

@@ -16,7 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301,  USA
  */
 
-#include <config.h> 
+#include "config.h"
+
 #include <string.h>
 #include <glib/gprintf.h>
 #include <glib/gi18n-lib.h>
@@ -25,9 +26,9 @@
 #include "editaccount.h"
 #include "actions.h"
 #include "mainform.h"
-
 #include "ex-grid.h"
 #include "sutil.h"
+#include "db.h"
 
 static GtkWidget *dialog,
                  *button_edit_currency;

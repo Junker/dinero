@@ -16,3 +16,5 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+
+gint show_remind_debt_window (GValue *id);

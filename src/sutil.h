@@ -39,3 +39,4 @@ gint ex_data_model_get_row_by_id(GdaDataModel *db_model, const gint id);
 void ex_form_lookup_field (GdauiRawForm *form, gint n_col, GdaDataModel *model, gint model_col);
 
 guint32 get_current_date();
+void str_replace_character(char *str, char *replace, char *with);

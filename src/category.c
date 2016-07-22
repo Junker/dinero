@@ -16,16 +16,20 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301,  USA
  */
 
-#include <config.h> 
+#include "config.h"
+
 #include <glib/gprintf.h>
 #include <string.h>
 #include <glib/gi18n-lib.h>
 #include <libgda-ui/libgda-ui.h>
 
+#include "db.h"
 #include "common.h"
 #include "category.h"
 #include "actions.h"
 #include "mainform.h"
+#include "sutil.h"
+#include "ex-grid.h"
 
 static GtkWidget *window;
 static ExGrid *grid_in_category,
@@ -256,7 +260,7 @@ void fill_grid_creditor(void)
 
 void on_grid_out_category_change_selection (GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data)
 {
-	fill_grid_out_subcategory(ex_grid_get_selected_row_value(dbrawgrid,0));
+	fill_grid_out_subcategory(ex_grid_get_selected_row_value(EX_GRID(dbrawgrid), 0));
 
 	gtk_widget_set_sensitive(GTK_WIDGET(button_expend_category_edit), TRUE);
 	gtk_widget_set_sensitive(GTK_WIDGET(button_expend_category_del), TRUE);
@@ -265,7 +269,7 @@ void on_grid_out_category_change_selection (GdauiRawGrid *dbrawgrid, gboolean ar
 
 void on_grid_in_category_change_selection (GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data)
 {
-	fill_grid_in_subcategory(ex_grid_get_selected_row_value(dbrawgrid,0));
+	fill_grid_in_subcategory(ex_grid_get_selected_row_value(EX_GRID(dbrawgrid),0));
 
 	gtk_widget_set_sensitive(GTK_WIDGET(button_income_category_edit), TRUE);
 	gtk_widget_set_sensitive(GTK_WIDGET(button_income_category_del), TRUE);	

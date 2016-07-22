@@ -18,7 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <config.h>
+#include "config.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -28,6 +28,7 @@
 #include <locale.h>
 #include <glib.h>
 #include <glib/gi18n.h>
+#include <glib/gprintf.h>
 #include <gtk/gtk.h>
 #include <libgda/libgda.h>
 
@@ -35,7 +36,10 @@
 #include "common.h"
 #include "mainform.h"
 #include "db.h"
-
+#include "plan.h"
+#include "sutil.h"
+#include "actions.h"
+#include "reminddebt.h"
 
 
 #define DB_FILE_NAME "dinero.sqlite"
@@ -54,14 +58,13 @@ void destroy (GtkWidget *widget, gpointer data)
 
 int main (int argc, char *argv[])
 {
-	GtkWidget *window;
-	
+/*	
 #ifdef ENABLE_NLS
 	bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 #endif
-
+*/
 	gtk_init(&argc, &argv);
 
 	//locale for float numbers (for SQL)
@@ -77,7 +80,7 @@ int main (int argc, char *argv[])
 
 	create_lookup_models();
 
-	window = create_main_window ();	
+	create_main_window();	
 
 	check_debtcredit_remain();
 
@@ -182,7 +185,7 @@ static void init_periodicity_model()
 	GValue *quarter = ex_value_new_string (_("Quarterly"));
 	GValue *year = ex_value_new_string (_("Yearly"));
 	
-	db_exec_sql("CREATE TEMPORARY TABLE tmp_periodicity(id INTEGER, name TEXT)", NULL);
+	db_exec_sql("CREATE TEMPORARY TABLE tmp_periodicity(id INTEGER, name TEXT)");
 
 	db_exec_sql ("INSERT INTO tmp_periodicity(id,name) VALUES(0, ##name::string)", "name", once, NULL);
 	db_exec_sql ("INSERT INTO tmp_periodicity(id,name) VALUES(1, ##name::string)", "name", day, NULL);
@@ -190,7 +193,7 @@ static void init_periodicity_model()
 	db_exec_sql ("INSERT INTO tmp_periodicity(id,name) VALUES(3, ##name::string)", "name", quarter, NULL);
 	db_exec_sql ("INSERT INTO tmp_periodicity(id,name) VALUES(4, ##name::string)", "name", year, NULL);
 
-	periodicity_model = db_exec_select_sql ("SELECT id,name FROM tmp_periodicity", NULL);
+	periodicity_model = db_exec_select_sql ("SELECT id,name FROM tmp_periodicity");
 	            
 	g_free(once);
 	g_free(day);

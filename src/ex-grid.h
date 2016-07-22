@@ -53,6 +53,7 @@ typedef enum {
 	EX_GRID_COL_FORMAT_BOOL
 } ExGridColumnFormat;
 
+ExGrid* ex_grid_new();
 GValue* ex_grid_get_selected_row_value(ExGrid *grid, const guint n_column);
 void ex_grid_lookup_field (ExGrid *grid, gint n_col, GdaDataModel *model, gint model_col);
 GtkCellRenderer* ex_grid_get_column_text_renderer(ExGrid *grid, guint col);

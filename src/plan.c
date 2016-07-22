@@ -17,7 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <config.h>
+#include "config.h"
+ 
 #include <libgda-ui/libgda-ui.h>
 #include <glib/gprintf.h>
 #include <glib/gi18n-lib.h>

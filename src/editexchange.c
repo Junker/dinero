@@ -16,7 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301,  USA
  */
 
-#include <config.h> 
+#include "config.h"
+
 #include <glib/gprintf.h>
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
@@ -27,6 +28,7 @@
 #include "mainform.h"
 #include "db.h"
 #include "actions.h"
+#include "sutil.h" 
 
 #include "gtkdateentry.h"
 
