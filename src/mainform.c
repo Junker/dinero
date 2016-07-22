@@ -15,7 +15,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301,  USA
  */
-#include <config.h> 
+#include "config.h"
+
 #include <string.h>
 #include <time.h>
 #include <glib/gprintf.h>
@@ -42,7 +43,6 @@
 
 #include "ex-grid.h"
 #include "sutil.h"
-
 #include "gtkdateentry.h"
 
 static GtkWidget *window;
@@ -400,11 +400,14 @@ void fill_grid_expenditure(void)
 	ex_grid_lookup_field (grid, EX_UNIT_ID_COL, unit_model, 0);
 	ex_grid_lookup_field (grid, EX_CURRENCY_ID_COL, currency_model, 0);
 
+	//hide columns
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), EX_ID_COL, FALSE);
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), EX_TIME_T_COL, FALSE);
 
+	//set columns format
 	ex_grid_column_set_format(grid, EX_AMOUNT_COL, EX_GRID_COL_FORMAT_MONEY);
 
+	//set columns title
 	ex_grid_column_set_title(grid, EX_DATE_COL, _("Date"));
 	ex_grid_column_set_title(grid, EX_ACCOUNT_ID_COL, _("Account"));
 	ex_grid_column_set_title(grid, EX_CATEGORY_ID_COL, _("Category"));
@@ -420,11 +423,8 @@ void fill_grid_expenditure(void)
 
 	ex_grid_set_columns_resizable(grid, TRUE);
 	ex_grid_set_columns_reordable(grid, TRUE);
-	
-	
-	GtkCellRenderer *date_renderer = ex_grid_get_column_text_renderer (grid, EX_DATE_COL);
-	g_object_set(G_OBJECT(date_renderer), "weight", 10000, NULL);
-	g_object_set(G_OBJECT(date_renderer), "weight-set", TRUE, NULL);
+
+	ex_grid_set_column_weight(grid, EX_DATE_COL, 1000);
 	
 	g_free(datefrom);
 	g_free(dateto);
@@ -514,9 +514,7 @@ void fill_grid_income(void)
 	gtk_widget_set_sensitive(GTK_WIDGET(button_income_edit), FALSE);
 	gtk_widget_set_sensitive(GTK_WIDGET(button_income_del), FALSE);
 
-	GtkCellRendererText *date_renderer = ex_grid_get_column_text_renderer (grid, EX_DATE_COL);
-	g_object_set(G_OBJECT(date_renderer), "weight", 10000, NULL);
-	g_object_set(G_OBJECT(date_renderer), "weight-set", TRUE, NULL);
+	ex_grid_set_column_weight(grid, EX_DATE_COL, 1000);
 
 	ex_grid_set_columns_resizable(grid, TRUE);
 	ex_grid_set_columns_reordable(grid, TRUE);
@@ -540,7 +538,7 @@ void fill_grid_account_short(void)
 	                                              FROM account a, currency b \
                                                   LEFT JOIN operation c on c.account_id=a.id AND c.currency_id=b.id \
                                                   JOIN account_startup f on f.account_id=a.id AND f.currency_id=b.id AND f.active_currency=1\
-                                                  GROUP BY a.id,b.id", NULL);
+                                                  GROUP BY a.id,b.id");
 		
 	if (!db_model) return;
 
@@ -576,9 +574,8 @@ void fill_grid_account_short(void)
 	gtk_widget_set_sensitive(GTK_WIDGET(button_account_del),FALSE);
 	gtk_widget_set_sensitive(GTK_WIDGET(button_account_transfer),FALSE);
 
-	GtkCellRenderer *renderer = ex_grid_get_column_text_renderer (grid, ACS_NAME_COL);
-	g_object_set(G_OBJECT(renderer), "weight", 1000, NULL);
-	g_object_set(G_OBJECT(renderer), "weight-set", TRUE, NULL);
+	ex_grid_set_column_weight(grid, ACS_NAME_COL, 1000);
+
 
 	ex_grid_set_columns_resizable(grid, TRUE);
 	ex_grid_set_columns_reordable(grid, TRUE);
@@ -655,9 +652,7 @@ void fill_grid_account_full(void)
 	
 	gtk_widget_set_sensitive(GTK_WIDGET(button_account_datedetailed), FALSE);
 
-	GtkCellRendererText *date_renderer = ex_grid_get_column_text_renderer (grid, ACF_DATE_COL);
-	g_object_set(G_OBJECT(date_renderer), "weight", 10000, NULL);
-	g_object_set(G_OBJECT(date_renderer), "weight-set", TRUE, NULL);
+	ex_grid_set_column_weight(grid, ACF_DATE_COL, 1000);
 
 	ex_grid_set_columns_resizable(grid, TRUE);
 	ex_grid_set_columns_reordable(grid, TRUE);
@@ -681,7 +676,7 @@ void fill_grid_debt(void)
 	                                                a.currency_id,b.remind,b.remind_date,a.description \
 	                                              FROM operation a, debtcredit b \
 	                                              WHERE a.id=b.id AND a.amount<0\
-	                                              ORDER BY a.date DESC", NULL);
+	                                              ORDER BY a.date DESC");
 
 	if (!db_model) return;
 
@@ -726,10 +721,7 @@ void fill_grid_debt(void)
 	gtk_widget_set_sensitive(GTK_WIDGET(button_debt_del), FALSE);
 	gtk_widget_set_sensitive(GTK_WIDGET(button_debt_payments), FALSE);
 
-	GtkCellRendererText *date_renderer = ex_grid_get_column_text_renderer (grid, DEB_DATE_COL);
-	g_object_set(G_OBJECT(date_renderer), "weight", 10000, NULL);
-	g_object_set(G_OBJECT(date_renderer), "weight-set", TRUE, NULL);
-
+	ex_grid_set_column_weight(grid, DEB_DATE_COL, 1000);
 
 	ex_grid_set_columns_resizable(grid, TRUE);
 	ex_grid_set_columns_reordable(grid, TRUE);
@@ -749,8 +741,7 @@ void fill_grid_credit(void)
 	                                                a.currency_id,b.remind,b.remind_date,a.description \
 	                                              FROM operation a, debtcredit b \
 	                                              WHERE a.id=b.id AND a.amount>0 \
-	                                              ORDER BY a.date DESC",
-	                                             NULL);
+	                                              ORDER BY a.date DESC");
 	if (!db_model) return;
 
 	//clean lookup fields
@@ -793,10 +784,7 @@ void fill_grid_credit(void)
 	gtk_widget_set_sensitive(GTK_WIDGET(button_credit_del), FALSE);
 	gtk_widget_set_sensitive(GTK_WIDGET(button_credit_payments), FALSE);
 
-
-	GtkCellRenderer *date_renderer = ex_grid_get_column_text_renderer (grid, DEB_DATE_COL);
-	g_object_set(G_OBJECT(date_renderer), "weight", 10000, NULL);
-	g_object_set(G_OBJECT(date_renderer), "weight-set", TRUE, NULL);
+	ex_grid_set_column_weight(grid, DEB_DATE_COL, 1000);
 
 	ex_grid_set_columns_resizable(grid, TRUE);
 	ex_grid_set_columns_reordable(grid, TRUE);
@@ -893,9 +881,7 @@ void fill_grid_plan_expenditure(void)
 	gtk_widget_set_sensitive(GTK_WIDGET(button_plan_expenditure_del), FALSE);
 	gtk_widget_set_sensitive(GTK_WIDGET(button_plan_expenditure_exec), FALSE);
 
-	GtkCellRendererText *date_renderer = ex_grid_get_column_text_renderer (grid, EX_DATE_COL);
-	g_object_set(G_OBJECT(date_renderer), "weight", 10000, NULL);
-	g_object_set(G_OBJECT(date_renderer), "weight-set", TRUE, NULL);
+	ex_grid_set_column_weight(grid, EX_DATE_COL, 1000);
 
 	ex_grid_set_columns_resizable(grid, TRUE);
 	ex_grid_set_columns_reordable(grid, TRUE);
@@ -996,10 +982,7 @@ void fill_grid_plan_income(void)
 	gtk_widget_set_sensitive(GTK_WIDGET(button_plan_income_del), FALSE);
 	gtk_widget_set_sensitive(GTK_WIDGET(button_plan_income_exec), FALSE);
 
-	GtkCellRendererText *date_renderer = ex_grid_get_column_text_renderer (grid, EX_DATE_COL);
-	g_object_set(G_OBJECT(date_renderer), "weight", 10000, NULL);
-	g_object_set(G_OBJECT(date_renderer), "weight-set", TRUE, NULL);
-
+	ex_grid_set_column_weight(grid, EX_DATE_COL, 1000);
 
 	ex_grid_set_columns_resizable(grid, TRUE);
 	ex_grid_set_columns_reordable(grid, TRUE);
@@ -1286,11 +1269,13 @@ void on_button_account_datedetailed_clicked(GtkButton *button, gpointer user_dat
 	show_account_datedetailed_window();
 }
 
+
 void on_expander_filter_account_activate (GtkExpander *expander, gpointer user_data)
 {
 	account_filter=!gtk_expander_get_expanded(expander);
 	fill_grid_account_full();
 }
+
 
 void on_combo_filter_expend_category_changed (GtkComboBox *widget, gpointer user_data)
 {
@@ -1311,6 +1296,7 @@ void on_combo_filter_expend_category_changed (GtkComboBox *widget, gpointer user
 	
 }
 
+
 void on_combo_filter_income_category_changed (GtkComboBox *widget, gpointer user_data)
 {
 	GValue *val = ex_combo_get_current_row_value(combo_filter_income_category,0);
@@ -1329,6 +1315,7 @@ void on_combo_filter_income_category_changed (GtkComboBox *widget, gpointer user
 	g_object_unref (db_model);
 	
 }
+
 
 void on_combo_filter_plan_income_category_changed (GtkComboBox *widget, gpointer user_data)
 {
@@ -1349,6 +1336,7 @@ void on_combo_filter_plan_income_category_changed (GtkComboBox *widget, gpointer
 	
 }
 
+
 void on_combo_filter_plan_expend_category_changed (GtkComboBox *widget, gpointer user_data)
 {
 	GValue *val = ex_combo_get_current_row_value(combo_filter_plan_expend_category,0);
@@ -1368,11 +1356,13 @@ void on_combo_filter_plan_expend_category_changed (GtkComboBox *widget, gpointer
 	
 }
 
+
 void on_expander_filter_expend_activate (GtkExpander *expander, gpointer user_data)
 {
 	expend_filter=!gtk_expander_get_expanded(expander);
 	fill_grid_expenditure();
 }
+
 
 void on_expander_filter_income_activate (GtkExpander *expander, gpointer user_data)
 {
@@ -1380,17 +1370,20 @@ void on_expander_filter_income_activate (GtkExpander *expander, gpointer user_da
 	fill_grid_income();
 }
 
+
 void on_expander_filter_plan_expend_activate (GtkExpander *expander, gpointer user_data)
 {
 	plan_income_filter = !gtk_expander_get_expanded(expander);
 	fill_grid_plan_expenditure();
 }
 
+
 void on_expander_filter_plan_income_activate (GtkExpander *expander, gpointer user_data)
 {
 	income_filter = !gtk_expander_get_expanded(expander);
 	fill_grid_plan_income();
 }
+
 
 void on_grid_account_short_selection_changed(GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data)
 {
@@ -1399,17 +1392,20 @@ void on_grid_account_short_selection_changed(GdauiRawGrid *dbrawgrid, gboolean a
 	gtk_widget_set_sensitive(GTK_WIDGET(button_account_transfer), TRUE);
 }
 
+
 void on_grid_expenditure_selection_changed(GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data)
 {
 	gtk_widget_set_sensitive(GTK_WIDGET(button_expenditure_edit), TRUE);
 	gtk_widget_set_sensitive(GTK_WIDGET(button_expenditure_del), TRUE);
 }
 
+
 void on_grid_income_selection_changed(GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data)
 {
 	gtk_widget_set_sensitive(GTK_WIDGET(button_income_edit), TRUE);
 	gtk_widget_set_sensitive(GTK_WIDGET(button_income_del), TRUE);
 }
+
 
 void on_grid_debt_selection_changed(GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data)
 {
@@ -1418,6 +1414,7 @@ void on_grid_debt_selection_changed(GdauiRawGrid *dbrawgrid, gboolean arg1, gpoi
 	gtk_widget_set_sensitive(GTK_WIDGET(button_debt_payments), TRUE);
 }
 
+
 void on_grid_credit_selection_changed(GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data)
 {
 	gtk_widget_set_sensitive(GTK_WIDGET(button_credit_edit), TRUE);
@@ -1425,10 +1422,12 @@ void on_grid_credit_selection_changed(GdauiRawGrid *dbrawgrid, gboolean arg1, gp
 	gtk_widget_set_sensitive(GTK_WIDGET(button_credit_payments), TRUE);
 }
 
+
 void on_grid_account_full_selection_changed (GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data)
 {
 	gtk_widget_set_sensitive(GTK_WIDGET(button_account_datedetailed), TRUE);
 }
+
 
 void on_grid_plan_expenditure_selection_changed(GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data)
 {
@@ -1437,12 +1436,14 @@ void on_grid_plan_expenditure_selection_changed(GdauiRawGrid *dbrawgrid, gboolea
 	gtk_widget_set_sensitive(GTK_WIDGET(button_plan_expenditure_exec), TRUE);
 }
 
+
 void on_grid_plan_income_selection_changed(GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data)
 {
 	gtk_widget_set_sensitive(GTK_WIDGET(button_plan_income_edit), TRUE);
 	gtk_widget_set_sensitive(GTK_WIDGET(button_plan_income_del), TRUE);
 	gtk_widget_set_sensitive(GTK_WIDGET(button_plan_income_exec), TRUE);
 }
+
 
 void on_button_filter_account_clear_clicked (GtkButton *button, gpointer user_data)
 {
@@ -1451,15 +1452,19 @@ void on_button_filter_account_clear_clicked (GtkButton *button, gpointer user_da
 	gtk_combo_box_set_active(combo_filter_account_account, -1);
 }
 
+
 void on_button_filter_expend_clear_clicked (GtkButton *button, gpointer user_data)
 {
 	gtk_date_entry_set_date(dateedit_filter_expend_from, get_current_date() - 30);
 	gtk_date_entry_set_date(dateedit_filter_expend_to, get_current_date());
+	
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_filter_expend_account), -1);
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_filter_expend_subcategory), -1);
 	gtk_combo_box_set_active(GTK_COMBO_BOX(combo_filter_expend_category), -1);
+	
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(combo_filter_expend_subcategory), NULL);
 }
+
 
 void on_button_filter_income_clear_clicked (GtkButton *button, gpointer user_data)
 {

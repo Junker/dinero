@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*- */
 /*
- * homefinances_gnome
- * Copyright (C) Dmitry Kosenkov 2011 <junker@front.ru>
+ * Dinero
+ * Copyright (C) Dmitry Kosenkov <junker@front.ru>
  * 
  * homefinances_gnome is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -81,7 +81,7 @@ void ex_grid_lookup_field (ExGrid *grid, gint n_col, GdaDataModel *model, gint m
 
 	ex_grid_set_column_width(grid, n_col, 500);
 	
-	g_assert (gda_holder_set_source_model (holder, model, model_col, NULL));
+	gda_holder_set_source_model(holder, model, model_col, NULL);
 
 }
 
@@ -214,3 +214,11 @@ void ex_grid_set_column_width(ExGrid *grid, gint column, guint width)
 */
 
 }
+
+void ex_grid_set_column_weight(ExGrid *grid, gint column, guint weight)
+{
+	GtkCellRenderer *date_renderer = ex_grid_get_column_text_renderer (grid, column);
+	g_object_set(G_OBJECT(date_renderer), "weight", weight, NULL);
+	g_object_set(G_OBJECT(date_renderer), "weight-set", TRUE, NULL);
+}
+
