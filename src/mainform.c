@@ -22,7 +22,7 @@
 #include <libgda-ui/libgda-ui.h>
 #include <glib/gi18n-lib.h>
 
-#include "main.h"
+#include "common.h"
 #include "actions.h"
 #include "db.h"
 #include "currency.h"
@@ -261,7 +261,7 @@ GtkWidget* create_main_window (void)
 	g_signal_connect (G_OBJECT(dateedit_filter_expend_from), "changed", G_CALLBACK(fill_grid_expenditure),NULL);
 	g_signal_connect (G_OBJECT(dateedit_filter_expend_to), "changed", G_CALLBACK(fill_grid_expenditure),NULL);
 	g_signal_connect (G_OBJECT(dateedit_filter_income_from), "changed", G_CALLBACK(fill_grid_income),NULL);
-	g_signal_connect (G_OBJECT(dateedit_filter_income_to), " changed", G_CALLBACK(fill_grid_income),NULL);
+	g_signal_connect (G_OBJECT(dateedit_filter_income_to), "changed", G_CALLBACK(fill_grid_income),NULL);
 	
 	g_signal_connect (G_OBJECT(grid_account_short), "selection_changed", G_CALLBACK (on_grid_account_short_selection_changed),NULL);
 	g_signal_connect (G_OBJECT(grid_account_full), "selection_changed", G_CALLBACK (on_grid_account_full_selection_changed),NULL);
@@ -350,8 +350,8 @@ void fill_grid_expenditure(void)
 	GString *sql = g_string_new("SELECT a.id,a.date,strftime('%d.%m.%Y',date(a.date+1721425)),a.account_id, \
 	                             b.category_id,b.subcategory_id,b.quantity,b.unit_id,a.amount*-1,a.currency_id,a.description \
 	                             FROM operation a, expin b \
-	                             WHERE a.id=b.id AND a.amount < 0");
-
+	                             WHERE a.id=b.id AND a.amount<0");
+	
 	if (expend_filter == TRUE) 
 	{
 		g_string_append(sql," AND a.date>=##datefrom::gint");
@@ -382,8 +382,18 @@ void fill_grid_expenditure(void)
 	
 
 	if (!db_model) return;
-	
+
+	//clean lookup fields
+	ex_grid_lookup_field (grid, EX_ACCOUNT_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, EX_CATEGORY_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, EX_SUBCATEGORY_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, EX_UNIT_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, EX_CURRENCY_ID_COL, NULL, 0);
+
+	//assign model
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid),db_model);
+
+	//set lookup fields
 	ex_grid_lookup_field (grid, EX_ACCOUNT_ID_COL, account_model, 0);
 	ex_grid_lookup_field (grid, EX_CATEGORY_ID_COL, category_model, 0);
 	ex_grid_lookup_field (grid, EX_SUBCATEGORY_ID_COL, subcategory_model, 0);
@@ -468,8 +478,18 @@ void fill_grid_income(void)
 	                                             NULL);
 	
 	if (!db_model) return;
-	
+
+	//clean lookup models
+	ex_grid_lookup_field (grid, EX_ACCOUNT_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, EX_CATEGORY_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, EX_SUBCATEGORY_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, EX_UNIT_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, EX_CURRENCY_ID_COL, NULL, 0);
+
+	//assign model
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid), db_model);
+
+	//lookup fields
 	ex_grid_lookup_field (grid, EX_ACCOUNT_ID_COL, account_model, 0);
 	ex_grid_lookup_field (grid, EX_CATEGORY_ID_COL, category_model, 0);
 	ex_grid_lookup_field (grid, EX_SUBCATEGORY_ID_COL, subcategory_model, 0);
@@ -523,18 +543,27 @@ void fill_grid_account_short(void)
                                                   GROUP BY a.id,b.id", NULL);
 		
 	if (!db_model) return;
-	
+
+	//clean lookup fields
+	ex_grid_lookup_field (grid, ACS_CURRENCY_ID_COL, NULL, 0);
+
+	//assign model
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid),db_model);
+
+	//lookup fields
 	ex_grid_lookup_field (grid, ACS_CURRENCY_ID_COL, currency_model, 0);
 
+	//hide columns
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), ACS_ID_COL, FALSE);
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), ACS_STARTUP_ID_COL, FALSE);
 
+	//set columns format
 	ex_grid_column_set_format(grid, ACS_STARTUP_AMOUNT_COL, EX_GRID_COL_FORMAT_MONEY);
 	ex_grid_column_set_format(grid, ACS_EXPEND_COL, EX_GRID_COL_FORMAT_MONEY);
 	ex_grid_column_set_format(grid, ACS_INCOME_COL, EX_GRID_COL_FORMAT_MONEY);
 	ex_grid_column_set_format(grid, ACS_AMOUNT_COL, EX_GRID_COL_FORMAT_MONEY);
 	
+	//set columns titles
 	ex_grid_column_set_title(grid, ACS_NAME_COL, _("Account"));
 	ex_grid_column_set_title(grid, ACS_STARTUP_AMOUNT_COL, _("Initial balance"));
 	ex_grid_column_set_title(grid, ACS_EXPEND_COL, _("Expenses"));
@@ -595,17 +624,27 @@ void fill_grid_account_full(void)
 	                                            NULL);
 	
 	if (!db_model) return;
-	
-	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid), db_model);
+
+	//clean lookup fields
 	ex_grid_lookup_field (grid, ACF_ID_COL, account_model, 0);
 	ex_grid_lookup_field (grid, ACF_CURRENCY_ID_COL, currency_model, 0);
 
+	//assign model
+	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid), db_model);
+
+	//lookup fields
+	ex_grid_lookup_field (grid, ACF_ID_COL, account_model, 0);
+	ex_grid_lookup_field (grid, ACF_CURRENCY_ID_COL, currency_model, 0);
+
+	//hide columns
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid_account_full), ACF_TIME_T_COL, FALSE);
 
+	//set columns format
 	ex_grid_column_set_format(grid, ACF_AMOUNT_EXPEND_COL, EX_GRID_COL_FORMAT_MONEY);
 	ex_grid_column_set_format(grid, ACF_AMOUNT_INCOME_COL, EX_GRID_COL_FORMAT_MONEY);
 	ex_grid_column_set_format(grid, ACF_AMOUNT_DIF_COL, EX_GRID_COL_FORMAT_MONEY);
 	
+	//set column titles 
 	ex_grid_column_set_title(grid, ACF_DATE_COL, _("Date"));
 	ex_grid_column_set_title(grid, ACF_ID_COL, _("Account"));
 	ex_grid_column_set_title(grid, ACF_AMOUNT_EXPEND_COL, _("Expenses"));
@@ -645,20 +684,31 @@ void fill_grid_debt(void)
 	                                              ORDER BY a.date DESC", NULL);
 
 	if (!db_model) return;
+
+	//clean lookup fields
+	ex_grid_lookup_field(grid, DEB_ACCOUNT_ID_COL, NULL, 0);
+	ex_grid_lookup_field(grid, DEB_PERSON_ID_COL, NULL, 0);
+	ex_grid_lookup_field(grid, DEB_CURRENCY_ID_COL, NULL, 0);
 	
+	//assign model
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid), db_model);
+
+	//lookup fields
 	ex_grid_lookup_field(grid, DEB_ACCOUNT_ID_COL, account_model, 0);
 	ex_grid_lookup_field(grid, DEB_PERSON_ID_COL, person_model, 0);
 	ex_grid_lookup_field(grid, DEB_CURRENCY_ID_COL, currency_model, 0);
 
+	//hide columns
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), DEB_ID_COL, FALSE);
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), DEB_TIME_T_COL, FALSE);
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), DEB_REMIND_COL, FALSE);
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), DEB_REMIND_DATE_COL, FALSE);
 
+	//set columns format
 	ex_grid_column_set_format(grid, DEB_AMOUNT_COL, EX_GRID_COL_FORMAT_MONEY);
 	ex_grid_column_set_format(grid, DEB_PAY_AMOUNT_COL, EX_GRID_COL_FORMAT_MONEY);
 
+	//set column titles
 	ex_grid_column_set_title(grid, DEB_DATE_COL, _("Date"));
 	ex_grid_column_set_title(grid, DEB_ACCOUNT_ID_COL, _("Account"));
 	ex_grid_column_set_title(grid, DEB_PERSON_ID_COL, _("Debtor"));
@@ -702,20 +752,31 @@ void fill_grid_credit(void)
 	                                              ORDER BY a.date DESC",
 	                                             NULL);
 	if (!db_model) return;
-	
+
+	//clean lookup fields
+	ex_grid_lookup_field(grid, DEB_ACCOUNT_ID_COL, NULL, 0);
+	ex_grid_lookup_field(grid, DEB_PERSON_ID_COL, NULL, 0);
+	ex_grid_lookup_field(grid, DEB_CURRENCY_ID_COL, NULL, 0);
+
+	//assign model
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid),db_model);
+	
+	//lookup fields
 	ex_grid_lookup_field(grid, DEB_ACCOUNT_ID_COL, account_model, 0);
 	ex_grid_lookup_field(grid, DEB_PERSON_ID_COL, person_model, 0);
 	ex_grid_lookup_field(grid, DEB_CURRENCY_ID_COL, currency_model, 0);
 
+	//hide columns
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), DEB_ID_COL, FALSE);
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), DEB_TIME_T_COL, FALSE);
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), DEB_REMIND_COL, FALSE);
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), DEB_REMIND_DATE_COL, FALSE);
 	
+	//set columns format
 	ex_grid_column_set_format(grid, DEB_AMOUNT_COL, EX_GRID_COL_FORMAT_MONEY);
 	ex_grid_column_set_format(grid, DEB_PAY_AMOUNT_COL, EX_GRID_COL_FORMAT_MONEY);
 	
+	//set columns title
 	ex_grid_column_set_title(grid, DEB_DATE_COL, _("Date"));
 	ex_grid_column_set_title(grid, DEB_ACCOUNT_ID_COL, _("Account"));
 	ex_grid_column_set_title(grid, DEB_PERSON_ID_COL, _("Creditor"));
@@ -789,20 +850,34 @@ void fill_grid_plan_expenditure(void)
 	
 	if (!db_model) return;
 
+	//clean lookup fields
+	ex_grid_lookup_field (grid, PLAN_ACCOUNT_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, PLAN_CATEGORY_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, PLAN_SUBCATEGORY_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, PLAN_UNIT_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, PLAN_CURRENCY_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, PLAN_PERIODICITY_COL, NULL, 0);
+
+	//assign model
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid), db_model);
+
+	//lookup fields
 	ex_grid_lookup_field (grid, PLAN_ACCOUNT_ID_COL, account_model, 0);
 	ex_grid_lookup_field (grid, PLAN_CATEGORY_ID_COL, category_model, 0);
 	ex_grid_lookup_field (grid, PLAN_SUBCATEGORY_ID_COL, subcategory_model, 0);
 	ex_grid_lookup_field (grid, PLAN_UNIT_ID_COL, unit_model, 0);
 	ex_grid_lookup_field (grid, PLAN_CURRENCY_ID_COL, currency_model, 0);
 	ex_grid_lookup_field (grid, PLAN_PERIODICITY_COL, periodicity_model, 0);
-	
+
+	//hide columns
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), PLAN_ID_COL, FALSE);
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), PLAN_TIME_T_COL, FALSE);
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), PLAN_PERIODICITY_DAYS_COL, FALSE);
 
+	//set columns format
 	ex_grid_column_set_format(grid, PLAN_AMOUNT_COL, EX_GRID_COL_FORMAT_MONEY);
 	
+	//set columns title
 	ex_grid_column_set_title(grid, PLAN_DATE_COL, _("Date"));
 	ex_grid_column_set_title(grid, PLAN_ACCOUNT_ID_COL, _("Account"));
 	ex_grid_column_set_title(grid, PLAN_CATEGORY_ID_COL, _("Category"));
@@ -877,22 +952,35 @@ void fill_grid_plan_income(void)
 	                                             NULL);
 	
 	if (!db_model) return;
-	
+
+	//clean lookup fields
+	ex_grid_lookup_field (grid, PLAN_ACCOUNT_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, PLAN_CATEGORY_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, PLAN_SUBCATEGORY_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, PLAN_UNIT_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, PLAN_CURRENCY_ID_COL, NULL, 0);
+	ex_grid_lookup_field (grid, PLAN_PERIODICITY_COL, NULL, 0);
+
+	//assign model
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid), db_model);
 
+	//lookup fields
 	ex_grid_lookup_field (grid, PLAN_ACCOUNT_ID_COL, account_model, 0);
 	ex_grid_lookup_field (grid, PLAN_CATEGORY_ID_COL, category_model, 0);
 	ex_grid_lookup_field (grid, PLAN_SUBCATEGORY_ID_COL, subcategory_model, 0);
 	ex_grid_lookup_field (grid, PLAN_UNIT_ID_COL, unit_model, 0);
 	ex_grid_lookup_field (grid, PLAN_CURRENCY_ID_COL, currency_model, 0);
 	ex_grid_lookup_field (grid, PLAN_PERIODICITY_COL, periodicity_model, 0);
-	
+
+	//hide columns
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), PLAN_ID_COL, FALSE);
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), PLAN_TIME_T_COL, FALSE);
 	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), PLAN_PERIODICITY_DAYS_COL, FALSE);
-	
+
+	//set columns format
 	ex_grid_column_set_format(grid, PLAN_AMOUNT_COL, EX_GRID_COL_FORMAT_MONEY);
 
+	//set columns title
 	ex_grid_column_set_title(grid, PLAN_DATE_COL, _("Date"));
 	ex_grid_column_set_title(grid, PLAN_ACCOUNT_ID_COL, _("Account"));
 	ex_grid_column_set_title(grid, PLAN_CATEGORY_ID_COL, _("Category"));
