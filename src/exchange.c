@@ -22,7 +22,7 @@
 #include <glib/gprintf.h>
 #include <glib/gi18n-lib.h>
 
-#include "main.h"
+#include "common.h"
 #include "exchange.h"
 #include "mainform.h"
 #include "db.h"

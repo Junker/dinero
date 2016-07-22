@@ -23,7 +23,7 @@
 #include <gtk/gtk.h>
 #include <libgda-ui/libgda-ui.h>
 
-#include "main.h"
+#include "common.h"
 #include "edittransfer.h"
 #include "mainform.h"
 #include "db.h"

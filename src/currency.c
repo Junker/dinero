@@ -26,8 +26,7 @@
 #include "currency.h"
 #include "db.h"
 #include "actions.h"
-
-#include "main.h"
+#include "common.h"
 
 #include "ex-grid.h"
 #include "sutil.h"

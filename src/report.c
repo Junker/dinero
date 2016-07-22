@@ -29,7 +29,7 @@
 #include <string.h>
 #include <glib/gi18n-lib.h>
 
-#include "main.h"
+#include "common.h"
 #include "actions.h" 
 #include "report.h" 
 #include "mainform.h"

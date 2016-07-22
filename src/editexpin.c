@@ -24,7 +24,7 @@
 #include <gtk/gtk.h>
 #include <libgda-ui/libgda-ui.h>
 
-#include "main.h"
+#include "common.h"
 #include "editexpin.h"
 #include "db.h"
 #include "actions.h"

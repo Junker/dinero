@@ -103,7 +103,9 @@ dinero_SOURCES = \
 	reminddebt.c \
 	reminddebt.h \
 	gtkdateentry.c \
-	gtkdateentry.h
+	gtkdateentry.h \
+	common.c \
+	common.h
 
 dinero_LDFLAGS = \
 	-Wl,--export-dynamic

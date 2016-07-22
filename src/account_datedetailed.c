@@ -22,7 +22,7 @@
 #include <glib/gprintf.h>
 #include <glib/gi18n-lib.h>
 
-#include "main.h"
+#include "common.h"
 #include "db.h"
 #include "account_datedetailed.h"
 #include "mainform.h"

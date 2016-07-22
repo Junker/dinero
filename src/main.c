@@ -2,7 +2,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*- */
 /*
  * main.c
- * Copyright (C) Dmitry Kosenkov 2009 <junker@front.ru>
+ * Copyright (C) Dmitry Kosenkov <junker@front.ru>
  * 
  * main.c is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -26,11 +26,13 @@
 #include <string.h>
 #include <stdio.h>
 #include <locale.h>
+#include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <libgda/libgda.h>
 
 #include "main.h"
+#include "common.h"
 #include "mainform.h"
 #include "db.h"
 
@@ -38,10 +40,11 @@
 
 #define DB_FILE_NAME "dinero.sqlite"
 
+void critical_log_handler(const gchar *log_domain, GLogLevelFlags log_level, const gchar *message, gpointer user_data);
 static void create_lookup_models();
 static void check_debtcredit_remain();
-
 static void init_periodicity_model();
+static void connect_db();
 
 void destroy (GtkWidget *widget, gpointer data)
 {
@@ -61,12 +64,44 @@ int main (int argc, char *argv[])
 
 	gtk_init(&argc, &argv);
 
+	//locale for float numbers (for SQL)
 	setlocale(LC_NUMERIC, "POSIX");
 
+	//init log handler
+//	g_log_set_handler(NULL, G_LOG_LEVEL_CRITICAL, critical_log_handler, NULL);
+
+	
+	connect_db();
+
+	gdaui_init();
+
+	create_lookup_models();
+
+	window = create_main_window ();	
+
+	check_debtcredit_remain();
+
+	show_plan_payment_window();
+
+	gtk_main ();
+	
+	return 0;
+}
+
+
+void critical_log_handler(const gchar *log_domain, GLogLevelFlags log_level, const gchar *message, gpointer user_data)
+{
+	g_log_default_handler(log_domain, log_level, message, user_data);
+	show_error_dialog(_("Query failed"), message, NULL);
+}
+
+static void connect_db()
+{
 	home_path = g_build_filename(g_get_home_dir(), ".config", PACKAGE_NAME, NULL);
 
 	gchar dsn[1000];
-	//Connect
+
+
 	gchar *dbfilename = g_build_filename(home_path, DB_FILE_NAME, NULL);
 
 	if (g_file_test(dbfilename, G_FILE_TEST_EXISTS))
@@ -79,47 +114,27 @@ int main (int argc, char *argv[])
 
 		if (!g_file_test(source_path, G_FILE_TEST_EXISTS))
 		{
-			g_print("%s File not found", source_path);
-			exit(-1);
+			g_error("%s File not found", source_path);
 		}
 		    
-		gchar *dest_path   = dbfilename;
+		gchar *dest_path = dbfilename;
 		GFile *source = g_file_new_for_path (source_path);
 		GFile *dest   = g_file_new_for_path (dest_path);
 
 		GError *error = NULL;
 		g_file_copy (source, dest, G_FILE_COPY_NONE, NULL, NULL, NULL, &error);
+		if (error)
+			g_error(error->message);
 
 		g_sprintf(dsn, "DB_DIR=%s;DB_NAME=%s", home_path, DB_FILE_NAME);
 
 		g_free(source_path);
 	}
 
-	gdaui_init();
-
-	db_connect (dsn);
-
-	create_lookup_models();
-
-	
-	window = create_main_window ();	
-//	gtk_widget_show_all (window);
-
-	check_debtcredit_remain();
-
-	show_plan_payment_window ();
-
-	
-	gtk_main ();
-
-	
-	return 0;
+	db_connect(dsn);
 }
 
-
-
-
-void check_debtcredit_remain()
+static void check_debtcredit_remain()
 {
 	GValue *date = ex_value_new_int (get_current_date());
 
@@ -144,7 +159,7 @@ void check_debtcredit_remain()
 
 
 
-void create_lookup_models() 
+static void create_lookup_models() 
 {
 	refresh_account_model();
 	refresh_currency_model();
@@ -157,55 +172,9 @@ void create_lookup_models()
 	init_periodicity_model();
 }
 
-void refresh_account_model()
-{
-	if (G_IS_OBJECT(account_model)) g_object_unref(account_model);
-	account_model = db_exec_select_sql ("SELECT id,name FROM account", NULL);
-}
 
-void refresh_currency_model()
-{
-	if (G_IS_OBJECT(currency_model)) g_object_unref(currency_model);
-	currency_model = db_exec_select_sql ("SELECT id,name FROM currency", NULL);
-}
 
-void refresh_category_model()
-{
-	if (G_IS_OBJECT(in_category_model)) g_object_unref(category_model);
-	category_model = db_exec_select_sql ("SELECT id,name FROM category", NULL);
-}
-
-void refresh_in_category_model()
-{
-	if (G_IS_OBJECT(in_category_model)) g_object_unref(in_category_model);
-	in_category_model = db_exec_select_sql ("SELECT id,name FROM category WHERE type=2", NULL);
-}
-
-void refresh_out_category_model()
-{
-	if (G_IS_OBJECT(out_category_model)) g_object_unref(out_category_model);
-	out_category_model = db_exec_select_sql ("SELECT id,name FROM category WHERE type=1", NULL);
-}
-
-void refresh_subcategory_model()
-{
-	if (G_IS_OBJECT(subcategory_model)) g_object_unref(subcategory_model);
-	subcategory_model = db_exec_select_sql ("SELECT id,name FROM subcategory", NULL);
-}
-
-void refresh_unit_model()
-{
-	if (G_IS_OBJECT(unit_model)) g_object_unref(unit_model);
-	unit_model = db_exec_select_sql ("SELECT id,name FROM unit", NULL);
-}
-
-void refresh_person_model()
-{
-	if (G_IS_OBJECT(person_model)) g_object_unref(person_model);
-	person_model = db_exec_select_sql ("SELECT id,name FROM person", NULL);
-}
-
-void init_periodicity_model()
+static void init_periodicity_model()
 {
 	GValue *once = ex_value_new_string (_("Once"));
 	GValue *day = ex_value_new_string (_("Daily"));

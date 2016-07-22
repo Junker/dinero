@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Dmitry Kosenkov 2009 <junker@front.ru>
+ * Copyright (C) Dmitry Kosenkov <junker@front.ru>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@
 
 
 #include "actions.h"
+#include "common.h"
 #include "db.h"
-#include "main.h"
 
 #include "ex-grid.h"
 

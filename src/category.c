@@ -22,7 +22,7 @@
 #include <glib/gi18n-lib.h>
 #include <libgda-ui/libgda-ui.h>
 
-#include "main.h"
+#include "common.h"
 #include "category.h"
 #include "actions.h"
 #include "mainform.h"
