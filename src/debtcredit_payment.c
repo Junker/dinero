@@ -61,7 +61,7 @@ void show_debtcredit_payment_window (OperType oper)
 	grid_oper = oper;
 
 	GtkBuilder *gbuilder = gtk_builder_new();
-	ex_builder_load_file (gbuilder, "gridform.glade");
+	ex_builder_load_file (gbuilder, "gridform.ui");
 	gtk_builder_connect_signals (gbuilder,NULL);
 	
 	window = GTK_WIDGET(gtk_builder_get_object (gbuilder, "window"));
@@ -143,7 +143,7 @@ void fill_grid()
 void on_button_addedit_clicked (GtkButton *button, OperType oper)
 {
 	GtkBuilder *gbuilder = gtk_builder_new();
-	ex_builder_load_file (gbuilder, "editdebtcredit_payment.glade");
+	ex_builder_load_file (gbuilder, "editdebtcredit_payment.ui");
 	gtk_builder_connect_signals (gbuilder,NULL);
 
 	GtkWidget *dialog = GTK_WIDGET(gtk_builder_get_object (gbuilder, "dialog"));

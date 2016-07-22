@@ -74,7 +74,7 @@ void show_plan_payment_window ()
 {
 
 	GtkBuilder *gbuilder = gtk_builder_new();
-	ex_builder_load_file (gbuilder, "plan.glade");
+	ex_builder_load_file (gbuilder, "plan.ui");
 	gtk_builder_connect_signals (gbuilder,NULL);
 	
 	window = GTK_WIDGET(gtk_builder_get_object (gbuilder, "window"));

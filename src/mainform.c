@@ -139,7 +139,7 @@ GtkWidget* create_main_window (void)
 {
 	GtkBuilder *gbuilder = gtk_builder_new();
 
-	ex_builder_load_file(gbuilder, "mainform.glade");
+	ex_builder_load_file(gbuilder, "mainform.ui");
 	
 	gtk_builder_connect_signals (gbuilder, NULL);
 	

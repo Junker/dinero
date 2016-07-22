@@ -44,7 +44,7 @@ gint show_remind_debt_window (GValue *id)
 {
 
 	GtkBuilder *gbuilder = gtk_builder_new();
-	ex_builder_load_file (gbuilder, "reminddebt.glade");
+	ex_builder_load_file (gbuilder, "reminddebt.ui");
 	gtk_builder_connect_signals (gbuilder,NULL);
 	
 	dialog = GTK_WIDGET(gtk_builder_get_object (gbuilder, "dialog"));

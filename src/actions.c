@@ -50,7 +50,7 @@ void show_error_dialog (const gchar *title, const gchar *message, const gchar *e
 gchar* show_input_dialog(const gchar *label_text, const gchar *entry_text)
 {
 	GtkBuilder *gbuilder = gtk_builder_new();
-	ex_builder_load_file (gbuilder, "inputdialog.glade");
+	ex_builder_load_file (gbuilder, "inputdialog.ui");
 	gtk_builder_connect_signals (gbuilder,NULL);
 	
 	GtkDialog *dialog = GTK_DIALOG(gtk_builder_get_object (gbuilder, "dialog"));

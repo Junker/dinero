@@ -65,7 +65,7 @@ static void on_combo_category_changed (GtkComboBox *widget, OperType oper);
 void show_editexpin_window (OperType oper)
 {
 	GtkBuilder *gbuilder = gtk_builder_new();
-	ex_builder_load_file (gbuilder, "editexpin.glade");
+	ex_builder_load_file (gbuilder, "editexpin.ui");
 	gtk_builder_connect_signals (gbuilder, NULL);
 
 	window = GTK_WIDGET(gtk_builder_get_object (gbuilder, "window"));

@@ -54,7 +54,7 @@ static enum {
 gint show_editaccount_window (OperType oper)
 {
 	GtkBuilder *gbuilder = gtk_builder_new();
-	ex_builder_load_file (gbuilder, "editaccount.glade");
+	ex_builder_load_file (gbuilder, "editaccount.ui");
 	gtk_builder_connect_signals (gbuilder,NULL);
 
 	GtkContainer *scrolledwindow_grid = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "scrolledwindow_grid"));
@@ -150,7 +150,7 @@ void on_grid_currency_selection_changed(GdauiRawGrid *dbrawgrid, gboolean arg1, 
 void on_button_edit_currency_clicked(GtkButton *button, gpointer data)
 {
 	GtkBuilder *gbuilder = gtk_builder_new();
-	ex_builder_load_file (gbuilder, "editaccountcurrency.glade");
+	ex_builder_load_file (gbuilder, "editaccountcurrency.ui");
 	gtk_builder_connect_signals (gbuilder,NULL);
 
 	GtkWidget *dialog = GTK_WIDGET(gtk_builder_get_object (gbuilder, "dialog"));

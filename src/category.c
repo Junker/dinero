@@ -79,7 +79,7 @@ void show_category_window (void)
 {
 	
 	GtkBuilder *gbuilder = gtk_builder_new();
-	ex_builder_load_file (gbuilder, "category.glade");
+	ex_builder_load_file (gbuilder, "category.ui");
 	gtk_builder_connect_signals (gbuilder,NULL);
 
 	window = GTK_WIDGET(gtk_builder_get_object (gbuilder, "window"));

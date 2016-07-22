@@ -49,7 +49,7 @@ void show_currency_window (void)
 {
 
 	GtkBuilder *gbuilder = gtk_builder_new();
-	ex_builder_load_file (gbuilder, "currency.glade");
+	ex_builder_load_file (gbuilder, "currency.ui");
 	gtk_builder_connect_signals (gbuilder, NULL);
 
 	window = GTK_WIDGET(gtk_builder_get_object (gbuilder, "window"));
@@ -84,7 +84,7 @@ void fill_grid(void)
 void show_editcurrency_window (OperType oper)
 {
 	GtkBuilder *gbuilder = gtk_builder_new();
-	ex_builder_load_file (gbuilder, "editcurrency.glade");
+	ex_builder_load_file (gbuilder, "editcurrency.ui");
 	gtk_builder_connect_signals (gbuilder, NULL);
 
 	GtkWidget *dialog = GTK_WIDGET(gtk_builder_get_object (gbuilder, "dialog"));

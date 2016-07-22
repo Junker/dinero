@@ -48,7 +48,7 @@ void show_account_datedetailed_window ()
 {
 	GtkBuilder *gbuilder = gtk_builder_new();
 	
-	ex_builder_load_file (gbuilder, "account_datedetailed.glade");
+	ex_builder_load_file (gbuilder, "account_datedetailed.ui");
 
 	
 	gtk_builder_connect_signals (gbuilder,NULL);

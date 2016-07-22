@@ -54,7 +54,7 @@ static void set_fields_values(gint oper);
 void show_editdebt_window (gint oper)
 {
 	GtkBuilder *gbuilder = gtk_builder_new();
-	ex_builder_load_file (gbuilder, "editdebt.glade");
+	ex_builder_load_file (gbuilder, "editdebt.ui");
 	gtk_builder_connect_signals (gbuilder, NULL);
 	
 	window = GTK_WIDGET(gtk_builder_get_object (gbuilder, "window"));

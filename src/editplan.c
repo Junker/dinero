@@ -81,7 +81,7 @@ void on_editplan_combo_periodicity_changed(GtkComboBox *widget, gpointer user_da
 void show_editplan_window (OperType oper)
 {
 	GtkBuilder *gbuilder = gtk_builder_new();
-	ex_builder_load_file (gbuilder, "editplan.glade");
+	ex_builder_load_file (gbuilder, "editplan.ui");
 	gtk_builder_connect_signals (gbuilder, NULL);
 
 	window = GTK_WIDGET(gtk_builder_get_object (gbuilder, "window"));
