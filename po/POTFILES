@@ -1,30 +1,33 @@
-	../src/main.c \
-	../src/mainform.c \
-	../src/category.c \
-	../src/currency.c \
-	../src/db.c \
-	../src/debtcredit_payment.c \
-	../src/editaccount.c \
-	../src/editdebt.c \
-	../src/editexchange.c \
-	../src/editexpin.c \
-	../src/editplan.c \
-	../src/edittransfer.c \
-	../src/exchange.c \
-	../src/report.c \
-	../src/transfer.c \
-	../src/reminddebt.c \
-	../src/plan.c \
-	../src/account_datedetailed.glade \
-	../src/mainform.glade \
-	../src/category.glade \
-	../src/currency.glade \
-	../src/editaccount.glade \
-	../src/editdebt.glade \
-	../src/editexchange.glade \
-	../src/editexpin.glade \
-	../src/editplan.glade \
-	../src/edittransfer.glade \
-	../src/editdebtcredit_payment.glade \
-	../src/report.glade \
-	../src/plan.glade
+# List of source files containing translatable strings.
+
+src/main.c
+src/mainform.c
+src/category.c
+src/currency.c
+src/db.c
+src/debtcredit_payment.c
+src/editaccount.c
+src/editdebt.c
+src/editexchange.c
+src/editexpin.c
+src/editplan.c
+src/edittransfer.c
+src/exchange.c
+src/report.c
+src/transfer.c
+src/reminddebt.c
+src/plan.c
+[type: gettext/glade]ui/account_datedetailed.ui
+[type: gettext/glade]ui/mainform.ui
+[type: gettext/glade]ui/category.ui
+[type: gettext/glade]ui/currency.ui
+[type: gettext/glade]ui/editaccount.ui
+[type: gettext/glade]ui/editdebt.ui
+[type: gettext/glade]ui/editexchange.ui
+[type: gettext/glade]ui/editexpin.ui
+[type: gettext/glade]ui/editplan.ui
+[type: gettext/glade]ui/edittransfer.ui
+[type: gettext/glade]ui/editdebtcredit_payment.ui
+[type: gettext/glade]ui/report.ui
+#[type: gettext/glade]ui/reminddebt.ui
+[type: gettext/glade]ui/plan.ui

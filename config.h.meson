@@ -1,0 +1,11 @@
+#define VERSION "@version@"
+
+#define PACKAGE "@name@"
+
+#define PACKAGE_NAME "@name@"
+
+#define GETTEXT_PACKAGE "@name@"
+
+#define PACKAGE_DATA_DIR "@data_dir@"
+
+#define PACKAGE_LOCALE_DIR "@locale_dir@"
