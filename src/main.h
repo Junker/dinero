@@ -19,5 +19,5 @@
 
 
 
-gchar *home_path;
-
+void open_main_db();
+void create_lookup_models();

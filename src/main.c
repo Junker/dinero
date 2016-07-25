@@ -42,53 +42,60 @@
 #include "reminddebt.h"
 
 
-#define DB_FILE_NAME "dinero.sqlite"
-
 void critical_log_handler(const gchar *log_domain, GLogLevelFlags log_level, const gchar *message, gpointer user_data);
-static void create_lookup_models();
+
 static void check_debtcredit_remain();
 static void init_periodicity_model();
-static void connect_db();
-
-void destroy (GtkWidget *widget, gpointer data)
-{
-	gtk_main_quit ();
-}
-
+static void app_activate(GtkApplication* app, gpointer user_data);
 
 int main (int argc, char *argv[])
 {
-/*	
-#ifdef ENABLE_NLS
-	bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	textdomain (GETTEXT_PACKAGE);
-#endif
-*/
-	gtk_init(&argc, &argv);
+	GtkApplication *app;
+	int status;
 
-	//locale for float numbers (for SQL)
-	setlocale(LC_NUMERIC, "POSIX");
+	//init gettext
+	bindtextdomain (PACKAGE, PACKAGE_LOCALE_DIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
+	textdomain (PACKAGE);
+
+
 
 	//init log handler
 //	g_log_set_handler(NULL, G_LOG_LEVEL_CRITICAL, critical_log_handler, NULL);
-
 	
-	connect_db();
+	app = gtk_application_new("org.junker.dinero", G_APPLICATION_FLAGS_NONE);
+	g_signal_connect (app, "activate", G_CALLBACK(app_activate), NULL);
+	status = g_application_run(G_APPLICATION(app), argc, argv);
+	g_object_unref (app);
+
+	gtk_main();
+	
+	return status;
+}
+
+static void app_activate(GtkApplication* app, gpointer user_data)
+{
+	//locale for float numbers (for SQL)
+	setlocale(LC_NUMERIC, "POSIX");
+
+	open_main_db();
 
 	gdaui_init();
 
 	create_lookup_models();
 
-	create_main_window();	
+	main_window = create_main_window();
+	gtk_widget_show_all(main_window);
 
 	check_debtcredit_remain();
 
 	show_plan_payment_window();
+}
 
-	gtk_main ();
-	
-	return 0;
+
+void destroy(GtkWidget *widget, gpointer data)
+{
+	gtk_main_quit ();
 }
 
 
@@ -98,7 +105,7 @@ void critical_log_handler(const gchar *log_domain, GLogLevelFlags log_level, con
 	show_error_dialog(_("Query failed"), message, NULL);
 }
 
-static void connect_db()
+void open_main_db()
 {
 	home_path = g_build_filename(g_get_home_dir(), ".config", PACKAGE_NAME, NULL);
 
@@ -137,6 +144,11 @@ static void connect_db()
 	db_connect(dsn);
 }
 
+void disconnect_db()
+{
+
+}
+
 static void check_debtcredit_remain()
 {
 	GValue *date = ex_value_new_int (get_current_date());
@@ -162,7 +174,7 @@ static void check_debtcredit_remain()
 
 
 
-static void create_lookup_models() 
+void create_lookup_models() 
 {
 	refresh_account_model();
 	refresh_currency_model();
