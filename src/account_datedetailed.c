@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Dmitry Kosenkov 2009 <junker@front.ru>
+ * Copyright (C) Dmitry Kosenkov <junker@front.ru>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,6 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301,  USA
  */
+
 
 #include "config.h"
 
@@ -65,12 +66,12 @@ void show_account_datedetailed_window ()
 	g_sprintf(text,_("Date: %s"), g_value_get_string(ex_grid_get_selected_row_value (grid_account_full,ACF_DATE_COL)));
 	gtk_label_set_text(label_date, text);
 	
-	GValue *account = db_get_value ("SELECT name FROM account WHERE id=##id::gint",
+	const GValue *account = db_get_value ("SELECT name FROM account WHERE id=##id::gint",
 	                                                  "id", ex_grid_get_selected_row_value(grid_account_full, ACF_ID_COL),
 	                                                  NULL
 	                                                 );
 	
-	gchar *account_str = g_value_get_string(account);
+	const gchar *account_str = g_value_get_string(account);
 	
 	g_sprintf(text, _("Account: %s"), account_str);
 	gtk_label_set_text(label_account, text);
@@ -90,7 +91,6 @@ static void create_and_fill_model ()
 	GValue *date     = ex_grid_get_selected_row_value (grid_account_full, ACF_TIME_T_COL);
 	GValue *account  = ex_grid_get_selected_row_value (grid_account_full, ACF_ID_COL);
 	GValue *currency = ex_grid_get_selected_row_value (grid_account_full, ACF_CURRENCY_ID_COL);
-
 
 	// -- Expenditure
 	
@@ -170,7 +170,7 @@ static void create_and_fill_model ()
 		gtk_tree_store_set(treestore, &toplevel,
                      NAME_COL,_("Credit"), -1);
 
-		for(i=0;i<gda_data_model_get_n_rows(gda_model);i++) 
+		for(i=0; i<gda_data_model_get_n_rows(gda_model); i++) 
 		{
 			gtk_tree_store_append(treestore, &child, &toplevel);
 			gtk_tree_store_set_value(treestore, &child, NAME_COL, gda_data_model_get_value_at(gda_model, 0, i, NULL));

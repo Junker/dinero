@@ -46,7 +46,7 @@ static void ex_grid_finalize (GObject *object)
 static void ex_grid_class_init (ExGridClass *klass)
 {
 	GObjectClass* object_class = G_OBJECT_CLASS (klass);
-	GdauiRawGridClass* parent_class = GDAUI_RAW_GRID_CLASS (klass);
+	GdauiRawGridClass* parent_class = GDAUI_RAW_GRID_CLASS(klass);
 
 	object_class->finalize = ex_grid_finalize;
 }
@@ -80,7 +80,8 @@ void ex_grid_lookup_field (ExGrid *grid, gint n_col, GdaDataModel *model, gint m
 	holder = gda_data_model_iter_get_holder_for_field (iter, n_col);
 
 	ex_grid_set_column_width(grid, n_col, 500);
-	
+
+
 	gda_holder_set_source_model(holder, model, model_col, NULL);
 
 }
@@ -171,10 +172,12 @@ void ex_grid_set_columns_resizable(ExGrid *grid, gboolean val)
 	
 	columns = gtk_tree_view_get_columns(GTK_TREE_VIEW(grid));
 	
-	for (i=1;i<=g_list_length(columns);i++)
-		if GTK_IS_TREE_VIEW_COLUMN(g_list_nth_data(columns,i))  
+	for (i=1; i<=g_list_length(columns); i++)
+	{
+		if (GTK_IS_TREE_VIEW_COLUMN(g_list_nth_data(columns,i)))  
 			gtk_tree_view_column_set_resizable(GTK_TREE_VIEW_COLUMN(g_list_nth_data(columns,i)), val);
-			}
+	}
+}
 
 void ex_grid_set_columns_reordable(ExGrid *grid, gboolean val) 
 {
@@ -183,9 +186,11 @@ void ex_grid_set_columns_reordable(ExGrid *grid, gboolean val)
 	
 	columns = gtk_tree_view_get_columns(GTK_TREE_VIEW(grid));
 	
-	for (i=1;i<=g_list_length(columns);i++)
-		if GTK_IS_TREE_VIEW_COLUMN(g_list_nth_data(columns,i))  
+	for (i=1; i<=g_list_length(columns); i++)
+	{
+		if (GTK_IS_TREE_VIEW_COLUMN(g_list_nth_data(columns,i)))  
 			gtk_tree_view_column_set_reorderable(GTK_TREE_VIEW_COLUMN(g_list_nth_data(columns,i)), val);
+	}
 }
 
 void ex_grid_populate_popup (ExGrid *grid, GtkMenu *arg1, gpointer user_data)

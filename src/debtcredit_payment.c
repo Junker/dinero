@@ -208,14 +208,17 @@ void on_button_addedit_clicked (GtkButton *button, OperType oper)
 		{
 			GValue *id = ex_grid_get_selected_row_value (grid, ID_COL);
 
-			GdaSet *row = db_exec_sql("UPDATE operation SET date=##date::gint, amount=##amount::gdouble, description=##descr::string \
-			                            WHERE id=##id::gint",
-			                          "date", date,    
-			                          "amount", amount,
-			                          "descr", description,
-			                          "id", id,
-			                          NULL
-			                         );				
+			gchar *sql = "UPDATE operation \
+							SET date=##date::gint, amount=##amount::gdouble, description=##descr::string \
+	                        WHERE id=##id::gint";
+
+			db_exec_sql(sql,
+	                   	"date", date,    
+	                    "amount", amount,
+	                    "descr", description,
+	                    "id", id,
+	                    NULL
+	        );				
 		}
 			
 
@@ -234,11 +237,13 @@ void on_button_addedit_clicked (GtkButton *button, OperType oper)
 
 }
 
+
 void on_grid_selection_changed (GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data)
 {
 	gtk_widget_set_sensitive(GTK_WIDGET(button_del), TRUE);
 	gtk_widget_set_sensitive(GTK_WIDGET(button_edit), TRUE);	
 }
+
 
 void on_button_del_clicked (GtkButton *button, gpointer user_data)
 {

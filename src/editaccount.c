@@ -51,6 +51,7 @@ static enum {
 		ACTIVE_COL,
 };
 
+
 gint show_editaccount_window (OperType oper)
 {
 	GtkBuilder *gbuilder = gtk_builder_new();
