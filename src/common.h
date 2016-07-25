@@ -26,7 +26,12 @@ enum
 	OPER_UPDATE
 };
 
+#define DB_FILE_NAME "dinero.sqlite"
+
 #define OperType gint
+
+
+gchar *home_path;
 
 //Lookup Models
 GdaDataModel *account_model,
