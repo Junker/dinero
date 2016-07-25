@@ -28,7 +28,7 @@ static void _get_vargs_params(GdaStatement *stmt, GdaSet *params, va_list vargs)
 static void sql_dump(GdaStatement *stmt, GdaSet *params);
 
 
-gboolean db_connect (gchar * dsn) 
+gboolean db_connect(gchar * dsn) 
 {
 	GError *error = NULL;
 	
@@ -63,8 +63,13 @@ gboolean db_connect (gchar * dsn)
 	return TRUE;
 }
 
+void db_disconnect()
+{
+	gda_connection_close(connection);
+}
+
  
-GdaSet* db_exec_sql (const gchar *sql, ...)
+GdaSet* db_exec_sql(const gchar *sql, ...)
 {
 	GdaStatement *stmt;
 	GdaSet *params;
@@ -124,7 +129,7 @@ GdaDataModel* db_exec_select_sql(const gchar *sql, ...)
 	return model;
 }
 
-const GValue* db_get_value (const gchar *sql, ...)
+const GValue* db_get_value(const gchar *sql, ...)
 {
 	GdaStatement *stmt;
 	GdaSet *params;

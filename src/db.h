@@ -27,3 +27,4 @@ GdaSet* db_exec_sql (const gchar *sql, ...);
 GdaDataModel* db_exec_select_sql (const gchar *sql, ...);
 const GValue* db_get_value (const gchar *sql, ...);
 gboolean db_connect (gchar * dsn);
+void db_disconnect();
