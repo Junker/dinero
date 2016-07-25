@@ -1,31 +1,7 @@
 /src/dinero
 
-# Autotools
-/autom4te.cache
-/autoscan.log
-/autoscan-*.log
-/aclocal.m4
-/compile
-/config.h.in
-/config.log
-/config.sub
-/config.guess
-/config.status
-/ltmain.sh
-**/Makefile
-/configure
-/configure.scan
-/depcomp
-/install-sh
-/missing
-/libtool
-/stamp-h1
-/intltool*
-**/Makefile.in
-**/Makefile.in.in
-config.h
-
-**/.deps
+# Meson
+**/build
 
 # Gettext
 po/POTFILES
@@ -42,10 +18,14 @@ po/*.sed
 /.anjuta
 /Debug
 
+#SublimeText
+/*.sublime*
+
 
 #Temp files
 *.c~
 *.h~
+*.glade~
 
 # Prerequisites
 *.d
