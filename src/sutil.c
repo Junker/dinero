@@ -16,19 +16,18 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301,  USA
  */
 
+#include "config.h"
+
 #include <glib.h>
+#include <stdio.h>
+#include <string.h>
 
 #include "sutil.h"
 
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
 
-#ifdef MY_DEBUG
-#define GLADE_PATH "ui/"
-#else
-#define GLADE_PATH PACKAGE_DATA_DIR"/"GETTEXT_PACKAGE"/glade/"
-#endif
+
+
+#define GLADE_PATH PACKAGE_DATA_DIR"/ui/"
 
 GValue* ex_value_new_string(const gchar *string)
 {
@@ -73,7 +72,7 @@ GValue* ex_value_new_boolean(const gboolean val)
 
 double ex_value_get_double(const GValue *value)
 {
-	gdouble res;
+	gdouble res = 0;
 	
 	if (G_VALUE_TYPE(value) == G_TYPE_DOUBLE)
 	{
@@ -113,7 +112,7 @@ GList *ex_tree_view_get_rows(GtkTreeView *treeview)
 	GtkTreeSelection *sel = gtk_tree_view_get_selection(treeview);
 
 	if (gtk_tree_selection_count_selected_rows(sel) == 0)
-      return;
+      return NULL;
 	
 	GList *path_list = gtk_tree_selection_get_selected_rows(sel, NULL);
 
@@ -161,7 +160,7 @@ void ex_form_lookup_field (GdauiRawForm *form, gint n_col, GdaDataModel *model, 
 
 	if (n_col == -1) return;
 
-	iter = gdaui_data_selector_get_data_set(form);
+	iter = gdaui_data_selector_get_data_set(GDAUI_DATA_SELECTOR(form));
 	holder = gda_data_model_iter_get_holder_for_field (iter, n_col);
 	
 	g_assert (gda_holder_set_source_model (holder, model, model_col, NULL));
@@ -170,6 +169,7 @@ void ex_form_lookup_field (GdauiRawForm *form, gint n_col, GdaDataModel *model, 
 
 const GValue* ex_combo_get_current_row_value(GdauiCombo *combo, const guint n_column)
 {
+	const GValue *value;
 	//If i reassign a new model to Combo, then gdaui_data_selector_get_data_set return wrong iter
 /*	GdaDataModelIter *iter = gdaui_data_selector_get_data_set(GDAUI_DATA_SELECTOR(combo));
 	if (!iter) return NULL;
@@ -177,7 +177,7 @@ const GValue* ex_combo_get_current_row_value(GdauiCombo *combo, const guint n_co
 	g_debug("ITER EXISTS! ROW:%i",gda_data_model_iter_get_row(iter));
 	
 	
-	const GValue *value = gda_data_model_iter_get_value_at(iter, n_column);
+	value = gda_data_model_iter_get_value_at(iter, n_column);
 
 	return value;
 */
@@ -193,11 +193,11 @@ const GValue* ex_combo_get_current_row_value(GdauiCombo *combo, const guint n_co
 	GdaDataModel *db_model = gdaui_data_selector_get_model(GDAUI_DATA_SELECTOR(combo));
 
 	
-	if (gtk_tree_model_iter_n_children( gtk_combo_box_get_model(combo), NULL ) != gda_data_model_get_n_rows(db_model))
+	if (gtk_tree_model_iter_n_children(gtk_combo_box_get_model(GTK_COMBO_BOX(combo)), NULL ) != gda_data_model_get_n_rows(db_model))
 		aindex--;
 
 
-	GValue *value = gda_data_model_get_value_at(db_model, n_column, aindex, &error);
+	value = gda_data_model_get_value_at(db_model, n_column, aindex, &error);
 	if (error) return NULL;
 
 	return value;
@@ -223,6 +223,11 @@ void ex_builder_load_file(GtkBuilder *builder, const gchar *filename)
 	{
 		gtk_builder_add_from_file (builder, filepath, NULL);
 	}
+	else
+	{
+		g_error("%s not found", filepath);
+	}
+	
 	g_free(filepath);
 }
 
@@ -239,10 +244,9 @@ GValue * ex_date_get_formated_date_value(GDate *date)
 
 guint32 get_current_date()
 {
-	struct tm tm = {0};
 	GDate *date = g_date_new ();
 
-	g_date_set_time (date, time (NULL));
+	g_date_set_time_t(date, time(NULL));
 
 
 	guint32 julian = g_date_get_julian (date);
@@ -250,4 +254,16 @@ guint32 get_current_date()
 	g_date_free(date);
 	
 	return julian;
+}
+
+void str_replace_character(char *str, char *replace, char *with)
+{
+	char *pch;
+    do
+	{
+        pch = strstr (str, replace);
+        if(pch != NULL)
+        strncpy (pch, with, 1);
+    }
+    while(pch != NULL);
 }
