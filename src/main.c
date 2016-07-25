@@ -58,23 +58,29 @@ int main (int argc, char *argv[])
 	bind_textdomain_codeset (PACKAGE, "UTF-8");
 	textdomain (PACKAGE);
 
-
-
 	//init log handler
 //	g_log_set_handler(NULL, G_LOG_LEVEL_CRITICAL, critical_log_handler, NULL);
 	
 	app = gtk_application_new("org.junker.dinero", G_APPLICATION_FLAGS_NONE);
-	g_signal_connect (app, "activate", G_CALLBACK(app_activate), NULL);
+	g_signal_connect(app, "activate", G_CALLBACK(app_activate), NULL);
 	status = g_application_run(G_APPLICATION(app), argc, argv);
-	g_object_unref (app);
+	g_object_unref(app);
 
-	gtk_main();
-	
 	return status;
 }
 
 static void app_activate(GtkApplication* app, gpointer user_data)
 {
+	GList *list;
+	list = gtk_application_get_windows (app);
+
+	if (list)
+	{
+		gtk_window_present(GTK_WINDOW(list->data));
+
+		return;
+	}
+	
 	//locale for float numbers (for SQL)
 	setlocale(LC_NUMERIC, "POSIX");
 
@@ -85,11 +91,14 @@ static void app_activate(GtkApplication* app, gpointer user_data)
 	create_lookup_models();
 
 	main_window = create_main_window();
-	gtk_widget_show_all(main_window);
+	gtk_window_set_application(GTK_WINDOW(main_window), app);
+	gtk_widget_show(main_window);
 
 	check_debtcredit_remain();
 
 	show_plan_payment_window();
+
+	gtk_main();
 }
 
 
