@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.20.0 -->
 <interface>
-  <requires lib="gtk+" version="3.8"/>
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkImage">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-harddisk</property>
+  </object>
   <object class="GtkAccelGroup" id="accelgroup1"/>
   <object class="GtkImage" id="image_category">
     <property name="visible">True</property>
@@ -64,7 +69,40 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkImageMenuItem" id="imagemenuitem5">
+                      <object class="GtkImageMenuItem" id="imagemenuitem_backup">
+                        <property name="label" translatable="yes">Backup</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="image">__glade_unnamed_2</property>
+                        <property name="use_stock">False</property>
+                        <child type="submenu">
+                          <object class="GtkMenu">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <child>
+                              <object class="GtkMenuItem" id="menuitem_restore_backup">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Restore Backup...</property>
+                                <property name="use_underline">True</property>
+                                <signal name="activate" handler="on_menuitem_restore_backup_activate" swapped="no"/>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkMenuItem" id="menuitem_save_backup">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Save Backup...</property>
+                                <property name="use_underline">True</property>
+                                <signal name="activate" handler="on_menuitem_save_backup_activate" swapped="no"/>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="imagemenuitem_quit">
                         <property name="label">gtk-quit</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
@@ -1827,7 +1865,7 @@
                       </object>
                       <packing>
                         <property name="expand">False</property>
-                        <property name="fill">True</property>
+                        <property name="fill">False</property>
                         <property name="padding">5</property>
                         <property name="position">1</property>
                       </packing>
@@ -1836,6 +1874,7 @@
                       <object class="GtkExpander" id="expander_filter_plan_expend">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="valign">end</property>
                         <signal name="activate" handler="on_expander_filter_plan_expend_activate" swapped="no"/>
                         <child>
                           <object class="GtkBox" id="hbox14">
@@ -2052,7 +2091,8 @@
                       </object>
                       <packing>
                         <property name="expand">False</property>
-                        <property name="fill">True</property>
+                        <property name="fill">False</property>
+                        <property name="pack_type">end</property>
                         <property name="position">2</property>
                       </packing>
                     </child>
