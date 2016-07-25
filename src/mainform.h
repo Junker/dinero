@@ -107,8 +107,9 @@ ExGrid  *grid_expenditure,
         *grid_plan_expenditure;
 
 
-
+GtkWidget *main_window;
 GtkWidget* create_main_window (void);
+
 void fill_grid_expenditure(void);
 void fill_grid_income(void);
 void fill_grid_account_short(void);

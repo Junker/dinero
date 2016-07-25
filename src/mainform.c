@@ -255,6 +255,11 @@ GtkWidget* create_main_window (void)
 	dateedit_filter_plan_income_to   = create_dateentry (eventbox_dateedit_filter_plan_income_to);
 
 
+	gtk_date_entry_set_date(dateedit_filter_account_from, get_current_date() - 30);
+	gtk_date_entry_set_date(dateedit_filter_expend_from, get_current_date() - 30);
+	gtk_date_entry_set_date(dateedit_filter_income_from, get_current_date() - 30);	
+	gtk_date_entry_set_date(dateedit_filter_plan_income_from, get_current_date() - 30);	
+
 	//Connect signals
 	g_signal_connect (G_OBJECT(dateedit_filter_account_from), "changed", G_CALLBACK(fill_grid_account_full),NULL);
 	g_signal_connect (G_OBJECT(dateedit_filter_account_to), "changed", G_CALLBACK(fill_grid_account_full),NULL);
@@ -295,11 +300,6 @@ GtkWidget* create_main_window (void)
 	g_signal_connect_swapped(G_OBJECT(grid_plan_expenditure), "row-activated", G_CALLBACK(on_plan_expenditure_button_edit_clicked), NULL);
 	g_signal_connect_swapped(G_OBJECT(grid_plan_income), "row-activated", G_CALLBACK(on_plan_income_button_edit_clicked), NULL);
 	
-
-	gtk_date_entry_set_date(dateedit_filter_account_from, get_current_date() - 30);
-	gtk_date_entry_set_date(dateedit_filter_expend_from, get_current_date() - 30);
-	gtk_date_entry_set_date(dateedit_filter_income_from, get_current_date() - 30);	
-	gtk_date_entry_set_date(dateedit_filter_plan_income_from, get_current_date() - 30);	
 	
 	//Set Combo models 
 	gint viewcols[1] = {1};
@@ -384,11 +384,14 @@ void fill_grid_expenditure(void)
 	if (!db_model) return;
 
 	//clean lookup fields
-	ex_grid_lookup_field (grid, EX_ACCOUNT_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, EX_CATEGORY_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, EX_SUBCATEGORY_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, EX_UNIT_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, EX_CURRENCY_ID_COL, NULL, 0);
+	if (gdaui_data_selector_get_model(GDAUI_DATA_SELECTOR(grid)))
+	{
+		ex_grid_lookup_field (grid, EX_ACCOUNT_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, EX_CATEGORY_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, EX_SUBCATEGORY_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, EX_UNIT_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, EX_CURRENCY_ID_COL, NULL, 0);
+	}
 
 	//assign model
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid),db_model);
@@ -480,11 +483,14 @@ void fill_grid_income(void)
 	if (!db_model) return;
 
 	//clean lookup models
-	ex_grid_lookup_field (grid, EX_ACCOUNT_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, EX_CATEGORY_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, EX_SUBCATEGORY_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, EX_UNIT_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, EX_CURRENCY_ID_COL, NULL, 0);
+	if (gdaui_data_selector_get_model(GDAUI_DATA_SELECTOR(grid)))
+	{
+		ex_grid_lookup_field (grid, EX_ACCOUNT_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, EX_CATEGORY_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, EX_SUBCATEGORY_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, EX_UNIT_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, EX_CURRENCY_ID_COL, NULL, 0);
+	}
 
 	//assign model
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid), db_model);
@@ -543,7 +549,10 @@ void fill_grid_account_short(void)
 	if (!db_model) return;
 
 	//clean lookup fields
-	ex_grid_lookup_field (grid, ACS_CURRENCY_ID_COL, NULL, 0);
+	if (gdaui_data_selector_get_model(GDAUI_DATA_SELECTOR(grid)))
+	{
+		ex_grid_lookup_field (grid, ACS_CURRENCY_ID_COL, NULL, 0);
+	}
 
 	//assign model
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid),db_model);
@@ -623,8 +632,11 @@ void fill_grid_account_full(void)
 	if (!db_model) return;
 
 	//clean lookup fields
-	ex_grid_lookup_field (grid, ACF_ID_COL, account_model, 0);
-	ex_grid_lookup_field (grid, ACF_CURRENCY_ID_COL, currency_model, 0);
+	if (gdaui_data_selector_get_model(GDAUI_DATA_SELECTOR(grid)))
+	{
+		ex_grid_lookup_field (grid, ACF_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, ACF_CURRENCY_ID_COL, NULL, 0);
+	}
 
 	//assign model
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid), db_model);
@@ -681,10 +693,13 @@ void fill_grid_debt(void)
 	if (!db_model) return;
 
 	//clean lookup fields
-	ex_grid_lookup_field(grid, DEB_ACCOUNT_ID_COL, NULL, 0);
-	ex_grid_lookup_field(grid, DEB_PERSON_ID_COL, NULL, 0);
-	ex_grid_lookup_field(grid, DEB_CURRENCY_ID_COL, NULL, 0);
-	
+	if (gdaui_data_selector_get_model(GDAUI_DATA_SELECTOR(grid)))
+	{
+		ex_grid_lookup_field(grid, DEB_ACCOUNT_ID_COL, NULL, 0);
+		ex_grid_lookup_field(grid, DEB_PERSON_ID_COL, NULL, 0);
+		ex_grid_lookup_field(grid, DEB_CURRENCY_ID_COL, NULL, 0);
+	}
+
 	//assign model
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid), db_model);
 
@@ -745,9 +760,12 @@ void fill_grid_credit(void)
 	if (!db_model) return;
 
 	//clean lookup fields
-	ex_grid_lookup_field(grid, DEB_ACCOUNT_ID_COL, NULL, 0);
-	ex_grid_lookup_field(grid, DEB_PERSON_ID_COL, NULL, 0);
-	ex_grid_lookup_field(grid, DEB_CURRENCY_ID_COL, NULL, 0);
+	if (gdaui_data_selector_get_model(GDAUI_DATA_SELECTOR(grid)))
+	{
+		ex_grid_lookup_field(grid, DEB_ACCOUNT_ID_COL, NULL, 0);
+		ex_grid_lookup_field(grid, DEB_PERSON_ID_COL, NULL, 0);
+		ex_grid_lookup_field(grid, DEB_CURRENCY_ID_COL, NULL, 0);
+	}
 
 	//assign model
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid),db_model);
@@ -839,12 +857,15 @@ void fill_grid_plan_expenditure(void)
 	if (!db_model) return;
 
 	//clean lookup fields
-	ex_grid_lookup_field (grid, PLAN_ACCOUNT_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, PLAN_CATEGORY_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, PLAN_SUBCATEGORY_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, PLAN_UNIT_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, PLAN_CURRENCY_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, PLAN_PERIODICITY_COL, NULL, 0);
+	if (gdaui_data_selector_get_model(GDAUI_DATA_SELECTOR(grid)))
+	{
+		ex_grid_lookup_field (grid, PLAN_ACCOUNT_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, PLAN_CATEGORY_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, PLAN_SUBCATEGORY_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, PLAN_UNIT_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, PLAN_CURRENCY_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, PLAN_PERIODICITY_COL, NULL, 0);
+	}
 
 	//assign model
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid), db_model);
@@ -940,12 +961,15 @@ void fill_grid_plan_income(void)
 	if (!db_model) return;
 
 	//clean lookup fields
-	ex_grid_lookup_field (grid, PLAN_ACCOUNT_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, PLAN_CATEGORY_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, PLAN_SUBCATEGORY_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, PLAN_UNIT_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, PLAN_CURRENCY_ID_COL, NULL, 0);
-	ex_grid_lookup_field (grid, PLAN_PERIODICITY_COL, NULL, 0);
+	if (gdaui_data_selector_get_model(GDAUI_DATA_SELECTOR(grid)))
+	{
+		ex_grid_lookup_field (grid, PLAN_ACCOUNT_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, PLAN_CATEGORY_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, PLAN_SUBCATEGORY_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, PLAN_UNIT_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, PLAN_CURRENCY_ID_COL, NULL, 0);
+		ex_grid_lookup_field (grid, PLAN_PERIODICITY_COL, NULL, 0);
+	}
 
 	//assign model
 	gdaui_data_selector_set_model(GDAUI_DATA_SELECTOR(grid), db_model);
@@ -1478,7 +1502,7 @@ void on_button_filter_income_clear_clicked (GtkButton *button, gpointer user_dat
 }
 
 
-void on_imagemenuitem_about_activate  (GtkMenuItem *menuitem, gpointer user_data)
+void on_imagemenuitem_about_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	gtk_show_about_dialog(NULL,"program-name", "Dinero",
 	                      		"version", VERSION,
@@ -1487,8 +1511,15 @@ void on_imagemenuitem_about_activate  (GtkMenuItem *menuitem, gpointer user_data
 	                      );
 }	
 
+void on_menuitem_restore_backup_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	restore_backup(GTK_WINDOW(window));
+}	
 
-
+void on_menuitem_save_backup_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	save_backup(GTK_WINDOW(window));
+}	
 
 
 void on_tbutton_print_clicked (GtkToolButton *toolbutton, gpointer user_data) 
