@@ -17,6 +17,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
+ 
 #include <stdlib.h>	
 #include <string.h>
 #include <time.h>
@@ -132,48 +134,6 @@ hb_date_fill_parse_tokens (const gchar *str, GDateParseTokens *pt)
   pt->n[2] = pt->num_ints > 2 ? atoi (num[2]) : 0;
 
 }
-
-
-/*
-static void hb_date_determine_dmy(void)
-{
-GDate d;
-gchar buf[128];
-GDateParseTokens testpt;
-gint i;
-
-	DB( g_print("\n[dateentry] determine dmy\n") );
-
-	g_date_clear (&d, 1);              // clear for scratch use
-    
-	// had to pick a random day - don't change this, some strftimes
-	// are broken on some days, and this one is good so far.
-	g_date_set_dmy (&d, 4, 7, 1976);
-	g_date_strftime (buf, 127, "%x", &d);
-
-	hb_date_fill_parse_tokens (buf, &testpt);
-
-	i = 0;
-	while (i < testpt.num_ints)
-	{
-		switch (testpt.n[i])
-		{
-		case 7:
-			dmy_order[i] = G_DATE_MONTH;
-			break;
-		case 4:
-			dmy_order[i] = G_DATE_DAY;
-			break;
-		case 1976:
-			dmy_order[2] = G_DATE_YEAR;
-			break;
-		}
-		++i;
-	}
-
-	DB( g_print(" dmy legend: 0=day, 1=month, 2=year\n") );   
-	DB( g_print(" dmy is: %d %d %d\n", dmy_order[0], dmy_order[1], dmy_order[2]) );   
-}*/    
 
 
 static void hb_date_parse_tokens(GtkWidget *gtkentry, gpointer user_data)
@@ -333,6 +293,7 @@ GtkDateEntryPrivate *priv;
 	gtk_container_add (GTK_CONTAINER (priv->button), priv->arrow);
 	gtk_box_pack_end (GTK_BOX (dateentry), priv->button, FALSE, FALSE, 0);
 	gtk_widget_show_all (priv->button);
+	gtk_widget_show_all (priv->entry);
 
 	g_signal_connect (priv->button, "clicked",
 				G_CALLBACK (gtk_date_entry_button_clicked), dateentry);
