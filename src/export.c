@@ -177,7 +177,9 @@ static GdaSet* get_export_options()
 	GSList *list = NULL;
 
 	GdaHolder *holder = gda_holder_new_boolean("NAMES_ON_FIRST_LINE", TRUE);
+	list = g_slist_append(list, holder);
 
+	holder = gda_holder_new_boolean("NULL_AS_EMPTY", TRUE);
 	list = g_slist_append(list, holder);
 
 	set = gda_set_new(list);
@@ -231,22 +233,212 @@ static GdaDataModel* get_accounts_model()
 
 static GdaDataModel* get_expenses_model()
 {
-	
+	enum  {
+		DATE_COL,
+		ACCOUNT_COL,
+		CATEGORY_COL,
+		SUBCATEGORY_COL,
+		QUANTITY_COL,
+		UNIT_COL,
+		AMOUNT_COL,
+		CURRENCY_COL,
+		DESCR_COL
+	};
+
+	GdaDataModel *db_model = db_exec_select_sql("SELECT STRFTIME('%d.%m.%Y',DATE(a.date+1721425)) AS date,g.name AS account, \
+	                             c.name AS category,d.name AS subcategory,b.quantity,e.name AS unit,a.amount*-1,f.name AS currency,a.description \
+	                             FROM operation a \
+	                             JOIN expin b ON a.id=b.id \
+	                             JOIN account g ON a.account_id=g.id \
+	                             JOIN category c ON b.category_id=c.id \
+	                             LEFT JOIN subcategory d ON b.subcategory_id=d.id \
+	                             LEFT JOIN unit e ON b.unit_id=e.id \
+	                             JOIN currency f ON a.currency_id=f.id \
+	                             WHERE a.amount<0 \
+	                             ORDER BY a.date DESC");
+
+	gda_data_model_set_column_name(db_model, DATE_COL, _("Date"));
+	gda_data_model_set_column_name(db_model, ACCOUNT_COL, _("Account"));
+	gda_data_model_set_column_name(db_model, CATEGORY_COL, _("Category"));
+	gda_data_model_set_column_name(db_model, SUBCATEGORY_COL, _("Subcategory"));
+	gda_data_model_set_column_name(db_model, QUANTITY_COL, _("Qty."));
+	gda_data_model_set_column_name(db_model, UNIT_COL, _("Unit"));
+	gda_data_model_set_column_name(db_model, AMOUNT_COL, _("Amount"));
+	gda_data_model_set_column_name(db_model, CURRENCY_COL, _("Currency"));
+	gda_data_model_set_column_name(db_model, DESCR_COL, _("Description"));
+
+	gda_data_model_set_column_title(db_model, DATE_COL, _("Date"));
+	gda_data_model_set_column_title(db_model, ACCOUNT_COL, _("Account"));
+	gda_data_model_set_column_title(db_model, CATEGORY_COL, _("Category"));
+	gda_data_model_set_column_title(db_model, SUBCATEGORY_COL, _("Subcategory"));
+	gda_data_model_set_column_title(db_model, QUANTITY_COL, _("Qty."));
+	gda_data_model_set_column_title(db_model, UNIT_COL, _("Unit"));
+	gda_data_model_set_column_title(db_model, AMOUNT_COL, _("Amount"));
+	gda_data_model_set_column_title(db_model, CURRENCY_COL, _("Currency"));
+	gda_data_model_set_column_title(db_model, DESCR_COL, _("Description"));
+
+
+	return db_model;
 }
 
 static GdaDataModel* get_income_model()
 {
-	
+	enum  {
+		DATE_COL,
+		ACCOUNT_COL,
+		CATEGORY_COL,
+		SUBCATEGORY_COL,
+		QUANTITY_COL,
+		UNIT_COL,
+		AMOUNT_COL,
+		CURRENCY_COL,
+		DESCR_COL
+	};
+
+	GdaDataModel *db_model = db_exec_select_sql("SELECT STRFTIME('%d.%m.%Y',DATE(a.date+1721425)) AS date,g.name AS account, \
+	                             c.name AS category,d.name AS subcategory,b.quantity,e.name AS unit,a.amount,f.name AS currency,a.description \
+	                             FROM operation a \
+	                             JOIN expin b ON a.id=b.id \
+	                             JOIN account g ON a.account_id=g.id \
+	                             JOIN category c ON b.category_id=c.id \
+	                             LEFT JOIN subcategory d ON b.subcategory_id=d.id \
+	                             LEFT JOIN unit e ON b.unit_id=e.id \
+	                             JOIN currency f ON a.currency_id=f.id \
+	                             WHERE a.amount>0 \
+	                             ORDER BY a.date DESC");
+
+	gda_data_model_set_column_name(db_model, DATE_COL, _("Date"));
+	gda_data_model_set_column_name(db_model, ACCOUNT_COL, _("Account"));
+	gda_data_model_set_column_name(db_model, CATEGORY_COL, _("Category"));
+	gda_data_model_set_column_name(db_model, SUBCATEGORY_COL, _("Subcategory"));
+	gda_data_model_set_column_name(db_model, QUANTITY_COL, _("Qty."));
+	gda_data_model_set_column_name(db_model, UNIT_COL, _("Unit"));
+	gda_data_model_set_column_name(db_model, AMOUNT_COL, _("Amount"));
+	gda_data_model_set_column_name(db_model, CURRENCY_COL, _("Currency"));
+	gda_data_model_set_column_name(db_model, DESCR_COL, _("Description"));
+
+	gda_data_model_set_column_title(db_model, DATE_COL, _("Date"));
+	gda_data_model_set_column_title(db_model, ACCOUNT_COL, _("Account"));
+	gda_data_model_set_column_title(db_model, CATEGORY_COL, _("Category"));
+	gda_data_model_set_column_title(db_model, SUBCATEGORY_COL, _("Subcategory"));
+	gda_data_model_set_column_title(db_model, QUANTITY_COL, _("Qty."));
+	gda_data_model_set_column_title(db_model, UNIT_COL, _("Unit"));
+	gda_data_model_set_column_title(db_model, AMOUNT_COL, _("Amount"));
+	gda_data_model_set_column_title(db_model, CURRENCY_COL, _("Currency"));
+	gda_data_model_set_column_title(db_model, DESCR_COL, _("Description"));
+
+
+	return db_model;
 }
 
 static GdaDataModel* get_debts_model()
 {
-	
+	enum {
+		DATE_COL,
+		ACCOUNT_COL,
+		PERSON_COL,
+		PERCENT_COL,
+		PERIOD_COL,
+		IS_CLOSED_COL,
+		CLOSED_DATE_COL,
+		AMOUNT_COL,
+		PAY_AMOUNT_COL,
+		CURRENCY_COL,
+		DESCR_COL
+	};
+
+	GdaDataModel *db_model = db_exec_select_sql("SELECT STRFTIME('%d.%m.%Y',DATE(a.date+1721425)) AS date,c.name AS account,\
+	                                                d.name AS person,b.percent,b.period,b.is_closed, b.close_date, a.amount*-1 AS amount, \
+	                                                (SELECT sum(xx.amount) FROM operation xx, debtcredit_payment xz WHERE xx.id=xz.id AND xz.debtcredit_id=a.id) AS pay_amount, \
+	                                                e.name AS currency,a.description \
+	                                              FROM operation a \
+	                                              JOIN debtcredit b ON a.id=b.id \
+	                                              JOIN account c ON c.id=a.account_id \
+	                                              JOIN person d ON b.person_id=d.id \
+	                                              JOIN currency e ON a.currency_id=e.id \
+	                                              WHERE a.amount<0 \
+	                                              ORDER BY a.date DESC");	
+
+	gda_data_model_set_column_name(db_model, DATE_COL, _("Date"));
+	gda_data_model_set_column_name(db_model, ACCOUNT_COL, _("Account"));
+	gda_data_model_set_column_name(db_model, PERSON_COL, _("Debtor"));
+	gda_data_model_set_column_name(db_model, PERCENT_COL, _("Percent"));
+	gda_data_model_set_column_name(db_model, PERIOD_COL, _("Period"));
+	gda_data_model_set_column_name(db_model, IS_CLOSED_COL, _("Pay off"));
+	gda_data_model_set_column_name(db_model, CLOSED_DATE_COL, _("Date pay off"));
+	gda_data_model_set_column_name(db_model, AMOUNT_COL, _("Amount"));
+	gda_data_model_set_column_name(db_model, PAY_AMOUNT_COL, _("Paid"));
+	gda_data_model_set_column_name(db_model, CURRENCY_COL, _("Currency"));
+	gda_data_model_set_column_name(db_model, DESCR_COL, _("Description"));
+
+	gda_data_model_set_column_title(db_model, DATE_COL, _("Date"));
+	gda_data_model_set_column_title(db_model, ACCOUNT_COL, _("Account"));
+	gda_data_model_set_column_title(db_model, PERSON_COL, _("Debtor"));
+	gda_data_model_set_column_title(db_model, PERCENT_COL, _("Percent"));
+	gda_data_model_set_column_title(db_model, PERIOD_COL, _("Period"));
+	gda_data_model_set_column_title(db_model, IS_CLOSED_COL, _("Pay off"));
+	gda_data_model_set_column_title(db_model, CLOSED_DATE_COL, _("Date pay off"));
+	gda_data_model_set_column_title(db_model, AMOUNT_COL, _("Amount"));
+	gda_data_model_set_column_title(db_model, PAY_AMOUNT_COL, _("Paid"));
+	gda_data_model_set_column_title(db_model, CURRENCY_COL, _("Currency"));
+	gda_data_model_set_column_title(db_model, DESCR_COL, _("Description"));
+
+	return db_model;
 }
 
 static GdaDataModel* get_credits_model()
 {
-	
+	enum {
+		DATE_COL,
+		ACCOUNT_COL,
+		PERSON_COL,
+		PERCENT_COL,
+		PERIOD_COL,
+		IS_CLOSED_COL,
+		CLOSED_DATE_COL,
+		AMOUNT_COL,
+		PAY_AMOUNT_COL,
+		CURRENCY_COL,
+		DESCR_COL
+	};
+
+	GdaDataModel *db_model = db_exec_select_sql("SELECT STRFTIME('%d.%m.%Y',DATE(a.date+1721425)) AS date,c.name AS account,\
+	                                                d.name AS person,b.percent,b.period,b.is_closed, b.close_date, a.amount*-1 AS amount, \
+	                                                (SELECT sum(xx.amount) FROM operation xx, debtcredit_payment xz WHERE xx.id=xz.id AND xz.debtcredit_id=a.id) AS pay_amount, \
+	                                                e.name AS currency,a.description \
+	                                              FROM operation a \
+	                                              JOIN debtcredit b ON a.id=b.id \
+	                                              JOIN account c ON c.id=a.account_id \
+	                                              JOIN person d ON b.person_id=d.id \
+	                                              JOIN currency e ON a.currency_id=e.id \
+	                                              WHERE a.amount>0 \
+	                                              ORDER BY a.date DESC");	
+
+	gda_data_model_set_column_name(db_model, DATE_COL, _("Date"));
+	gda_data_model_set_column_name(db_model, ACCOUNT_COL, _("Account"));
+	gda_data_model_set_column_name(db_model, PERSON_COL, _("Debtor"));
+	gda_data_model_set_column_name(db_model, PERCENT_COL, _("Percent"));
+	gda_data_model_set_column_name(db_model, PERIOD_COL, _("Period"));
+	gda_data_model_set_column_name(db_model, IS_CLOSED_COL, _("Pay off"));
+	gda_data_model_set_column_name(db_model, CLOSED_DATE_COL, _("Date pay off"));
+	gda_data_model_set_column_name(db_model, AMOUNT_COL, _("Amount"));
+	gda_data_model_set_column_name(db_model, PAY_AMOUNT_COL, _("Paid"));
+	gda_data_model_set_column_name(db_model, CURRENCY_COL, _("Currency"));
+	gda_data_model_set_column_name(db_model, DESCR_COL, _("Description"));
+
+	gda_data_model_set_column_title(db_model, DATE_COL, _("Date"));
+	gda_data_model_set_column_title(db_model, ACCOUNT_COL, _("Account"));
+	gda_data_model_set_column_title(db_model, PERSON_COL, _("Debtor"));
+	gda_data_model_set_column_title(db_model, PERCENT_COL, _("Percent"));
+	gda_data_model_set_column_title(db_model, PERIOD_COL, _("Period"));
+	gda_data_model_set_column_title(db_model, IS_CLOSED_COL, _("Pay off"));
+	gda_data_model_set_column_title(db_model, CLOSED_DATE_COL, _("Date pay off"));
+	gda_data_model_set_column_title(db_model, AMOUNT_COL, _("Amount"));
+	gda_data_model_set_column_title(db_model, PAY_AMOUNT_COL, _("Paid"));
+	gda_data_model_set_column_title(db_model, CURRENCY_COL, _("Currency"));
+	gda_data_model_set_column_title(db_model, DESCR_COL, _("Description"));
+
+	return db_model;
 }
 
 
