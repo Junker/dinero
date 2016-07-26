@@ -40,7 +40,7 @@
 #include "report.h"
 #include "debtcredit_payment.h"
 #include "editplan.h"
-
+#include "export.h"
 #include "ex-grid.h"
 #include "sutil.h"
 #include "gtkdateentry.h"
@@ -146,74 +146,74 @@ GtkWidget* create_main_window (void)
 	window = GTK_WIDGET(gtk_builder_get_object (gbuilder, "window"));
 
 	//Grids containers
-	GtkContainer *scrolledwindow_account_short    = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "scrolledwindow_account_short"));
-	GtkContainer *scrolledwindow_account_full     = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "scrolledwindow_account_full"));
-	GtkContainer *scrolledwindow_expenditure      = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "scrolledwindow_expenditure"));
-	GtkContainer *scrolledwindow_income           = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "scrolledwindow_income"));
-	GtkContainer *scrolledwindow_debt             = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "scrolledwindow_debt"));
-	GtkContainer *scrolledwindow_credit           = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "scrolledwindow_credit"));
-	GtkContainer *scrolledwindow_plan_expenditure = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "scrolledwindow_plan_expenditure"));
-	GtkContainer *scrolledwindow_plan_income      = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "scrolledwindow_plan_income"));
+	GtkContainer *scrolledwindow_account_short    = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "scrolledwindow_account_short"));
+	GtkContainer *scrolledwindow_account_full     = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "scrolledwindow_account_full"));
+	GtkContainer *scrolledwindow_expenditure      = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "scrolledwindow_expenditure"));
+	GtkContainer *scrolledwindow_income           = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "scrolledwindow_income"));
+	GtkContainer *scrolledwindow_debt             = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "scrolledwindow_debt"));
+	GtkContainer *scrolledwindow_credit           = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "scrolledwindow_credit"));
+	GtkContainer *scrolledwindow_plan_expenditure = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "scrolledwindow_plan_expenditure"));
+	GtkContainer *scrolledwindow_plan_income      = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "scrolledwindow_plan_income"));
 	
 
 	//Combo containers
-	GtkContainer *eventbox_combo_filter_account_account         = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_combo_filter_account_account"));
-	GtkContainer *eventbox_combo_filter_expend_account          = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_combo_filter_expend_account"));
-	GtkContainer *eventbox_combo_filter_expend_category         = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_combo_filter_expend_category"));
-	GtkContainer *eventbox_combo_filter_expend_subcategory      = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_combo_filter_expend_subcategory"));
-	GtkContainer *eventbox_combo_filter_income_account          = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_combo_filter_income_account"));
-	GtkContainer *eventbox_combo_filter_income_category         = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_combo_filter_income_category"));
-	GtkContainer *eventbox_combo_filter_income_subcategory      = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_combo_filter_income_subcategory"));
-	GtkContainer *eventbox_combo_filter_plan_expend_account     = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_combo_filter_plan_expend_account"));
-	GtkContainer *eventbox_combo_filter_plan_expend_category    = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_combo_filter_plan_expend_category"));
-	GtkContainer *eventbox_combo_filter_plan_expend_subcategory = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_combo_filter_plan_expend_subcategory"));
-	GtkContainer *eventbox_combo_filter_plan_income_account     = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_combo_filter_plan_income_account"));
-	GtkContainer *eventbox_combo_filter_plan_income_category    = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_combo_filter_plan_income_category"));
-	GtkContainer *eventbox_combo_filter_plan_income_subcategory = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_combo_filter_plan_income_subcategory"));
+	GtkContainer *eventbox_combo_filter_account_account         = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_combo_filter_account_account"));
+	GtkContainer *eventbox_combo_filter_expend_account          = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_combo_filter_expend_account"));
+	GtkContainer *eventbox_combo_filter_expend_category         = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_combo_filter_expend_category"));
+	GtkContainer *eventbox_combo_filter_expend_subcategory      = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_combo_filter_expend_subcategory"));
+	GtkContainer *eventbox_combo_filter_income_account          = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_combo_filter_income_account"));
+	GtkContainer *eventbox_combo_filter_income_category         = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_combo_filter_income_category"));
+	GtkContainer *eventbox_combo_filter_income_subcategory      = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_combo_filter_income_subcategory"));
+	GtkContainer *eventbox_combo_filter_plan_expend_account     = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_combo_filter_plan_expend_account"));
+	GtkContainer *eventbox_combo_filter_plan_expend_category    = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_combo_filter_plan_expend_category"));
+	GtkContainer *eventbox_combo_filter_plan_expend_subcategory = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_combo_filter_plan_expend_subcategory"));
+	GtkContainer *eventbox_combo_filter_plan_income_account     = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_combo_filter_plan_income_account"));
+	GtkContainer *eventbox_combo_filter_plan_income_category    = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_combo_filter_plan_income_category"));
+	GtkContainer *eventbox_combo_filter_plan_income_subcategory = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_combo_filter_plan_income_subcategory"));
 
 	//dateedit containers
-	GtkContainer *eventbox_dateedit_filter_account_from      = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_dateedit_filter_account_from"));
-	GtkContainer *eventbox_dateedit_filter_account_to        = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_dateedit_filter_account_to"));
-	GtkContainer *eventbox_dateedit_filter_expend_from       = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_dateedit_filter_expend_from"));
-	GtkContainer *eventbox_dateedit_filter_expend_to         = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_dateedit_filter_expend_to"));
-	GtkContainer *eventbox_dateedit_filter_income_from       = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_dateedit_filter_income_from"));
-	GtkContainer *eventbox_dateedit_filter_income_to         = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_dateedit_filter_income_to"));
-	GtkContainer *eventbox_dateedit_filter_plan_expend_from  = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_dateedit_filter_plan_expend_from"));
-	GtkContainer *eventbox_dateedit_filter_plan_expend_to    = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_dateedit_filter_plan_expend_to"));
-	GtkContainer *eventbox_dateedit_filter_plan_income_from  = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_dateedit_filter_plan_income_from"));
-	GtkContainer *eventbox_dateedit_filter_plan_income_to    = GTK_CONTAINER(gtk_builder_get_object (gbuilder, "eventbox_dateedit_filter_plan_income_to"));
+	GtkContainer *eventbox_dateedit_filter_account_from      = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_dateedit_filter_account_from"));
+	GtkContainer *eventbox_dateedit_filter_account_to        = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_dateedit_filter_account_to"));
+	GtkContainer *eventbox_dateedit_filter_expend_from       = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_dateedit_filter_expend_from"));
+	GtkContainer *eventbox_dateedit_filter_expend_to         = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_dateedit_filter_expend_to"));
+	GtkContainer *eventbox_dateedit_filter_income_from       = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_dateedit_filter_income_from"));
+	GtkContainer *eventbox_dateedit_filter_income_to         = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_dateedit_filter_income_to"));
+	GtkContainer *eventbox_dateedit_filter_plan_expend_from  = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_dateedit_filter_plan_expend_from"));
+	GtkContainer *eventbox_dateedit_filter_plan_expend_to    = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_dateedit_filter_plan_expend_to"));
+	GtkContainer *eventbox_dateedit_filter_plan_income_from  = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_dateedit_filter_plan_income_from"));
+	GtkContainer *eventbox_dateedit_filter_plan_income_to    = GTK_CONTAINER(gtk_builder_get_object(gbuilder, "eventbox_dateedit_filter_plan_income_to"));
 
 	
 	expander_filter_account = GTK_EXPANDER(gtk_builder_get_object (gbuilder, "expander_filter_account"));
 
 	//Buttons
-	button_account_add          = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_account_add"));
-	button_account_edit         = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_account_edit"));
-	button_account_del          = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_account_del"));
-	button_account_transfer     = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_account_transfer"));
-	button_expenditure_add      = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_expenditure_add"));
-	button_expenditure_edit     = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_expenditure_edit"));
-	button_expenditure_del      = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_expenditure_del"));
-	button_income_add           = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_income_add"));
-	button_income_edit          = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_income_edit"));
-	button_income_del           = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_income_del"));
-	button_debt_add             = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_debt_add"));
-	button_debt_edit            = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_debt_edit"));
-	button_debt_del             = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_debt_del"));
-	button_debt_payments        = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_debt_payments"));
-	button_credit_add           = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_credit_add"));
-	button_credit_edit          = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_credit_edit"));
-	button_credit_del           = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_credit_del"));
-	button_credit_payments      = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_credit_payments"));
-	button_account_datedetailed = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_account_datedetailed"));
-	button_plan_expenditure_add  = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_plan_expenditure_add"));
-	button_plan_expenditure_edit = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_plan_expenditure_edit"));
-	button_plan_expenditure_del  = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_plan_expenditure_del"));
-	button_plan_expenditure_exec = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_plan_expenditure_exec"));
-	button_plan_income_add       = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_plan_income_add"));
-	button_plan_income_edit      = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_plan_income_edit"));
-	button_plan_income_del       = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_plan_income_del"));
-	button_plan_income_exec      = GTK_BUTTON(gtk_builder_get_object (gbuilder, "button_plan_income_exec"));
+	button_account_add          = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_account_add"));
+	button_account_edit         = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_account_edit"));
+	button_account_del          = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_account_del"));
+	button_account_transfer     = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_account_transfer"));
+	button_expenditure_add      = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_expenditure_add"));
+	button_expenditure_edit     = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_expenditure_edit"));
+	button_expenditure_del      = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_expenditure_del"));
+	button_income_add           = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_income_add"));
+	button_income_edit          = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_income_edit"));
+	button_income_del           = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_income_del"));
+	button_debt_add             = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_debt_add"));
+	button_debt_edit            = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_debt_edit"));
+	button_debt_del             = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_debt_del"));
+	button_debt_payments        = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_debt_payments"));
+	button_credit_add           = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_credit_add"));
+	button_credit_edit          = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_credit_edit"));
+	button_credit_del           = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_credit_del"));
+	button_credit_payments      = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_credit_payments"));
+	button_account_datedetailed = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_account_datedetailed"));
+	button_plan_expenditure_add  = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_plan_expenditure_add"));
+	button_plan_expenditure_edit = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_plan_expenditure_edit"));
+	button_plan_expenditure_del  = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_plan_expenditure_del"));
+	button_plan_expenditure_exec = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_plan_expenditure_exec"));
+	button_plan_income_add       = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_plan_income_add"));
+	button_plan_income_edit      = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_plan_income_edit"));
+	button_plan_income_del       = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_plan_income_del"));
+	button_plan_income_exec      = GTK_BUTTON(gtk_builder_get_object(gbuilder, "button_plan_income_exec"));
 	
 	
 
@@ -243,16 +243,16 @@ GtkWidget* create_main_window (void)
 	grid_plan_expenditure = create_grid(scrolledwindow_plan_expenditure);
 	
 	//Create dateedit controls
-	dateedit_filter_account_from     = create_dateentry (eventbox_dateedit_filter_account_from);
-	dateedit_filter_account_to       = create_dateentry (eventbox_dateedit_filter_account_to);
-	dateedit_filter_expend_from      = create_dateentry (eventbox_dateedit_filter_expend_from);
-	dateedit_filter_expend_to        = create_dateentry (eventbox_dateedit_filter_expend_to);
-	dateedit_filter_income_from      = create_dateentry (eventbox_dateedit_filter_income_from);
-	dateedit_filter_income_to        = create_dateentry (eventbox_dateedit_filter_income_to);
-	dateedit_filter_plan_expend_from = create_dateentry (eventbox_dateedit_filter_plan_expend_from);
-	dateedit_filter_plan_expend_to   = create_dateentry (eventbox_dateedit_filter_plan_expend_to);
-	dateedit_filter_plan_income_from = create_dateentry (eventbox_dateedit_filter_plan_income_from);
-	dateedit_filter_plan_income_to   = create_dateentry (eventbox_dateedit_filter_plan_income_to);
+	dateedit_filter_account_from     = create_dateentry(eventbox_dateedit_filter_account_from);
+	dateedit_filter_account_to       = create_dateentry(eventbox_dateedit_filter_account_to);
+	dateedit_filter_expend_from      = create_dateentry(eventbox_dateedit_filter_expend_from);
+	dateedit_filter_expend_to        = create_dateentry(eventbox_dateedit_filter_expend_to);
+	dateedit_filter_income_from      = create_dateentry(eventbox_dateedit_filter_income_from);
+	dateedit_filter_income_to        = create_dateentry(eventbox_dateedit_filter_income_to);
+	dateedit_filter_plan_expend_from = create_dateentry(eventbox_dateedit_filter_plan_expend_from);
+	dateedit_filter_plan_expend_to   = create_dateentry(eventbox_dateedit_filter_plan_expend_to);
+	dateedit_filter_plan_income_from = create_dateentry(eventbox_dateedit_filter_plan_income_from);
+	dateedit_filter_plan_income_to   = create_dateentry(eventbox_dateedit_filter_plan_income_to);
 
 
 	gtk_date_entry_set_date(dateedit_filter_account_from, get_current_date() - 30);
@@ -682,7 +682,7 @@ void fill_grid_debt(void)
 
 	ExGrid *grid = grid_debt;
 	
-	GdaDataModel *db_model = db_exec_select_sql ("SELECT a.id,a.date,strftime('%d.%m.%Y',date(a.date+1721425)),a.account_id,\
+	GdaDataModel *db_model = db_exec_select_sql("SELECT a.id,a.date,strftime('%d.%m.%Y',date(a.date+1721425)),a.account_id,\
 	                                                b.person_id,b.percent,b.period,b.is_closed, b.close_date, \
 	                                                a.amount*-1,(SELECT sum(xx.amount) FROM operation xx, debtcredit_payment xz WHERE xx.id=xz.id AND xz.debtcredit_id=a.id), \
 	                                                a.currency_id,b.remind,b.remind_date,a.description \
@@ -1057,6 +1057,12 @@ void on_tbutton_currency_clicked (GtkToolButton *toolbutton, gpointer user_data)
 {
 	show_currency_window();
 }
+
+void on_tbutton_exchange_clicked (GtkToolButton *toolbutton, gpointer user_data) 
+{
+	show_exchange_window();
+}
+
 
 void on_tbutton_report_clicked (GtkToolButton *toolbutton, gpointer user_data) 
 {
@@ -1519,7 +1525,34 @@ void on_menuitem_restore_backup_activate(GtkMenuItem *menuitem, gpointer user_da
 void on_menuitem_save_backup_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	save_backup(GTK_WINDOW(window));
-}	
+}
+
+void on_menuitem_export_accounts_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	show_export_window(EXPORT_ACCOUNTS);
+}
+
+
+void on_menuitem_export_expenses_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	show_export_window(EXPORT_EXPENSES);
+}
+
+void on_menuitem_export_income_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	show_export_window(EXPORT_INCOME);
+}
+
+void on_menuitem_export_debts_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	show_export_window(EXPORT_DEBTS);
+}
+
+void on_menuitem_export_credits_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	show_export_window(EXPORT_CREDITS);
+}
+
 
 
 void on_tbutton_print_clicked (GtkToolButton *toolbutton, gpointer user_data) 
