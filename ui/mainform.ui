@@ -7,6 +7,11 @@
     <property name="can_focus">False</property>
     <property name="stock">gtk-harddisk</property>
   </object>
+  <object class="GtkImage">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-convert</property>
+  </object>
   <object class="GtkAccelGroup" id="accelgroup1"/>
   <object class="GtkImage" id="image_category">
     <property name="visible">True</property>
@@ -66,6 +71,66 @@
                       <object class="GtkSeparatorMenuItem" id="separatormenuitem1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="menuitem_export">
+                        <property name="label" translatable="yes">Export...</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="image">__glade_unnamed_3</property>
+                        <property name="use_stock">False</property>
+                        <child type="submenu">
+                          <object class="GtkMenu">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <child>
+                              <object class="GtkMenuItem" id="menuitem_export_accounts">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Accounts...</property>
+                                <property name="use_underline">True</property>
+                                <signal name="activate" handler="on_menuitem_export_accounts_activate" swapped="no"/>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkMenuItem" id="menuitem_export_expenses">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Expenses...</property>
+                                <property name="use_underline">True</property>
+                                <signal name="activate" handler="on_menuitem_export_expenses_activate" swapped="no"/>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkMenuItem" id="menuitem_export_income">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Income...</property>
+                                <property name="use_underline">True</property>
+                                <signal name="activate" handler="on_menuitem_export_income_activate" swapped="no"/>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkMenuItem" id="menuitem_export_debts">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Debts...</property>
+                                <property name="use_underline">True</property>
+                                <signal name="activate" handler="on_menuitem_export_debts_activate" swapped="no"/>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkMenuItem" id="menuitem_export_credits">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Credits...</property>
+                                <property name="use_underline">True</property>
+                                <signal name="activate" handler="on_menuitem_export_credits_activate" swapped="no"/>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <child>
@@ -210,7 +275,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Exchange</property>
-                        <signal name="activate" handler="show_editexchange_window" swapped="no"/>
+                        <signal name="activate" handler="on_tbutton_exchange_clicked" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -842,7 +907,7 @@
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">True</property>
+                    <property name="fill">False</property>
                     <property name="padding">5</property>
                     <property name="position">1</property>
                   </packing>
@@ -856,6 +921,7 @@
                       <object class="GtkBox" id="hbox8">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="valign">end</property>
                         <child>
                           <object class="GtkTable" id="table1">
                             <property name="visible">True</property>
@@ -915,7 +981,7 @@
                           </object>
                           <packing>
                             <property name="expand">False</property>
-                            <property name="fill">True</property>
+                            <property name="fill">False</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
@@ -1068,7 +1134,7 @@
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">True</property>
+                    <property name="fill">False</property>
                     <property name="position">2</property>
                   </packing>
                 </child>

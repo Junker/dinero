@@ -1,0 +1,10 @@
+
+enum {
+	EXPORT_ACCOUNTS,
+	EXPORT_EXPENSES,
+	EXPORT_INCOME,
+	EXPORT_DEBTS,
+	EXPORT_CREDITS
+};
+
+#define ExportEntity gint
