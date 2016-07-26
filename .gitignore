@@ -26,6 +26,7 @@ po/*.sed
 *.c~
 *.h~
 *.glade~
+*.ui~
 
 # Prerequisites
 *.d
