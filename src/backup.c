@@ -29,6 +29,8 @@
 
 static GtkWidget *window;
 
+#define DB_FILE_NAME_SUFFIX ".sqlite" 
+
 void restore_backup(GtkWindow *parent_window)
 {
 	GtkWidget *dialog;
@@ -75,7 +77,7 @@ void restore_backup(GtkWindow *parent_window)
 			open_main_db();
 
 			create_lookup_models();
-			
+
 			gtk_widget_destroy(main_window);
 
 			main_window = create_main_window();
@@ -121,13 +123,15 @@ void save_backup(GtkWindow *parent_window)
 	{
 		GtkFileChooser *chooser = GTK_FILE_CHOOSER(dialog);
 		
-		GString *file_name = g_string_new(gtk_file_chooser_get_filename(chooser));
-		g_string_append(file_name, ".sqlite");
+		GString *file_path = g_string_new(gtk_file_chooser_get_filename(chooser));
+
+		if (!g_str_has_suffix(file_path->str, DB_FILE_NAME_SUFFIX))
+			g_string_append(file_path, DB_FILE_NAME_SUFFIX);
 
 		gchar *db_file_path = g_build_filename(home_path, DB_FILE_NAME, NULL);
 
 		GFile *source_file = g_file_new_for_path(db_file_path);
-		GFile *dest_file   = g_file_new_for_path(file_name->str);
+		GFile *dest_file   = g_file_new_for_path(file_path->str);
 
 		g_file_copy(source_file, dest_file, G_FILE_COPY_OVERWRITE, NULL, NULL, NULL, &error);
 
@@ -136,7 +140,7 @@ void save_backup(GtkWindow *parent_window)
 			show_warning_dialog(error->message, parent_window);
 		}
 
-		g_string_free(file_name, TRUE);
+		g_string_free(file_path, TRUE);
 		g_free(db_file_path);
 		g_object_unref(source_file);
 		g_object_unref(dest_file);

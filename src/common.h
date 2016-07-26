@@ -27,6 +27,8 @@ enum
 };
 
 #define DB_FILE_NAME "dinero.sqlite"
+#define DB_FILE_NAME_SUFFIX ".sqlite" 
+
 
 #define OperType gint
 
