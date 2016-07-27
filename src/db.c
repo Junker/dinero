@@ -220,11 +220,11 @@ static void _get_vargs_params(GdaStatement *stmt, GdaSet *params, va_list vargs)
 			const gchar *var_name = va_arg(vargs, gchar*);
 			const GValue *var_value = va_arg(vargs, GValue*);
 
-			if (!var_name || !var_value) break;
+			if (!var_name) break;
 
 			GdaHolder *holder = gda_set_get_holder(params, var_name);
 
-			if (!holder) break;
+			if (!holder) continue;
 			
 			gda_holder_set_value (holder, var_value, NULL);	
 		}
