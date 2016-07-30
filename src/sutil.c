@@ -171,17 +171,14 @@ const GValue* ex_combo_get_current_row_value(GdauiCombo *combo, const guint n_co
 {
 	const GValue *value;
 	//If i reassign a new model to Combo, then gdaui_data_selector_get_data_set return wrong iter
-/*	GdaDataModelIter *iter = gdaui_data_selector_get_data_set(GDAUI_DATA_SELECTOR(combo));
+	GdaDataModelIter *iter = gdaui_data_selector_get_data_set(GDAUI_DATA_SELECTOR(combo));
 	if (!iter) return NULL;
 
-	g_debug("ITER EXISTS! ROW:%i",gda_data_model_iter_get_row(iter));
-	
-	
 	value = gda_data_model_iter_get_value_at(iter, n_column);
 
 	return value;
-*/
 
+/*
 	//DIRTY HACK!
 
 	GError *error = NULL;
@@ -201,7 +198,7 @@ const GValue* ex_combo_get_current_row_value(GdauiCombo *combo, const guint n_co
 	if (error) return NULL;
 
 	return value;
-
+*/
 }
 
 

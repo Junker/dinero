@@ -48,7 +48,7 @@ static void check_debtcredit_remain();
 static void init_periodicity_model();
 static void app_activate(GtkApplication* app, gpointer user_data);
 
-int main (int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	GtkApplication *app;
 	int status;
@@ -72,7 +72,7 @@ int main (int argc, char *argv[])
 static void app_activate(GtkApplication* app, gpointer user_data)
 {
 	GList *list;
-	list = gtk_application_get_windows (app);
+	list = gtk_application_get_windows(app);
 
 	if (list)
 	{
@@ -80,7 +80,7 @@ static void app_activate(GtkApplication* app, gpointer user_data)
 
 		return;
 	}
-	
+
 	//locale for float numbers (for SQL)
 	setlocale(LC_NUMERIC, "POSIX");
 
@@ -129,7 +129,7 @@ void open_main_db()
 	{
 		g_mkdir_with_parents(home_path, 0755);
 	
-		gchar *source_path = g_build_filename(PACKAGE_DATA_DIR, PACKAGE_NAME, DB_FILE_NAME, NULL);
+		gchar *source_path = g_build_filename(PACKAGE_DATA_DIR, DB_FILE_NAME, NULL);
 
 		if (!g_file_test(source_path, G_FILE_TEST_EXISTS))
 		{

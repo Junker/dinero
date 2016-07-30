@@ -51,7 +51,7 @@ static void fill_grid(void);
 static void on_grid_selection_changed(GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data);
 static void on_button_del_clicked (GtkButton *button,gpointer user_data);
 
-void show_exchange_window (void)
+void show_exchange_window()
 {
 
 	GtkBuilder *gbuilder = gtk_builder_new();

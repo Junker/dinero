@@ -11,6 +11,7 @@
     <property name="default_width">300</property>
     <property name="default_height">250</property>
     <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
     <child>
       <object class="GtkBox">
@@ -120,7 +121,6 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <property name="always_show_image">True</property>
                 <signal name="clicked" handler="gtk_widget_destroy" object="window" swapped="yes"/>
               </object>
               <packing>
@@ -136,7 +136,6 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <property name="always_show_image">True</property>
                 <signal name="clicked" handler="on_button_save_clicked" swapped="no"/>
               </object>
               <packing>
