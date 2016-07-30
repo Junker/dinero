@@ -165,6 +165,14 @@ void ex_grid_column_set_title(ExGrid *grid, guint col, gchar *title)
 	gtk_tree_view_column_set_title(column, title);
 }
 
+// need cuz https://bugzilla.gnome.org/show_bug.cgi?id=769078
+void ex_grid_column_set_visible(ExGrid *grid, guint col, gboolean visible)
+{
+	GtkTreeViewColumn *column = gtk_tree_view_get_column(GTK_TREE_VIEW(grid), col);
+	gtk_tree_view_column_set_visible(column, visible);
+}
+
+
 void ex_grid_set_columns_resizable(ExGrid *grid, gboolean val) 
 {
 	GList *columns;
