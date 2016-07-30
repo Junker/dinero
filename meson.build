@@ -1,5 +1,5 @@
 project('dinero', 'c',
-	version : '0.8',
+	version : '0.1',
 	license : 'GPL3',
 	default_options : ['warning_level=1'])
 
@@ -26,6 +26,14 @@ configure_file(
 
 ##### LOCALIZATION
 subdir('po')
+
+
+### GLADE DATA
+install_subdir('ui', install_dir: pkgdatadir)
+
+### DB
+install_data('db/dinero.sqlite', install_dir: pkgdatadir)
+
 
 ##### BUILD
 sources = [
@@ -84,5 +92,6 @@ sources = [
 executable('dinero', 'src/main.c',
 	sources,
 	dependencies : [gtk_dep, gda_dep, gda_sqlite_dep, gda_ui_dep],
+	install: true,
 	link_args : ['-rdynamic']
 )
