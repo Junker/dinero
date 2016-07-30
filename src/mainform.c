@@ -115,7 +115,7 @@ static void on_combo_filter_expend_category_changed (GtkComboBox *widget, gpoint
 static void on_combo_filter_income_category_changed (GtkComboBox *widget, gpointer user_data);
 static void on_combo_filter_plan_expend_category_changed (GtkComboBox *widget, gpointer user_data);
 static void on_combo_filter_plan_income_category_changed (GtkComboBox *widget, gpointer user_data);
-static void on_grid_account_short_selection_changed(GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data);
+static void on_grid_account_short_selection_changed (GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data);
 static void on_grid_expenditure_selection_changed(GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data);
 static void on_grid_income_selection_changed(GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data);
 static void on_grid_debt_selection_changed(GdauiRawGrid *dbrawgrid, gboolean arg1, gpointer user_data);
@@ -255,41 +255,48 @@ GtkWidget* create_main_window (void)
 	dateedit_filter_plan_income_to   = create_dateentry(eventbox_dateedit_filter_plan_income_to);
 
 
+	//filters dateentry set date
 	gtk_date_entry_set_date(dateedit_filter_account_from, get_current_date() - 30);
 	gtk_date_entry_set_date(dateedit_filter_expend_from, get_current_date() - 30);
 	gtk_date_entry_set_date(dateedit_filter_income_from, get_current_date() - 30);	
+	gtk_date_entry_set_date(dateedit_filter_plan_expend_from, get_current_date() - 30);	
 	gtk_date_entry_set_date(dateedit_filter_plan_income_from, get_current_date() - 30);	
+	gtk_date_entry_set_date(dateedit_filter_account_to, get_current_date());
+	gtk_date_entry_set_date(dateedit_filter_expend_to, get_current_date());
+	gtk_date_entry_set_date(dateedit_filter_income_to, get_current_date());	
+	gtk_date_entry_set_date(dateedit_filter_plan_expend_to, get_current_date());	
+	gtk_date_entry_set_date(dateedit_filter_plan_income_to, get_current_date());	
 
 	//Connect signals
-	g_signal_connect (G_OBJECT(dateedit_filter_account_from), "changed", G_CALLBACK(fill_grid_account_full),NULL);
-	g_signal_connect (G_OBJECT(dateedit_filter_account_to), "changed", G_CALLBACK(fill_grid_account_full),NULL);
-	g_signal_connect (G_OBJECT(dateedit_filter_expend_from), "changed", G_CALLBACK(fill_grid_expenditure),NULL);
-	g_signal_connect (G_OBJECT(dateedit_filter_expend_to), "changed", G_CALLBACK(fill_grid_expenditure),NULL);
-	g_signal_connect (G_OBJECT(dateedit_filter_income_from), "changed", G_CALLBACK(fill_grid_income),NULL);
-	g_signal_connect (G_OBJECT(dateedit_filter_income_to), "changed", G_CALLBACK(fill_grid_income),NULL);
+	g_signal_connect (G_OBJECT(dateedit_filter_account_from), "changed", G_CALLBACK(fill_grid_account_full), NULL);
+	g_signal_connect (G_OBJECT(dateedit_filter_account_to), "changed", G_CALLBACK(fill_grid_account_full), NULL);
+	g_signal_connect (G_OBJECT(dateedit_filter_expend_from), "changed", G_CALLBACK(fill_grid_expenditure), NULL);
+	g_signal_connect (G_OBJECT(dateedit_filter_expend_to), "changed", G_CALLBACK(fill_grid_expenditure), NULL);
+	g_signal_connect (G_OBJECT(dateedit_filter_income_from), "changed", G_CALLBACK(fill_grid_income), NULL);
+	g_signal_connect (G_OBJECT(dateedit_filter_income_to), "changed", G_CALLBACK(fill_grid_income), NULL);
 	
-	g_signal_connect (G_OBJECT(grid_account_short), "selection_changed", G_CALLBACK (on_grid_account_short_selection_changed),NULL);
-	g_signal_connect (G_OBJECT(grid_account_full), "selection_changed", G_CALLBACK (on_grid_account_full_selection_changed),NULL);
-	g_signal_connect (G_OBJECT(grid_expenditure), "selection_changed", G_CALLBACK (on_grid_expenditure_selection_changed),NULL);
-	g_signal_connect (G_OBJECT(grid_income), "selection_changed", G_CALLBACK (on_grid_income_selection_changed),NULL);
-	g_signal_connect (G_OBJECT(grid_debt), "selection_changed", G_CALLBACK (on_grid_debt_selection_changed),NULL);
-	g_signal_connect (G_OBJECT(grid_credit), "selection_changed", G_CALLBACK (on_grid_credit_selection_changed),NULL);
-	g_signal_connect (G_OBJECT(grid_plan_expenditure), "selection_changed", G_CALLBACK (on_grid_plan_expenditure_selection_changed),NULL);
-	g_signal_connect (G_OBJECT(grid_plan_income), "selection_changed", G_CALLBACK (on_grid_plan_income_selection_changed),NULL);
+	g_signal_connect (G_OBJECT(grid_account_short), "selection_changed", G_CALLBACK (on_grid_account_short_selection_changed), NULL);
+	g_signal_connect (G_OBJECT(grid_account_full), "selection_changed", G_CALLBACK (on_grid_account_full_selection_changed), NULL);
+	g_signal_connect (G_OBJECT(grid_expenditure), "selection_changed", G_CALLBACK (on_grid_expenditure_selection_changed), NULL);
+	g_signal_connect (G_OBJECT(grid_income), "selection_changed", G_CALLBACK (on_grid_income_selection_changed), NULL);
+	g_signal_connect (G_OBJECT(grid_debt), "selection_changed", G_CALLBACK (on_grid_debt_selection_changed), NULL);
+	g_signal_connect (G_OBJECT(grid_credit), "selection_changed", G_CALLBACK (on_grid_credit_selection_changed), NULL);
+	g_signal_connect (G_OBJECT(grid_plan_expenditure), "selection_changed", G_CALLBACK (on_grid_plan_expenditure_selection_changed), NULL);
+	g_signal_connect (G_OBJECT(grid_plan_income), "selection_changed", G_CALLBACK (on_grid_plan_income_selection_changed), NULL);
 
-	g_signal_connect (G_OBJECT(combo_filter_account_account), "selection-changed", G_CALLBACK (fill_grid_account_full),NULL);
-	g_signal_connect (G_OBJECT(combo_filter_expend_account), "selection-changed", G_CALLBACK (fill_grid_expenditure),NULL);
-	g_signal_connect (G_OBJECT(combo_filter_expend_category), "selection-changed", G_CALLBACK (on_combo_filter_expend_category_changed),NULL);
-	g_signal_connect (G_OBJECT(combo_filter_expend_subcategory), "selection-changed", G_CALLBACK (fill_grid_expenditure),NULL);
-	g_signal_connect (G_OBJECT(combo_filter_income_account), "selection-changed", G_CALLBACK (fill_grid_income),NULL);
-	g_signal_connect (G_OBJECT(combo_filter_income_category), "selection-changed", G_CALLBACK (on_combo_filter_income_category_changed),NULL);
-	g_signal_connect (G_OBJECT(combo_filter_income_subcategory), "selection-changed", G_CALLBACK (fill_grid_income),NULL);
-	g_signal_connect (G_OBJECT(combo_filter_plan_expend_account), "selection-changed", G_CALLBACK (fill_grid_plan_expenditure),NULL);
-	g_signal_connect (G_OBJECT(combo_filter_plan_expend_category), "selection-changed", G_CALLBACK (on_combo_filter_plan_expend_category_changed),NULL);
-	g_signal_connect (G_OBJECT(combo_filter_plan_expend_subcategory), "selection-changed", G_CALLBACK (fill_grid_plan_expenditure),NULL);
-	g_signal_connect (G_OBJECT(combo_filter_plan_income_account), "selection-changed", G_CALLBACK (fill_grid_plan_income),NULL);
-	g_signal_connect (G_OBJECT(combo_filter_plan_income_category), "selection-changed", G_CALLBACK (on_combo_filter_plan_income_category_changed),NULL);
-	g_signal_connect (G_OBJECT(combo_filter_plan_income_subcategory), "selection-changed", G_CALLBACK (fill_grid_plan_income),NULL);
+	g_signal_connect (G_OBJECT(combo_filter_account_account), "selection-changed", G_CALLBACK (fill_grid_account_full), NULL);
+	g_signal_connect (G_OBJECT(combo_filter_expend_account), "selection-changed", G_CALLBACK (fill_grid_expenditure), NULL);
+	g_signal_connect (G_OBJECT(combo_filter_expend_category), "selection-changed", G_CALLBACK (on_combo_filter_expend_category_changed), NULL);
+	g_signal_connect (G_OBJECT(combo_filter_expend_subcategory), "selection-changed", G_CALLBACK (fill_grid_expenditure), NULL);
+	g_signal_connect (G_OBJECT(combo_filter_income_account), "selection-changed", G_CALLBACK (fill_grid_income), NULL);
+	g_signal_connect (G_OBJECT(combo_filter_income_category), "selection-changed", G_CALLBACK (on_combo_filter_income_category_changed), NULL);
+	g_signal_connect (G_OBJECT(combo_filter_income_subcategory), "selection-changed", G_CALLBACK (fill_grid_income), NULL);
+	g_signal_connect (G_OBJECT(combo_filter_plan_expend_account), "selection-changed", G_CALLBACK (fill_grid_plan_expenditure), NULL);
+	g_signal_connect (G_OBJECT(combo_filter_plan_expend_category), "selection-changed", G_CALLBACK (on_combo_filter_plan_expend_category_changed), NULL);
+	g_signal_connect (G_OBJECT(combo_filter_plan_expend_subcategory), "selection-changed", G_CALLBACK (fill_grid_plan_expenditure), NULL);
+	g_signal_connect (G_OBJECT(combo_filter_plan_income_account), "selection-changed", G_CALLBACK (fill_grid_plan_income), NULL);
+	g_signal_connect (G_OBJECT(combo_filter_plan_income_category), "selection-changed", G_CALLBACK (on_combo_filter_plan_income_category_changed), NULL);
+	g_signal_connect (G_OBJECT(combo_filter_plan_income_subcategory), "selection-changed", G_CALLBACK (fill_grid_plan_income), NULL);
 
 	g_signal_connect_swapped(G_OBJECT(grid_account_full), "row-activated", G_CALLBACK(on_button_account_datedetailed_clicked), NULL);
 	g_signal_connect_swapped(G_OBJECT(grid_account_short), "row-activated", G_CALLBACK(on_account_button_edit_clicked), NULL);
@@ -362,7 +369,7 @@ void fill_grid_expenditure(void)
 		account     = ex_combo_get_current_row_value(combo_filter_expend_account, 0);
 		category    = ex_combo_get_current_row_value(combo_filter_expend_category, 0);
 		subcategory = ex_combo_get_current_row_value(combo_filter_expend_subcategory, 0);
-			
+		
 		if (!gdaui_combo_is_null_selected(combo_filter_expend_account)) 
 			g_string_append(sql," AND a.account_id=##account::gint::NULL");
 		if (!gdaui_combo_is_null_selected(combo_filter_expend_category)) 
@@ -404,8 +411,8 @@ void fill_grid_expenditure(void)
 	ex_grid_lookup_field (grid, EX_CURRENCY_ID_COL, currency_model, 0);
 
 	//hide columns
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), EX_ID_COL, FALSE);
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), EX_TIME_T_COL, FALSE);
+	ex_grid_column_set_visible(grid, EX_ID_COL, FALSE);
+	ex_grid_column_set_visible(grid, EX_TIME_T_COL, FALSE);
 
 	//set columns format
 	ex_grid_column_set_format(grid, EX_AMOUNT_COL, EX_GRID_COL_FORMAT_MONEY);
@@ -432,7 +439,7 @@ void fill_grid_expenditure(void)
 	g_free(datefrom);
 	g_free(dateto);
 	g_object_unref(db_model);
-	g_string_free(sql,TRUE);
+	g_string_free(sql, TRUE);
 
 }
 
@@ -450,7 +457,7 @@ void fill_grid_income(void)
 	GString *sql = g_string_new("SELECT a.id,a.date,strftime('%d.%m.%Y',date(a.date+1721425)),a.account_id, \
 	                             b.category_id,b.subcategory_id,b.quantity,b.unit_id,a.amount,a.currency_id,a.description \
 	                             FROM operation a, expin b \
-	                             WHERE a.id=b.id AND a.amount > 0");
+	                             WHERE a.id=b.id AND a.amount>0");
 
 	if (income_filter == TRUE) 
 	{
@@ -502,8 +509,8 @@ void fill_grid_income(void)
 	ex_grid_lookup_field (grid, EX_UNIT_ID_COL, unit_model, 0);
 	ex_grid_lookup_field (grid, EX_CURRENCY_ID_COL, currency_model, 0);
 	
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), EX_ID_COL, FALSE);
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), EX_TIME_T_COL, FALSE);
+	ex_grid_column_set_visible(grid, EX_ID_COL, FALSE);
+	ex_grid_column_set_visible(grid, EX_TIME_T_COL, FALSE);
 
 	ex_grid_column_set_format(grid, EX_AMOUNT_COL, EX_GRID_COL_FORMAT_MONEY);
 	
@@ -561,8 +568,8 @@ void fill_grid_account_short(void)
 	ex_grid_lookup_field (grid, ACS_CURRENCY_ID_COL, currency_model, 0);
 
 	//hide columns
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), ACS_ID_COL, FALSE);
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), ACS_STARTUP_ID_COL, FALSE);
+	ex_grid_column_set_visible(grid, ACS_ID_COL, FALSE);
+	ex_grid_column_set_visible(grid, ACS_STARTUP_ID_COL, FALSE);
 
 	//set columns format
 	ex_grid_column_set_format(grid, ACS_STARTUP_AMOUNT_COL, EX_GRID_COL_FORMAT_MONEY);
@@ -579,9 +586,9 @@ void fill_grid_account_short(void)
 	ex_grid_column_set_title(grid, ACS_CURRENCY_ID_COL, _("Currency"));
 	ex_grid_column_set_title(grid, ACS_DESCR_COL, _("Description"));
 	
-	gtk_widget_set_sensitive(GTK_WIDGET(button_account_edit),FALSE);
-	gtk_widget_set_sensitive(GTK_WIDGET(button_account_del),FALSE);
-	gtk_widget_set_sensitive(GTK_WIDGET(button_account_transfer),FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(button_account_edit), FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(button_account_del), FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(button_account_transfer), FALSE);
 
 	ex_grid_set_column_weight(grid, ACS_NAME_COL, 1000);
 
@@ -709,10 +716,10 @@ void fill_grid_debt(void)
 	ex_grid_lookup_field(grid, DEB_CURRENCY_ID_COL, currency_model, 0);
 
 	//hide columns
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), DEB_ID_COL, FALSE);
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), DEB_TIME_T_COL, FALSE);
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), DEB_REMIND_COL, FALSE);
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), DEB_REMIND_DATE_COL, FALSE);
+	ex_grid_column_set_visible(grid, DEB_ID_COL, FALSE);
+	ex_grid_column_set_visible(grid, DEB_TIME_T_COL, FALSE);
+	ex_grid_column_set_visible(grid, DEB_REMIND_COL, FALSE);
+	ex_grid_column_set_visible(grid, DEB_REMIND_DATE_COL, FALSE);
 
 	//set columns format
 	ex_grid_column_set_format(grid, DEB_AMOUNT_COL, EX_GRID_COL_FORMAT_MONEY);
@@ -776,10 +783,10 @@ void fill_grid_credit(void)
 	ex_grid_lookup_field(grid, DEB_CURRENCY_ID_COL, currency_model, 0);
 
 	//hide columns
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), DEB_ID_COL, FALSE);
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), DEB_TIME_T_COL, FALSE);
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), DEB_REMIND_COL, FALSE);
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), DEB_REMIND_DATE_COL, FALSE);
+	ex_grid_column_set_visible(grid, DEB_ID_COL, FALSE);
+	ex_grid_column_set_visible(grid, DEB_TIME_T_COL, FALSE);
+	ex_grid_column_set_visible(grid, DEB_REMIND_COL, FALSE);
+	ex_grid_column_set_visible(grid, DEB_REMIND_DATE_COL, FALSE);
 	
 	//set columns format
 	ex_grid_column_set_format(grid, DEB_AMOUNT_COL, EX_GRID_COL_FORMAT_MONEY);
@@ -879,9 +886,9 @@ void fill_grid_plan_expenditure(void)
 	ex_grid_lookup_field (grid, PLAN_PERIODICITY_COL, periodicity_model, 0);
 
 	//hide columns
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), PLAN_ID_COL, FALSE);
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), PLAN_TIME_T_COL, FALSE);
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), PLAN_PERIODICITY_DAYS_COL, FALSE);
+	ex_grid_column_set_visible(grid, PLAN_ID_COL, FALSE);
+	ex_grid_column_set_visible(grid, PLAN_TIME_T_COL, FALSE);
+	ex_grid_column_set_visible(grid, PLAN_PERIODICITY_DAYS_COL, FALSE);
 
 	//set columns format
 	ex_grid_column_set_format(grid, PLAN_AMOUNT_COL, EX_GRID_COL_FORMAT_MONEY);
@@ -910,7 +917,6 @@ void fill_grid_plan_expenditure(void)
 	g_free(datefrom);
 	g_free(dateto);
 	g_object_unref(db_model);
-	g_object_unref(periodicity_model);
 	g_string_free(sql,TRUE);	
 
 }
@@ -983,9 +989,9 @@ void fill_grid_plan_income(void)
 	ex_grid_lookup_field (grid, PLAN_PERIODICITY_COL, periodicity_model, 0);
 
 	//hide columns
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), PLAN_ID_COL, FALSE);
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), PLAN_TIME_T_COL, FALSE);
-	gdaui_data_selector_set_column_visible(GDAUI_DATA_SELECTOR(grid), PLAN_PERIODICITY_DAYS_COL, FALSE);
+	ex_grid_column_set_visible(grid, PLAN_ID_COL, FALSE);
+	ex_grid_column_set_visible(grid, PLAN_TIME_T_COL, FALSE);
+	ex_grid_column_set_visible(grid, PLAN_PERIODICITY_DAYS_COL, FALSE);
 
 	//set columns format
 	ex_grid_column_set_format(grid, PLAN_AMOUNT_COL, EX_GRID_COL_FORMAT_MONEY);
@@ -1014,7 +1020,6 @@ void fill_grid_plan_income(void)
 	g_free(datefrom);
 	g_free(dateto);
 	g_object_unref(db_model);
-	g_object_unref(periodicity_model);
 	g_string_free(sql,TRUE);	
 
 }
