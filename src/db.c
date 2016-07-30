@@ -90,8 +90,11 @@ GdaSet* db_exec_sql(const gchar *sql, ...)
 	sql_dump(stmt, params);
 
 	gda_connection_statement_execute_non_select(connection, stmt, params, &inserted_row, &error);
-	if (error) 
+	if (error)
+	{
+		str_replace_character(error->message, "%", "_");
 		g_error(error->message);
+	}
 
 	if (params) g_object_unref(params);
 	g_object_unref(stmt);
@@ -120,8 +123,11 @@ GdaDataModel* db_exec_select_sql(const gchar *sql, ...)
 	sql_dump(stmt, params);
 	
 	model = gda_connection_statement_execute_select (connection, stmt, params, &error);
-	if (error) 
-		g_error(error->message);		
+	if (error)
+	{
+		str_replace_character(error->message, "%", "_");
+		g_error(error->message);
+	}		
 
 	if (params) g_object_unref(params);
 	g_object_unref(stmt);
@@ -151,8 +157,11 @@ const GValue* db_get_value(const gchar *sql, ...)
 	sql_dump(stmt, params);
 
 	model = gda_connection_statement_execute_select (connection, stmt, params, &error);
-	if (error) 
+	if (error)
+	{
+		str_replace_character(error->message, "%", "_");
 		g_error(error->message);
+	}
 
 	if (gda_data_model_get_n_rows(model) <= 0) return NULL;
 	
@@ -177,9 +186,8 @@ static void sql_dump(GdaStatement *stmt, GdaSet *params)
 {
 	GString *result;
 	gchar *sql;
-	int i;
 
-	if (g_getenv("G_MESSAGES_DEBUG") == NULL)
+	if (g_getenv("GDA_SQL_DEBUG"))
 		return;
 
 	sql = gda_statement_to_sql(stmt, params, NULL);
@@ -187,24 +195,29 @@ static void sql_dump(GdaStatement *stmt, GdaSet *params)
 	
 	result = g_string_new("SQL: ");
 	g_string_append(result, sql);
-	g_string_append(result, " [ ");
 	
-	for (i = 0; i<1000; i++)
+	if (params)
 	{
-		GdaHolder *holder = gda_set_get_nth_holder(params, i);
-
-		if (!holder) break;
-
-		if (i != 0)
-			g_string_append(result, ", ");
+		g_string_append(result, " [ ");
 		
-		const gchar *name = gda_holder_get_id(holder);
-		gchar *value = gda_holder_get_value_str(holder, NULL);
+		int i;
+		for (i = 0; i<1000; i++)
+		{
+			GdaHolder *holder = gda_set_get_nth_holder(params, i);
 
-		g_string_append_printf(result, "%s => %s", name, value);
+			if (!holder) break;
+
+			if (i != 0)
+				g_string_append(result, ", ");
+			
+			const gchar *name = gda_holder_get_id(holder);
+			gchar *value = gda_holder_get_value_str(holder, NULL);
+
+			g_string_append_printf(result, "%s => %s", name, value);
+		}
+
+		g_string_append(result, " ]");
 	}
-
-	g_string_append(result, " ]");
 
 	g_debug(result->str);
 }
