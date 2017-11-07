@@ -40,7 +40,7 @@ static void fill_form();
 static void on_button_close_clicked (GtkButton *button, gpointer user_data);
 
 
-gint show_remind_debt_window (GValue *id)
+gint show_remind_debt_window (const GValue *id)
 {
 
 	GtkBuilder *gbuilder = gtk_builder_new();
@@ -54,8 +54,8 @@ gint show_remind_debt_window (GValue *id)
 
 	g_signal_connect(gtk_builder_get_object (gbuilder, "button_close"), "clicked", G_CALLBACK(on_button_close_clicked), id);
 	
-	form = create_form (eventbox_form);
-	gtk_widget_show (form);
+	form = create_form(eventbox_form);
+	gtk_widget_show(GTK_WIDGET(form));
 	
 	fill_form(id);
 	

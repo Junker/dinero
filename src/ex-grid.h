@@ -64,5 +64,7 @@ void ex_grid_set_columns_resizable(ExGrid *grid, gboolean val);
 void ex_grid_set_columns_reordable(ExGrid *grid, gboolean val);
 void ex_grid_set_column_data_cb (ExGrid *grid, gint column, GtkTreeCellDataFunc func);
 void ex_grid_set_column_width(ExGrid *grid, gint column, guint width);
+void ex_grid_column_set_visible(ExGrid *grid, guint col, gboolean visible);
+void ex_grid_set_column_weight(ExGrid *grid, gint column, guint weight);
 
 #endif /* _EX_GRID_H_ */

@@ -17,4 +17,4 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-gint show_remind_debt_window (GValue *id);
+gint show_remind_debt_window (const GValue *id);

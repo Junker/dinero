@@ -207,6 +207,8 @@ static void sql_dump(GdaStatement *stmt, GdaSet *params)
 
 			if (!holder) break;
 
+			if (!gda_holder_is_valid(holder)) break;
+
 			if (i != 0)
 				g_string_append(result, ", ");
 			

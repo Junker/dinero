@@ -171,9 +171,9 @@ static void check_debtcredit_remain()
 	int i;
 	for(i=0; i < gda_data_model_get_n_rows(model); i++) 
 	{
-		GValue *id = gda_data_model_get_value_at(model, 0, i, NULL);
+		const GValue *id = gda_data_model_get_value_at(model, 0, i, NULL);
 
-		show_remind_debt_window (id);
+		show_remind_debt_window(id);
 		                                    
 	}
 
