@@ -169,6 +169,8 @@ void ex_form_lookup_field (GdauiRawForm *form, gint n_col, GdaDataModel *model, 
 
 const GValue* ex_combo_get_current_row_value(GdauiCombo *combo, const guint n_column)
 {
+	if (gdaui_combo_is_null_selected(combo)) return NULL;
+
 	const GValue *value;
 	//If i reassign a new model to Combo, then gdaui_data_selector_get_data_set return wrong iter
 	GdaDataModelIter *iter = gdaui_data_selector_get_data_set(GDAUI_DATA_SELECTOR(combo));
