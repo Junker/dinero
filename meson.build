@@ -9,8 +9,14 @@ gda_dep = dependency('libgda-5.0')
 gda_sqlite_dep = dependency('libgda-sqlite-5.0')
 gda_ui_dep = dependency('libgda-ui-5.0')
 
+dev = get_option('dev')
 
-pkgdatadir = get_option('prefix') + '/' + get_option('datadir') + '/' + meson.project_name()
+if dev
+	pkgdatadir = '..'
+else
+	pkgdatadir = get_option('prefix') + '/' + get_option('datadir') + '/' + meson.project_name()
+endif
+
 localedir = get_option('prefix') + '/' + get_option('localedir') 
 
 ##### CONFIGURATION
