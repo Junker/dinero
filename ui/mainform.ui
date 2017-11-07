@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.20.0 -->
+<!-- Generated with glade 3.20.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkImage">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-harddisk</property>
-  </object>
   <object class="GtkImage">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -923,9 +918,11 @@
                         <property name="can_focus">False</property>
                         <property name="valign">end</property>
                         <child>
-                          <object class="GtkTable" id="table1">
+                          <object class="GtkGrid">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="row_spacing">2</property>
+                            <property name="column_spacing">3</property>
                             <child>
                               <object class="GtkLabel" id="label20">
                                 <property name="visible">True</property>
@@ -934,7 +931,8 @@
                                 <property name="xalign">1</property>
                               </object>
                               <packing>
-                                <property name="x_padding">2</property>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
                               </packing>
                             </child>
                             <child>
@@ -945,9 +943,8 @@
                                 <property name="xalign">1</property>
                               </object>
                               <packing>
+                                <property name="left_attach">0</property>
                                 <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_padding">2</property>
                               </packing>
                             </child>
                             <child>
@@ -960,7 +957,7 @@
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
+                                <property name="top_attach">0</property>
                               </packing>
                             </child>
                             <child>
@@ -973,22 +970,23 @@
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
                                 <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
                               </packing>
                             </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="fill">True</property>
+                            <property name="padding">4</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkTable" id="table2">
+                          <object class="GtkGrid">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="row_spacing">2</property>
+                            <property name="column_spacing">3</property>
                             <child>
                               <object class="GtkLabel" id="label25">
                                 <property name="visible">True</property>
@@ -997,7 +995,8 @@
                                 <property name="xalign">1</property>
                               </object>
                               <packing>
-                                <property name="x_padding">2</property>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
                               </packing>
                             </child>
                             <child>
@@ -1008,9 +1007,8 @@
                                 <property name="xalign">1</property>
                               </object>
                               <packing>
+                                <property name="left_attach">0</property>
                                 <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_padding">2</property>
                               </packing>
                             </child>
                             <child>
@@ -1021,59 +1019,57 @@
                                 <property name="xalign">1</property>
                               </object>
                               <packing>
+                                <property name="left_attach">0</property>
                                 <property name="top_attach">2</property>
-                                <property name="bottom_attach">3</property>
-                                <property name="x_padding">2</property>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkEventBox" id="eventbox_combo_filter_expend_account">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="hexpand">True</property>
                                 <child>
                                   <placeholder/>
                                 </child>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkEventBox" id="eventbox_combo_filter_expend_category">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <placeholder/>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
+                                <property name="top_attach">0</property>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkEventBox" id="eventbox_combo_filter_expend_subcategory">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="hexpand">True</property>
                                 <child>
                                   <placeholder/>
                                 </child>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
                                 <property name="top_attach">2</property>
-                                <property name="bottom_attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkEventBox" id="eventbox_combo_filter_expend_category">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="hexpand">True</property>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">1</property>
                               </packing>
                             </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
-                            <property name="padding">2</property>
+                            <property name="padding">4</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
@@ -1268,9 +1264,11 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkTable" id="table3">
+                          <object class="GtkGrid">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="row_spacing">2</property>
+                            <property name="column_spacing">3</property>
                             <child>
                               <object class="GtkLabel" id="label5">
                                 <property name="visible">True</property>
@@ -1279,7 +1277,8 @@
                                 <property name="xalign">1</property>
                               </object>
                               <packing>
-                                <property name="x_padding">2</property>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
                               </packing>
                             </child>
                             <child>
@@ -1290,9 +1289,8 @@
                                 <property name="xalign">1</property>
                               </object>
                               <packing>
+                                <property name="left_attach">0</property>
                                 <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_padding">2</property>
                               </packing>
                             </child>
                             <child>
@@ -1305,7 +1303,7 @@
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
+                                <property name="top_attach">0</property>
                               </packing>
                             </child>
                             <child>
@@ -1318,22 +1316,23 @@
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
                                 <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
                               </packing>
                             </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
+                            <property name="padding">4</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkTable" id="table4">
+                          <object class="GtkGrid">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="row_spacing">2</property>
+                            <property name="column_spacing">3</property>
                             <child>
                               <object class="GtkLabel" id="label16">
                                 <property name="visible">True</property>
@@ -1342,7 +1341,8 @@
                                 <property name="xalign">1</property>
                               </object>
                               <packing>
-                                <property name="x_padding">2</property>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
                               </packing>
                             </child>
                             <child>
@@ -1353,9 +1353,8 @@
                                 <property name="xalign">1</property>
                               </object>
                               <packing>
+                                <property name="left_attach">0</property>
                                 <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_padding">2</property>
                               </packing>
                             </child>
                             <child>
@@ -1366,59 +1365,57 @@
                                 <property name="xalign">1</property>
                               </object>
                               <packing>
+                                <property name="left_attach">0</property>
                                 <property name="top_attach">2</property>
-                                <property name="bottom_attach">3</property>
-                                <property name="x_padding">2</property>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkEventBox" id="eventbox_combo_filter_income_account">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="hexpand">True</property>
                                 <child>
                                   <placeholder/>
                                 </child>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
+                                <property name="top_attach">0</property>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkEventBox" id="eventbox_combo_filter_income_category">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="hexpand">True</property>
                                 <child>
                                   <placeholder/>
                                 </child>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
                                 <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkEventBox" id="eventbox_combo_filter_income_subcategory">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="hexpand">True</property>
                                 <child>
                                   <placeholder/>
                                 </child>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
                                 <property name="top_attach">2</property>
-                                <property name="bottom_attach">3</property>
                               </packing>
                             </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
-                            <property name="padding">2</property>
+                            <property name="padding">4</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
@@ -2559,6 +2556,9 @@
           </packing>
         </child>
       </object>
+    </child>
+    <child type="titlebar">
+      <placeholder/>
     </child>
   </object>
 </interface>

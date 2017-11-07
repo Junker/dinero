@@ -232,6 +232,12 @@ GtkWidget* create_main_window (void)
 	combo_filter_plan_income_category    = create_combo(eventbox_combo_filter_plan_income_category);
 	combo_filter_plan_income_subcategory = create_combo(eventbox_combo_filter_plan_income_subcategory);
 
+	gtk_widget_set_sensitive(GTK_WIDGET(combo_filter_expend_subcategory), FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(combo_filter_income_subcategory), FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(combo_filter_plan_expend_subcategory), FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(combo_filter_plan_income_subcategory), FALSE);
+
+
 	//Create Grids controls
 	grid_income           = create_grid(scrolledwindow_income);
 	grid_expenditure      = create_grid(scrolledwindow_expenditure);
@@ -1314,12 +1320,14 @@ void on_expander_filter_account_activate (GtkExpander *expander, gpointer user_d
 
 void on_combo_filter_expend_category_changed (GtkComboBox *widget, gpointer user_data)
 {
-	GValue *val = ex_combo_get_current_row_value(combo_filter_expend_category,0);
+	const GValue *val = ex_combo_get_current_row_value(combo_filter_expend_category, 0);
 
 
 	gchar *sql = "SELECT id,name FROM subcategory WHERE category_id=##id::gint::NULL ORDER BY name";
 	GdaDataModel *db_model = db_exec_select_sql (sql, "id", val, NULL);
 	if (!db_model) return;
+
+	gtk_widget_set_sensitive(GTK_WIDGET(combo_filter_expend_subcategory), !gdaui_combo_is_null_selected(combo_filter_expend_category));
 
 	gint viewcols[1] = {1};
 	gdaui_combo_set_model(combo_filter_expend_subcategory, db_model, 1, viewcols);
@@ -1334,12 +1342,14 @@ void on_combo_filter_expend_category_changed (GtkComboBox *widget, gpointer user
 
 void on_combo_filter_income_category_changed (GtkComboBox *widget, gpointer user_data)
 {
-	GValue *val = ex_combo_get_current_row_value(combo_filter_income_category,0);
+	const GValue *val = ex_combo_get_current_row_value(combo_filter_income_category,0);
 
 	gchar *sql = "SELECT id,name FROM subcategory WHERE category_id=##id::gint::NULL ORDER BY name";
 	GdaDataModel *db_model = db_exec_select_sql (sql, "id", val, NULL);
 
 	if (!db_model) return;
+
+	gtk_widget_set_sensitive(GTK_WIDGET(combo_filter_income_subcategory), !gdaui_combo_is_null_selected(combo_filter_income_category));
 
 	gint viewcols[1] = {1};
 	gdaui_combo_set_model(combo_filter_income_subcategory, db_model, 1, viewcols);
@@ -1354,12 +1364,14 @@ void on_combo_filter_income_category_changed (GtkComboBox *widget, gpointer user
 
 void on_combo_filter_plan_income_category_changed (GtkComboBox *widget, gpointer user_data)
 {
-	GValue *val = ex_combo_get_current_row_value(combo_filter_plan_income_category,0);
+	const GValue *val = ex_combo_get_current_row_value(combo_filter_plan_income_category,0);
 
 
 	gchar *sql = "SELECT id,name FROM subcategory WHERE category_id=##id::gint::NULL ORDER BY name";
 	GdaDataModel *db_model = db_exec_select_sql (sql, "id", val, NULL);
 	if (!db_model) return;
+
+	gtk_widget_set_sensitive(GTK_WIDGET(combo_filter_plan_income_subcategory), !gdaui_combo_is_null_selected(combo_filter_plan_income_category));
 
 	gint viewcols[1] = {1};
 	gdaui_combo_set_model(combo_filter_plan_income_subcategory, db_model, 1, viewcols);
@@ -1374,12 +1386,15 @@ void on_combo_filter_plan_income_category_changed (GtkComboBox *widget, gpointer
 
 void on_combo_filter_plan_expend_category_changed (GtkComboBox *widget, gpointer user_data)
 {
-	GValue *val = ex_combo_get_current_row_value(combo_filter_plan_expend_category,0);
+	const GValue *val = ex_combo_get_current_row_value(combo_filter_plan_expend_category,0);
 
 
 	gchar *sql = "SELECT id,name FROM subcategory WHERE category_id=##id::gint::NULL ORDER BY name";
 	GdaDataModel *db_model = db_exec_select_sql (sql, "id", val, NULL);
 	if (!db_model) return;
+
+	gtk_widget_set_sensitive(GTK_WIDGET(combo_filter_plan_income_subcategory), !gdaui_combo_is_null_selected(combo_filter_plan_expend_category));
+
 
 	gint viewcols[1] = {1};
 	gdaui_combo_set_model(combo_filter_plan_expend_subcategory, db_model, 1, viewcols);
